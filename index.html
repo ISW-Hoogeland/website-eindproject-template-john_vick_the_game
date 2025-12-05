@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Mijn Website</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
 <body>
-  Mijn favoriete kleur is ...
-</body>
+  <header>
+    <h1>John Vick the Game</h1>
+  </header>
 
-</html>
+  <!-- OVERLAYS OUTSIDE MAIN -->
+  <div id="cutscene" class="overlay hidden">
+    <div class="cutscene-box">
+      <p id="cutscene-text"></p>
+      <button id="cutscene-next">Volgende</button>
+    </div>
+  </div>
+
+  <div id="tutorial" class="overlay hidden">
+    <div class="tutorial-box">
+      <h2>Tutorial</h2>
+      <p>Beweeg met WASD. Klik om te schieten. Vermijd vijanden.</p>
+      <button id="tutorial-start">Begin!</button>
+    </div>
+  </div>
+
+  <main>
+    <div class="menu-buttons">
+      <button id="start-btn">Start het Spel</button>
+      <button>Laad een Spel</button>
+      <button>Instellingen</button>
+      <button>Credits</button>
+    </div>
+  </main>
+
+  <script src="menu.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</body>
