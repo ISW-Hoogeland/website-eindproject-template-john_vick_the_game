@@ -11,9 +11,9 @@ const startBtn = document.getElementById("start-btn");
 
 // scenes
 const scenes = [
-    "Het is een donkere nacht in Westland.",
-    "John Vick staat op het punt om wraak te nemen op degenen die zijn boot hebben gestolen.",
-    "Maar voordat hij zijn missie kan beginnen, moet hij eerst leren overleven."
+    "Jij... JIJ... bent precies waar ik naar op zoek ben.",
+    "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je silm zijn en je omgeving ten gunste van jezelf gebruiken.",
+    "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, pas dan praten we verder."
 ];
 
 let sceneIndex = 0;
