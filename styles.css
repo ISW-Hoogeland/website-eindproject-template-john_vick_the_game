@@ -1,135 +1,53 @@
-/* verborgen state — !important voorkomt overschrijving door ID selectors */
-.hidden {
-   display: none !important;
-}
-
-/* overlay basis (zentraal, fullscreen) */
-.overlay {
-   position: fixed;
-   inset: 0;
-   background: rgba(0, 0, 0, 0.85);
-   color: #fff;
-   display: flex;
-   /* standaard zichtbaar als geen .hidden */
-   justify-content: center;
-   align-items: center;
-   z-index: 9999;
-   padding: 20px;
-}
-
-/* Box styling */
-.cutscene-box,
-.tutorial-box {
-   background: rgba(30, 30, 30, 0.95);
-   padding: 36px;
-   max-width: 700px;
-   border-radius: 10px;
-   text-align: center;
-   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-}
-
-/* overige styles (kort gehouden) */
-.menu-buttons {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-   width: 60%;
-   max-width: 450px;
-}
-
-.menu-buttons button {
-   padding: 24px 0;
-   font-size: 18px;
-   background: rgba(0, 0, 0, 0.7);
-   color: white;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
-}
-
-/* header & body bg etc — jouw eerdere regels blijven */
 body {
-   margin: 0;
-   font-family: Arial, Helvetica, sans-serif;
-   background: url("jouw-afbeelding.png") no-repeat center center fixed;
-   background-size: cover;
-}
-
-header {
-   background: #3a3a3a;
-   padding: 20px;
-   color: white;
-}
-
-main {
-   height: calc(100vh - 60px);
+   background-color: #050505;
+   color: #eee;
+   font-family: 'Courier New', monospace;
    display: flex;
    justify-content: center;
    align-items: center;
+   height: 100vh;
+   margin: 0;
 }
 
-#tutorial-scene {
-   position: fixed;
-   inset: 0;
-   background: #2e5a2e;
-   display: flex;
-   flex-direction: column;
-   z-index: 100;
+.menu-screen {
+   text-align: center;
+   width: 400px;
+   border: 1px solid #333;
+   padding: 40px;
+   background: rgba(0, 0, 0, 0.9);
+   box-shadow: 0 0 20px rgb(137, 23, 23);
 }
 
-#garden {
-   flex: 1;
-   position: relative;
+.hidden {
+   display: none;
 }
 
-/* Geel-zwart afgezet gebied */
-#restricted-area {
-   position: absolute;
-   bottom: 50px;
-   left: 50px;
-   width: 300px;
-   height: 200px;
-   border: 5px dashed black;
-   background: repeating-linear-gradient(45deg,
-         yellow,
-         yellow 10px,
-         black 10px,
-         black 20px);
+h1 {
+   font-size: 3rem;
+   letter-spacing: 5px;
+   color: #fff;
+   text-shadow: 2px 2px #891717;
+   margin-bottom: 50px;
 }
 
-/* Objecten */
-#electric-box {
-   position: absolute;
-   top: 50px;
-   left: 50px;
-   font-size: 40px;
-   cursor: pointer;
-}
-
-#shed {
-   position: absolute;
-   top: 50px;
-   right: 50px;
-   font-size: 40px;
-   cursor: pointer;
-}
-
-#gun {
-   position: absolute;
-   bottom: 100px;
-   left: 150px;
-   font-size: 40px;
-   cursor: pointer;
-}
-
-#inventory {
-   background: rgba(0, 0, 0, 0.7);
-   color: white;
-   padding: 10px;
-}
-
-#tutorial-text {
-   background: black;
-   color: white;
+nav button {
+   display: block;
+   width: 100%;
    padding: 15px;
+   margin: 10px 0;
+   background: transparent;
+   color: #ccc;
+   border: 1px solid #444;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+}
+
+nav button:hover {
+   background: #891717;
+   color: #fff;
+   border-color: #891717;
+   box-shadow: 0 0 15px #891717; 
+   transform: scale(1.05);
 }

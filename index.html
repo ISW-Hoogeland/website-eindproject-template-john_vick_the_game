@@ -1,54 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl">
+<link rel="stylesheet" href="styles.css">
+
+<head>
+  <title>John Vick The Game</title>
+</head>
+
 <body>
-  <header>
-    <h1>John Vick the Game</h1>
-  </header>
+  <div id="game-wrapper">
+    <div id="main-menu" class="menu-screen">
+      <h1 class="glitch-title">JOHN VICK</h1>
+      <nav>
+        <button onclick="startGame()">NIEUW SPEL</button>
+        <button onclick="showScreen('load-menu')">LAAD SPEL</button>
+        <button onclick="showScreen('settings-menu')">INSTELLINGEN</button>
+        <button onclick="showScreen('credits-menu')">CREDITS</button>
+      </nav>
+    </div>
 
-  <!-- OVERLAYS OUTSIDE MAIN -->
-  <div id="cutscene" class="overlay hidden">
-    <div class="cutscene-box">
-      <p id="cutscene-text"></p>
-      <button id="cutscene-next">Volgende</button>
+    <div id="load-menu" class="menu-screen hidden">
+      <h2>LAAD SPEL</h2>
+      <p>Geen opgeslagen spellen gevonden...</p>
+      <button onclick="showScreen('main-menu')">TERUG</button>
+    </div>
+
+    <div id="settings-menu" class="menu-screen hidden">
+      <h2>INSTELLINGEN</h2>
+    </div>
+
+    <div id="credits-menu" class="menu-screen hidden">
+      <h2>CREDITS</h2>
+      <button onclick="showScreen('main-menu')">TERUG</button>
     </div>
   </div>
-
-  <div id="tutorial" class="overlay hidden">
-    <div class="tutorial-box">
-      <h2>Tutorial</h2>
-      <p>Beweeg met WASD. Klik om te schieten. Vermijd vijanden.</p>
-      <button id="tutorial-start">Begin!</button>
-    </div>
-  </div>
-
-  <div id="tutorial-scene" class="hidden">
-    <div id="garden">
-
-      <div id="restricted-area"></div>
-
-      <div id="electric-box">⚡</div>
-      <div id="shed">🏠</div>
-      <div id="gun" class="hidden">🔫</div>
-
-    </div>
-
-    <div id="inventory">
-      <span id="shovel" class="hidden">🪣 Schep</span>
-    </div>
-
-    <div id="tutorial-text">
-      Open het elektriciteitskastje.
-    </div>
-  </div>
-
-
-  <main>
-    <div class="menu-buttons">
-      <button id="start-btn">Start het Spel</button>
-      <button>Laad een Spel</button>
-      <button>Instellingen</button>
-      <button>Credits</button>
-    </div>
-  </main>
-
-  <script src="menu.js"></script>
-  <link rel="stylesheet" href="styles.css">
 </body>
+
+</html>
