@@ -1,173 +1,97 @@
-// =====================
-// CUTSCENE ELEMENTEN
-// =====================
-const cutscene = document.getElementById("cutscene");
-const cutsceneText = document.getElementById("cutscene-text");
-const cutsceneNext = document.getElementById("cutscene-next");
+// Deze objecten houden de huidige status van de speler bij
+let gameState = { currentDay: 1, inventory: [], lastScene: 'tuin' };
+let currentCutsceneIndex = 0;
+let activeCutscene = [];
 
-// =====================
-// MENU / TUTORIAL OVERLAYS
-// =====================
-const tutorial = document.getElementById("tutorial");
-const tutorialStart = document.getElementById("tutorial-start");
+// Dit zorgt ervoor dat bij het opstarten altijd het menu opent
+window.onload = function () {
+    showScreen('main-menu');
+    document.getElementById('cutscene-container').classList.add('hidden');
+};
 
-const menuButtons = document.querySelector(".menu-buttons");
-const startBtn = document.getElementById("start-btn");
-
-// =====================
-// CUTSCENE DATA
-// =====================
-const scenes = [
-    "Jij... JIJ... bent precies waar ik naar op zoek ben.",
-    "Maar je moet jezelf eerst bewijzen. Als hitman moet je slim zijn en je omgeving gebruiken.",
-    "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen."
-];
-
-let sceneIndex = 0;
-let typingInterval = null;
-
-// =====================
-// TYPEWRITER EFFECT
-// =====================
-function typeText(text, speed = 40) {
-    if (typingInterval) clearInterval(typingInterval);
-
-    cutsceneText.textContent = "";
-    let i = 0;
-
-    typingInterval = setInterval(() => {
-        cutsceneText.textContent += text[i] ?? "";
-        i++;
-
-        if (i >= text.length) {
-            clearInterval(typingInterval);
-            typingInterval = null;
-        }
-    }, speed);
+// Functies voor het menu
+function showScreen(screenId) {
+    const screens = document.querySelectorAll('.menu-screen');
+    screens.forEach(s => s.classList.add('hidden'));
+    document.getElementById(screenId).classList.remove('hidden');
 }
 
-// =====================
-// START GAME → CUTSCENE
-// =====================
+// Start een volledig nieuw spel
 function startGame() {
-    menuButtons.style.display = "none";
-    cutscene.classList.remove("hidden");
-
-    sceneIndex = 0;
-    typeText(scenes[sceneIndex]);
+    document.getElementById('cutscene-container').classList.add('hidden');
+    showScreen('game-screen');
+    playCutscene('intro_dag1');
+    console.log("De gameplay is gestart. Zoek de schep!");
+    saveGame
 }
 
-startBtn.addEventListener("click", startGame);
+// Functies voor het opslaan en laden
 
-// =====================
-// CUTSCENE NEXT
-// =====================
-cutsceneNext.addEventListener("click", () => {
-    if (typingInterval) {
-        clearInterval(typingInterval);
-        typingInterval = null;
-        cutsceneText.textContent = scenes[sceneIndex];
-        return;
-    }
+// Slaat de huidige gameState op in de browser
+function saveGame() {
+    localStorage.setItem('johnVickSave', JSON.stringify(gameState));
+    console.log("Spel opgeslagen!");
+}
 
-    sceneIndex++;
+// Laadt het spel vanuit de browser
+function loadGame() {
+    const savedData = localStorage.getItem('johnVickSave');
 
-    if (sceneIndex < scenes.length) {
-        typeText(scenes[sceneIndex]);
+    if (savedData) {
+        gameState = JSON.parse(savedData);
+        alert("Spel geladen! Je bent bij Dag " + gameState.currentDay);
+        loadScene(gameState.lastScene);
     } else {
-        cutscene.classList.add("hidden");
-        tutorial.classList.remove("hidden");
+        alert("Geen opgeslagen spel gevonden.");
     }
-});
+}
 
-// =====================
-// TUTORIAL START
-// =====================
-tutorialStart.addEventListener("click", () => {
-    tutorial.classList.add("hidden");
-    tutorialScene.classList.remove("hidden");
-    tutorialText.textContent = "Open het elektriciteitskastje.";
-});
+// Update de 'laad spel' knop tekst als er een save is
+function checkSaveGame() {
+    const savedData = localStorage.getItem('johnVickSave');
+    const loadBtn = document.querySelector("button[onclick*='load-menu']");
 
-// =====================================================
-// ===================== TUTORIAL GAME ==================
-// =====================================================
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        loadBtn.innerText = "LAAD SPEL (DAG " + data.currentDay + ")";
+    }
+}
 
-// Tutorial scene elementen
-const tutorialScene = document.getElementById("tutorial-scene");
-const electricBox = document.getElementById("electric-box");
-const shed = document.getElementById("shed");
-const restrictedArea = document.getElementById("restricted-area");
-const shovelItem = document.getElementById("shovel");
-const gun = document.getElementById("gun");
-const tutorialText = document.getElementById("tutorial-text");
+// Teksten van de Cutscenes
+const cutsceneData = {
+    intro_dag1: [
+        { gif: "assets/mason_intro.gif", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
+        { gif: "assets/mason_intro.gif", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
+        { gif: "assets/tuin_shot.gif", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
+    ]
+}
 
-// Tutorial state
-let powerSolved = false;
-let shedUnlocked = false;
-let hasShovel = false;
-let gunFound = false;
+// Speelt de cutscene af
+function playCutscene(id) {
+    activeCutscene = cutsceneData[id];
+    currentCutsceneIndex = 0;
+    document.getElementById('cutscene-container').classList.remove('hidden');
+    updateCutsceneUI();
+}
 
-// =====================
-// ELEKTRICITEITSKASTJE
-// =====================
-electricBox.addEventListener("click", () => {
-    if (powerSolved) return;
+// Update de cutscene UI
+function updateCutsceneUI() {
+    const step = activeCutscene[currentCutsceneIndex];
+    document.getElementById('cutscene-gif').src = step.gif;
+    document.getElementById('dialogue-text').innerText = step.text;
+}
 
-    const answer = prompt("Vind x: e^ln(5) - 5x = 0");
-    if (answer === "1") {
-        powerSolved = true;
-        shedUnlocked = true;
-        tutorialText.textContent = "Het slot is uitgeschakeld. Ga naar het tuinhuisje.";
-        alert("Elektriciteit uitgeschakeld!");
+// Maakt de 'verder' knop werkend in de cutscenes
+function nextCutsceneStep() {
+    currentCutsceneIndex++;
+
+    if (currentCutsceneIndex < activeCutscene.length) {
+        updateCutsceneUI();
     } else {
-        alert("Fout antwoord.");
+        // Einde van de cutscene
+        document.getElementById('cutscene-container').classList.add('hidden');
+        startGameplay(); // De functie die de tuin laat zien
     }
-});
+}
 
-// =====================
-// TUINHUISJE
-// =====================
-shed.addEventListener("click", () => {
-    if (!shedUnlocked) {
-        tutorialText.textContent = "Het tuinhuisje zit nog op slot.";
-        return;
-    }
-
-    if (!hasShovel) {
-        hasShovel = true;
-        shovelItem.classList.remove("hidden");
-        tutorialText.textContent = "Je hebt een schep. Graaf in het afgezette gebied.";
-    }
-});
-
-// =====================
-// GRAVEN
-// =====================
-restrictedArea.addEventListener("click", () => {
-    if (!hasShovel || gunFound) return;
-
-    gunFound = true;
-    gun.classList.remove("hidden");
-    tutorialText.textContent = "Je raakt iets hards onder de grond...";
-});
-
-// =====================
-// GEWEER → NIEUWE CUTSCENE
-// =====================
-gun.addEventListener("click", () => {
-    tutorialScene.classList.add("hidden");
-
-    // nieuwe cutscene
-    scenes.length = 0;
-    scenes.push(
-        "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen.",
-        "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten.",
-        "Kijk eens hier: dummies. het neusje van de zalm. 10 meter, 20 meter en 30 meter. laat eens zien wat je kunt."
-
-    );
-
-    sceneIndex = 0;
-    cutscene.classList.remove("hidden");
-    typeText(scenes[sceneIndex]);
-});
+checkSaveGame();

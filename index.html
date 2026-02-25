@@ -26,6 +26,7 @@
 
     <div id="settings-menu" class="menu-screen hidden">
       <h2>INSTELLINGEN</h2>
+      <button onclick="showScreen('main-menu')">TERUG</button>
     </div>
 
     <div id="credits-menu" class="menu-screen hidden">
@@ -33,6 +34,34 @@
       <button onclick="showScreen('main-menu')">TERUG</button>
     </div>
   </div>
+
+  <div id="cutscene-container" class="hidden">
+    <div class="letterbox top"></div>
+
+    <div class="content">
+      <img id="cutscene-gif" src="" alt="Cutscene">
+      <div class="dialogue-box">
+        <h3 id="speaker-name">Mason Bourne</h3>
+        <p id="dialogue-text"></p>
+        <button id="next-btn" onclick="nextCutsceneStep()">VERDER ></button>
+      </div>
+    </div>
+
+    <div class="letterbox bottom"></div>
+  </div>
+
+  <div id="game-screen" class="menu-screen hidden">
+    <div id="garden-bg"
+      style="width: 100%; height: 400px; background: url('assets/tuin.jpg') center/cover; position: relative;">
+      <div class="lint"
+        style="position: absolute; bottom: 20%; width: 100%; height: 20px; background: repeating-linear-gradient(45deg, #f1c40f, #f1c40f 10px, #000 10px, #000 20px);">
+      </div>
+    </div>
+    <div id="game-ui" style="background: #111; padding: 20px; color: white;">
+      <p id="game-instruction">Onderzoek de tuin...</p>
+    </div>
+  </div>
+  <script src="menu.js"></script>
 </body>
 
 </html>
