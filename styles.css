@@ -7,6 +7,7 @@ body {
    align-items: center;
    height: 100vh;
    margin: 0;
+   overflow: hidden;
 }
 
 .menu-screen {
@@ -99,7 +100,6 @@ nav button:hover {
 
 #speaker-name {
    color: #891717;
-   /* Wick Rood */
    margin: 0;
    text-transform: uppercase;
    letter-spacing: 2px;
@@ -117,4 +117,269 @@ nav button:hover {
    color: white;
    padding: 10px 20px;
    cursor: pointer;
+}
+
+#garden-screen {
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#garden-view {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/tuin_dicht.png');
+   background-size: cover;
+   background-position: center;
+}
+
+#dialogue-text::after {
+   content: "|";
+   animation: blink 0.8s infinite;
+   color: #ffffff;
+   margin-left: 5px;
+}
+
+@keyframes blink {
+   0% {
+      opacity: 0;
+   }
+
+   50% {
+      opacity: 1;
+   }
+
+   100% {
+      opacity: 0;
+   }
+}
+
+#electrical-puzzle-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.9);
+   z-index: 2000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-image: url("assets/tuin_dicht.png");
+}
+
+
+#electrical-puzzle-frame {
+   width: 500px;
+   height: 700px;
+   background-image: url('assets/elektriciteitskastje.gif');
+   background-size: cover;
+   background-position: center;
+   border: 3px solid #333;
+   border-radius: 5px;
+   box-shadow: 0 0 50px #891717;
+   position: relative;
+   overflow: hidden;
+}
+
+#close-electrical-puzzle {
+   position: absolute;
+   top: 17px;
+   right: 17px;
+   background: transparent;
+   border: none;
+   color: #891717;
+   font-size: 1.5rem;
+   cursor: pointer;
+   z-index: 100;
+}
+
+#check-electrical-puzzle-btn {
+   position: absolute;
+   bottom: 20px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: #000;
+   border: 1px solid #891717;
+   color: white;
+   padding: 10px 20px;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+#check-electrical-puzzle-btn:hover {
+   background: #000;
+   box-shadow: 0 0 10px #891717;
+}
+
+#elektra {
+   position: absolute;
+   top: 0.2px;
+   left: 20px;
+   background: transparent;
+   border: none;
+   color: #fff;
+   font-size: 1.2rem;
+   cursor: pointer;
+   z-index: 100;
+}
+
+.circuit-disk {
+   width: 128px;
+   height: 128px;
+   position: absolute;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+   transform-origin: center;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.type-bocht {
+   background-image: url('assets/schijf_bocht.gif');
+}
+
+.type-recht {
+   background-image: url('assets/schijf_recht.gif');
+}
+
+.type-t {
+   background-image: url('assets/schijf_t.gif');
+}
+
+
+#disk-0 {
+   top: 13.08%;
+   left: 33.0%;
+}
+
+#disk-2 {
+   top: 31.38%;
+   left: 33.0%;
+}
+
+#disk-4 {
+   top: 49.68%;
+   left: 33.0%;
+}
+
+#disk-6 {
+   top: 67.98%;
+   left: 33.0%;
+}
+
+#disk-1 {
+   top: 13.08%;
+   left: 58.6%;
+}
+
+#disk-3 {
+   top: 31.38%;
+   left: 58.6%;
+}
+
+#disk-5 {
+   top: 49.68%;
+   left: 58.6%;
+}
+
+#disk-7 {
+   top: 67.98%;
+   left: 58.6%;
+}
+
+.game-object {
+   position: absolute;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#shed-click-spot {
+   width: 15%;
+   height: 40%;
+   top: 30%;
+   left: 40%;
+}
+
+#junction-box-click-spot {
+   width: 8%;
+   height: 12%;
+   top: 50%;
+   left: 60%;
+}
+
+#dig-site {
+   width: 12%;
+   height: 10%;
+   top: 75%;
+   left: 25%;
+}
+
+#shooting-range {
+   width: 100vw;
+   height: 100vh;
+   background-image: url('assets/schietbaan_bg.png');
+   background-size: cover;
+   position: relative;
+   cursor: crosshair;
+}
+
+.dummy {
+   position: absolute;
+   background-image: url('assets/dummy.jpg');
+   background-size: contain;
+   background-repeat: no-repeat;
+   cursor: crosshair;
+   transition: transform 0.5s ease-in;
+   transform-origin: bottom;
+}
+
+.dummy.hit {
+   transform: rotateX(-90deg);
+   pointer-events: none;
+   filter: brightness(0.5);
+}
+
+.large {
+   width: 150px;
+   height: 250px;
+   bottom: 10%;
+   left: 15%;
+}
+
+.medium {
+   width: 100px;
+   height: 180px;
+   bottom: 35%;
+   left: 45%;
+}
+
+.small {
+   width: 60px;
+   height: 100px;
+   bottom: 55%;
+   left: 75%;
+}
+
+.dummy:active {
+   transform: scale(0.9);
+}
+
+@keyframes muzzle-flash {
+   0% {
+      background-color: rgba(255, 255, 255, 0.8);
+   }
+
+   100% {
+      background-color: transparent;
+   }
+}
+
+.flash-active {
+   animation: muzzle-flash 0.1s ease-out;
 }
