@@ -1,12 +1,19 @@
-// Deze objecten houden de huidige status van de speler bij
+// Deze objecten houden de huidige status van diverse objecten bij
 let gameState = { currentDay: 1, currentChapter: 1, inventory: [], lastScene: 'tuin' };
 let currentCutsceneIndex = 0;
 let activeCutscene = [];
+let activeBlock = null;
+let offset = { x: 0, y: 0 };
+const gridSize = 160;
+const offsetMargin = 6;
+window.addEventListener('mousemove', drag);
+window.addEventListener('mouseup', endDrag);
 
-// Dit zorgt ervoor dat bij het opstarten altijd het menu opent
+// Dit zorgt ervoor dat bij het opstarten altijd het menu opent en de puzzels worden geladen
 window.onload = function () {
     showScreen('main-menu');
     document.getElementById('cutscene-container').classList.add('hidden');
+    initClubPuzzle();
 };
 
 // Functies voor het menu
@@ -65,9 +72,9 @@ function checkSaveGame() {
 const cutsceneData = {
     intro_dag1: {
         steps: [
-            { gif: "assets/intro.gif", speaker: "Mason Bourne", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
-            { gif: "assets/intro.gif", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
-            { gif: "assets/tuin_dicht.gif", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
+            { gif: "assets/", speaker: "Mason Bourne", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
         ],
         nextStep: "chapter_1"
     },
@@ -87,9 +94,38 @@ const cutsceneData = {
         steps: [
             { gif: "assets/", speaker: "Mason Bourne", text: "Ik ben serieus onder de indruk, voor hoever dat kan met stilstaande doelen natuurlijk." },
             { gif: "assets/", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?" },
-            { gif: "assets/", speaker: "John Vick", text: "YEAH!!" }
-        ]
-    }
+            { gif: "assets/", speaker: "John Vick", text: "YEAH!!" },
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 2..." },
+            { gif: "assets/", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
+            { gif: "assets/", speaker: "John Vick", text: "Zeker." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Josef gestolen." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Jij moet hem terug halen." },
+            { gif: "assets/", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?" },
+            { gif: "assets/", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is," },
+            { gif: "assets/", speaker: "Mason Bourne", text: "meestal spijkerbroeken draagt, veel bananen eet en een bril draagt." },
+            { gif: "assets/", speaker: "John Vick", text: "Heb je nog meer info? Er zijn namelijk veel mensen die er zo uitzien." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Hij woont in Nederland en hij werkt bij ..." },
+            { gif: "assets/", speaker: "Mason Bourne", text: "WAT GEBEURT HIER?!?!" },
+            { gif: "assets/", speaker: "Wachter", text: "WE WORDEN AANGEVALLEN! SNEL, NAAR DE GANGEN!" },
+            { gif: "assets/", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!" },
+            { gif: "assets/", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!" },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!" },
+            { gif: "assets/", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!" },
+        ],
+        nextStep: "chapter_3"
+    },
+    //{ gif: "assets/", speaker: "", text: "" },
+    na_puzzel_club: {
+        steps: [
+            { gif: "assets/", speaker: " ", text: " " }, //stripclub - hotel
+            { gif: "assets/", speaker: " ", text: " " },
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 3..." },
+            { gif: "assets/", speaker: " ", text: " " }, //wakker worden
+            { gif: "assets/", speaker: " ", text: " " },
+        ],
+        nextStep: "chapter_4"
+    },
 
 }
 
@@ -143,6 +179,9 @@ function nextCutsceneStep() {
             showScreen('garden-screen');
         } else if (activeCutscene.nextStep === "chapter_2") {
             showScreen('shooting-range');
+        } else if (activeCutscene.nextStep === "chapter_3") {
+            showScreen('strip-club');
+            document.getElementById('unblock-puzzle-overlay').classList.remove('hidden');
         } else {
             showScreen('main-menu');
         }
@@ -159,10 +198,11 @@ let diskRotations = [0, 0, 0, 0, 0, 0, 0, 0];
 // De puzzelacties
 function openElectricalPuzzleOverLay() {
     document.getElementById('electrical-puzzle-overlay').classList.remove('hidden');
-    diskRotations.forEach((index) => {
+    for (let i = 0; i < diskRotations.length; i++) {
         const randomRot = Math.floor(Math.random() * 4) * 90;
-        setDiskRotation(index, randomRot);
-    });
+        diskRotations[i] = randomRot;
+        setDiskRotation(i, randomRot);
+    }
 }
 
 function closeElectricalPuzzleOverlay() {
@@ -255,8 +295,139 @@ function shootDummy(element) {
     const activeDummies = document.querySelectorAll('.dummy:not(.hit)');
     if (activeDummies.length === 0) {
         setTimeout(() => {
+            gameState.currentChapter = 3;
             playCutscene('na_schieten');
         }, 800);
+    }
+}
+
+// Initialisatie van de blokken
+const levelConfig = [
+    { id: 0, top: 320, left: 0, orientation: "horizontal_target" },
+    { id: 1, top: 0, left: 160, orientation: "vertical_short" },
+    { id: 2, top: 320, left: 320, orientation: "vertical_long" },
+    { id: 3, top: 0, left: 480, orientation: "horizontal" },
+    { id: 4, top: 160, left: 640, orientation: "vertical_short" },
+    { id: 5, top: 160, left: 800, orientation: "vertical_long" },
+    { id: 6, top: 480, left: 0, orientation: "horizontal" },
+    { id: 7, top: 640, left: 480, orientation: "vertical_short" },
+    { id: 8, top: 640, left: 640, orientation: "horizontal" },
+    { id: 9, top: 800, left: 160, orientation: "horizontal" }
+];
+
+// Initialisatie van de game
+function initClubPuzzle() {
+    levelConfig.forEach(config => {
+        const block = document.querySelector(`.block[data-id="${config.id}"]`);
+        if (block) {
+            block.style.top = (config.top + offsetMargin) + "px";
+            block.style.left = (config.left + offsetMargin) + "px";
+            block.dataset.orientation = config.orientation;
+            block.onmousedown = startDrag;
+        }
+    });
+}
+
+// Controleer of twee blokken elkaar overlappen
+function isOverlapping(rect1, rect2) {
+    return !(rect1.right <= rect2.left ||
+        rect1.left >= rect2.right ||
+        rect1.bottom <= rect2.top ||
+        rect1.top >= rect2.bottom);
+}
+
+// Functies voor het bewegen van de blokken
+function drag(e) {
+    if (!activeBlock) return;
+
+    const grid = document.getElementById('unblock-grid').getBoundingClientRect();
+    const oldLeft = parseInt(activeBlock.style.left);
+    const oldTop = parseInt(activeBlock.style.top);
+    let newLeft = Math.round((e.clientX - grid.left - offset.x - offsetMargin) / gridSize) * gridSize + offsetMargin;
+    let maxLeft = 972 - activeBlock.offsetWidth;
+
+    if (activeBlock.classList.contains('target')) {
+        const winRowTop = 320 + offsetMargin;
+        if (oldTop === winRowTop) {
+            maxLeft = 1100;
+        } else {
+            maxLeft = 972 - activeBlock.offsetWidth;
+        }
+    }
+
+    newLeft = Math.max(offsetMargin, Math.min(newLeft, maxLeft));
+
+    let newTop = Math.round((e.clientY - grid.top - offset.y - offsetMargin) / gridSize) * gridSize + offsetMargin;
+    const maxTop = 972 - activeBlock.offsetHeight;
+    newTop = Math.max(offsetMargin, Math.min(newTop, maxTop));
+
+    activeBlock.style.left = newLeft + "px";
+    activeBlock.style.top = newTop + "px";
+
+    if (hasCollision(activeBlock)) {
+        activeBlock.style.left = oldLeft + "px";
+        activeBlock.style.top = oldTop + "px";
+    }
+
+    checkClubWin();
+}
+function startDrag(e) {
+    activeBlock = e.target;
+    const rect = activeBlock.getBoundingClientRect();
+    offset.x = e.clientX - rect.left;
+    offset.y = e.clientY - rect.top;
+    activeBlock.style.zIndex = "100";
+    activeBlock.style.cursor = 'grabbing';
+}
+
+function endDrag() {
+    if (activeBlock) {
+        activeBlock.style.zIndex = "10";
+        activeBlock.style.cursor = 'grab';
+        activeBlock = null;
+    }
+}
+
+function hasCollision(currentBlock) {
+    const allBlocks = document.querySelectorAll('.block');
+    const currentRect = currentBlock.getBoundingClientRect();
+
+    for (let other of allBlocks) {
+        if (other === currentBlock) continue;
+
+        const otherRect = other.getBoundingClientRect();
+        const margin = 1;
+        const adjustedOther = {
+            left: otherRect.left + margin,
+            right: otherRect.right - margin,
+            top: otherRect.top + margin,
+            bottom: otherRect.bottom - margin
+        };
+
+        if (isOverlapping(currentRect, adjustedOther)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkClubWin() {
+    const target = document.querySelector('.block.target');
+    const currentLeft = parseInt(target.style.left);
+    const currentTop = parseInt(target.style.top);
+
+    const winThreshold = 960;
+    const targetRowTop = 320 + offsetMargin;
+
+    if (currentLeft >= winThreshold && currentTop === targetRowTop) {
+        if (!target.classList.contains('solved')) {
+            target.classList.add('solved');
+            activeBlock = null;
+            setTimeout(() => {
+                gameState.currentChapter = 4;
+                playCutscene('na_puzzel_club');
+            }, 1000);
+        }
     }
 }
 

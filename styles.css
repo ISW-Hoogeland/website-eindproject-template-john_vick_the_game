@@ -62,7 +62,7 @@ nav button:hover {
    background: #000;
    z-index: 1000;
    display: flex;
-   flex-direction: column;
+   flex-direction: row;
    justify-content: center;
    align-items: center;
 }
@@ -120,6 +120,7 @@ nav button:hover {
 }
 
 #garden-screen {
+   position: relative;
    width: 100vw;
    height: 100vh;
    overflow: hidden;
@@ -156,17 +157,19 @@ nav button:hover {
 }
 
 #electrical-puzzle-overlay {
-   position: fixed;
+   position: absolute;
    top: 0;
    left: 0;
    width: 100%;
    height: 100%;
-   background: rgba(0, 0, 0, 0.9);
    z-index: 2000;
    display: flex;
    justify-content: center;
    align-items: center;
    background-image: url("assets/tuin_dicht.png");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
 }
 
 
@@ -213,18 +216,6 @@ nav button:hover {
 #check-electrical-puzzle-btn:hover {
    background: #000;
    box-shadow: 0 0 10px #891717;
-}
-
-#elektra {
-   position: absolute;
-   top: 0.2px;
-   left: 20px;
-   background: transparent;
-   border: none;
-   color: #fff;
-   font-size: 1.2rem;
-   cursor: pointer;
-   z-index: 100;
 }
 
 .circuit-disk {
@@ -372,7 +363,7 @@ nav button:hover {
 
 @keyframes muzzle-flash {
    0% {
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: #ffae00;
    }
 
    100% {
@@ -382,4 +373,85 @@ nav button:hover {
 
 .flash-active {
    animation: muzzle-flash 0.1s ease-out;
+}
+
+#unblock-grid {
+   width: 972px;
+   height: 972px;
+   background-image: url("assets/lock.png");
+   position: relative;
+   overflow: visible;
+}
+
+#strip-club {
+   width: 100vw;
+   height: 100vh;
+   background-image: url("assets/strip_club.gif");
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-right: 420px;
+}
+
+#unblock-puzzle-overlay {
+   display: block;
+}
+
+.block.target[data-orientation="horizontal_target"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 320px;
+   height: 160px;
+   background-image: url("assets/blok_doel.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block.target.solved {
+   filter: brightness(1.5) drop-shadow(0 0 15px #4CAF50);
+   transition: filter 0.3s;
+}
+
+.block[data-orientation="vertical_short"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 160px;
+   height: 320px;
+   background-image: url("assets/blok_verticaal.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block[data-orientation="vertical_long"][data-length="3"] {
+   position: absolute;
+   cursor: grab;
+   width: 160px;
+   height: 480px;
+   background-image: url("assets/blok_verticaal_groot.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block[data-orientation="horizontal"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 320px;
+   height: 160px;
+   background-image: url("assets/blok_horizontaal.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+#exit-gate {
+   position: absolute;
+   left: 960px;
+   top: 0;
+   width: 420px;
+   height: 972px;
+   background-image: url('assets/blok_einde.png');
+   background-size: contain;
+   background-repeat: no-repeat;
+   z-index: 0;
+   pointer-events: none;
 }
