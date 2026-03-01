@@ -74,6 +74,16 @@
     </div>
   </div>
 
+  <div id="hotel-screen" class="menu-screen hidden">
+    <div id="hotel-view">
+      <div id="table-click" onclick="startMazePuzzle()"></div>
+      <div id="hoteldoor-click" onclick="interactWithHotelDoor()"></div>
+      <div id="hotel-feedback" class="hidden">
+        <p id="hotel-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
   <div id="strip-club" class="menu-screen hidden">
     <div id="unblock-grid">
       <div class="block target" data-id="0" data-orientation="horizontal_target" data-length="2"></div>
@@ -91,8 +101,7 @@
   </div>
 
   <div id="maze-screen" class="menu-screen hidden">
-    <canvas id="maze-canvas" width="466" height="466"
-      style="border: 3px solid #891717; display: block; margin: auto;"></canvas>
+    <canvas id="maze-canvas" class="hidden"></canvas>
   </div>
 
   <div id="electrical-puzzle-overlay" class="hidden">
@@ -113,6 +122,18 @@
     </div>
   </div>
 
+  <div id="rob-home" class="menu-screen hidden">
+    <div id="rob-view">
+      <div id="pws-click" onclick="interactWithPWS()"></div>
+      <div id="ebs-click" onclick="interactWithEBS()"></div>
+      <div id="nuclear-click" onclick="interactWithNuclear()"></div>
+      <div id="robdoor-click" onclick="interactWithRobDoor()"></div>
+      <div id="rob-feedback" class="hidden">
+        <p id="rob-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
   <button id="dev-skip-button" onclick="devSkip()" style="
     position: fixed; 
     bottom: 20px; 
@@ -124,7 +145,7 @@
     font-weight: bold; 
     border: 2px solid black; 
     cursor: pointer;
-  ">SKIP (TESTING)</button>
+  ">dev skip</button>
 
   <script src="menu.js"></script>
 </body>

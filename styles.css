@@ -247,42 +247,42 @@ nav button:hover {
 
 
 #disk-0 {
-   top: 13.08%;
+   top: 12.94%;
    left: 33.0%;
 }
 
 #disk-2 {
-   top: 31.38%;
+   top: 31.24%;
    left: 33.0%;
 }
 
 #disk-4 {
-   top: 49.68%;
+   top: 49.54%;
    left: 33.0%;
 }
 
 #disk-6 {
-   top: 67.98%;
+   top: 67.84%;
    left: 33.0%;
 }
 
 #disk-1 {
-   top: 13.08%;
+   top: 12.94%;
    left: 58.6%;
 }
 
 #disk-3 {
-   top: 31.38%;
+   top: 31.24%;
    left: 58.6%;
 }
 
 #disk-5 {
-   top: 49.68%;
+   top: 49.54%;
    left: 58.6%;
 }
 
 #disk-7 {
-   top: 67.98%;
+   top: 67.84%;
    left: 58.6%;
 }
 
@@ -308,10 +308,10 @@ nav button:hover {
 }
 
 #dig-site {
-   width: 12%;
-   height: 10%;
-   top: 75%;
-   left: 25%;
+   width: 22%;
+   height: 15%;
+   top: 69%;
+   left: 42%;
 }
 
 #shooting-range {
@@ -463,30 +463,27 @@ nav button:hover {
    position: fixed;
    top: 0;
    left: 0;
+   width: 100vw;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   background-color: #bab198;
+}
+
+#maze-canvas {
    width: 100%;
    height: 100%;
    display: block;
-   background-color: #000;
+   border: none;
+   box-shadow: none;
 }
 
 #maze-canvas {
    position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   width: 466px;
-   height: 466px;
-   box-shadow: 0 0 20px #891717;
-   display: block;
-   image-rendering: pixelated;
-   background-color: #000;
-}
-
-#choice-screen {
-   position: relative;
-   width: 100vw;
-   height: 100vh;
-   overflow: hidden;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
 }
 
 #choice-view {
@@ -503,12 +500,11 @@ nav button:hover {
 
 #door-click {
    position: absolute;
-   top: 150px;
-   left: 100px;
-   width: 200px;
-   height: 350px;
+   top: 10%;
+   left: 5%;
+   width: 33%;
+   height: 80%;
    cursor: pointer;
-   position: absolute;
    background: rgba(255, 0, 0, 0.2);
    border: 2px solid yellow;
    cursor: pointer;
@@ -516,12 +512,11 @@ nav button:hover {
 
 #tunnel-click {
    position: absolute;
-   top: 120px;
-   right: 150px;
-   width: 180px;
-   height: 380px;
+   top: 10%;
+   right: 3%;
+   width: 33%;
+   height: 80%;
    cursor: pointer;
-   position: absolute;
    background: rgba(255, 0, 0, 0.2);
    border: 2px solid yellow;
    cursor: pointer;
@@ -542,6 +537,142 @@ nav button:hover {
 }
 
 #garden-feedback {
+   position: absolute;
+   bottom: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#hotel-feedback {
+   position: absolute;
+   bottom: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#hotel-screen {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#hotel-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/hotel_john.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#hoteldoor-click {
+   position: absolute;
+   top: 35%;
+   left: 0%;
+   width: 9%;
+   height: 60%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#table-click {
+   position: absolute;
+   top: 35%;
+   left: 22%;
+   width: 9%;
+   height: 7%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#rob-home {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#rob-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_rob_binnen.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#pws-click {
+   position: absolute;
+   top: 62%;
+   left: 10%;
+   width: 20%;
+   height: 15%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#ebs-click {
+   position: absolute;
+   top: 10%;
+   left: 3%;
+   width: 36%;
+   height: 46%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#nuclear-click {
+   position: absolute;
+   top: 9%;
+   right: 29%;
+   width: 21%;
+   height: 52%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#robdoor-click {
+   position: absolute;
+   top: 10%;
+   right: 2%;
+   width: 15%;
+   height: 75%;
+   cursor: pointer;
+   background: rgba(255, 0, 0, 0.2);
+   border: 2px solid yellow;
+   cursor: pointer;
+}
+
+#rob-feedback {
    position: absolute;
    bottom: 50px;
    left: 50%;
