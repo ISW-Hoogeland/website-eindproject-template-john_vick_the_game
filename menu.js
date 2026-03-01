@@ -1,79 +1,18 @@
 // Deze objecten houden de huidige status van diverse objecten bij
 let gameState = { currentDay: 1, currentChapter: 1, inventory: [], lastScene: 'tuin' };
 let currentCutsceneIndex = 0;
-let activeCutscene = [];
+let activeCutscene = null;
 let activeBlock = null;
 let offset = { x: 0, y: 0 };
 const gridSize = 160;
 const offsetMargin = 6;
-window.addEventListener('mousemove', drag);
-window.addEventListener('mouseup', endDrag);
-
-// Dit zorgt ervoor dat bij het opstarten altijd het menu opent en de puzzels worden geladen
-window.onload = function () {
-    showScreen('main-menu');
-    document.getElementById('cutscene-container').classList.add('hidden');
-    initClubPuzzle();
-};
-
-// Functies voor het menu
-function showScreen(screenId) {
-    const screens = document.querySelectorAll('.menu-screen');
-    screens.forEach(s => s.classList.add('hidden'));
-    document.getElementById(screenId).classList.remove('hidden');
-}
-
-// Start een volledig nieuw spel
-function startGame() {
-    gameState = { currentDay: 1, inventory: [], lastScene: 'tuin' };
-    playCutscene('intro_dag1');
-    saveGame();
-}
-
-function startGameplay() {
-    document.getElementById('cutscene-container').classList.add('hidden');
-    showScreen('garden-screen');
-    console.log("De gameplay is gestart. Zoek de schep!");
-}
-
-// Functies voor het opslaan en laden
-
-// Slaat de huidige gameState op in de browser
-function saveGame() {
-    localStorage.setItem('johnVickSave', JSON.stringify(gameState));
-    console.log("Spel opgeslagen!");
-}
-
-// Laadt het spel vanuit de browser
-function loadGame() {
-    const savedData = localStorage.getItem('johnVickSave');
-
-    if (savedData) {
-        gameState = JSON.parse(savedData);
-        alert("Spel geladen! Je bent bij Dag " + gameState.currentDay);
-        showScreen('garden-screen');
-    } else {
-        alert("Geen opgeslagen spel gevonden.");
-    }
-}
-
-// Update de 'laad spel' knop tekst als er een save is
-function checkSaveGame() {
-    const savedData = localStorage.getItem('johnVickSave');
-    const loadBtn = document.querySelector("button[onclick*='load-menu']");
-
-    if (savedData && loadBtn) {
-        const data = JSON.parse(savedData);
-        loadBtn.innerText = "LAAD SPEL (DAG " + data.currentDay + ")";
-    }
-}
 
 // Teksten van de Cutscenes
 const cutsceneData = {
     intro_dag1: {
         steps: [
-            { gif: "assets/", speaker: "Mason Bourne", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
             { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
         ],
         nextStep: "chapter_1"
@@ -96,26 +35,26 @@ const cutsceneData = {
             { gif: "assets/", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?" },
             { gif: "assets/", speaker: "John Vick", text: "YEAH!!" },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 2..." },
-            { gif: "assets/", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
-            { gif: "assets/", speaker: "John Vick", text: "Zeker." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Josef gestolen." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Jij moet hem terug halen." },
-            { gif: "assets/", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?" },
-            { gif: "assets/", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is," },
-            { gif: "assets/", speaker: "Mason Bourne", text: "meestal spijkerbroeken draagt, veel bananen eet en een bril draagt." },
-            { gif: "assets/", speaker: "John Vick", text: "Heb je nog meer info? Er zijn namelijk veel mensen die er zo uitzien." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Hij woont in Nederland en hij werkt bij ..." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "WAT GEBEURT HIER?!?!" },
-            { gif: "assets/", speaker: "Wachter", text: "WE WORDEN AANGEVALLEN! SNEL, NAAR DE GANGEN!" },
-            { gif: "assets/", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!" },
-            { gif: "assets/", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!" },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!" },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!" },
+            { gif: "assets/huis_mason.gif", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Zeker." },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Josef gestolen." },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Jij moet hem terug halen." },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is," },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "meestal spijkerbroeken draagt, veel bananen eet en een bril draagt." },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Heb je nog meer info? Er zijn namelijk veel mensen die er zo uitzien." },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hij woont in Nederland en hij werkt bij ..." },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "WAT GEBEURT HIER?!?!" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Wachter", text: "WE WORDEN AANGEVALLEN! SNEL, NAAR DE GANGEN!" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!" },
+            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!" },
+            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!" },
         ],
         nextStep: "chapter_3"
     },
-    //{ gif: "assets/", speaker: "", text: "" },
+
     na_puzzel_club: {
         steps: [
             { gif: "assets/", speaker: " ", text: " " }, //stripclub - hotel
@@ -127,7 +66,102 @@ const cutsceneData = {
         nextStep: "chapter_4"
     },
 
+    na_doolhof: {
+        steps: [
+            { gif: "assets/", speaker: "Butler", text: "Goede ochtend. Wie moge u wezen?" },
+            { gif: "assets/", speaker: "John Vick", text: "John Vick. Ik ben gestuurd door Mason Bourne." },
+            { gif: "assets/", speaker: "Butler", text: "Ik ga het even navragen." },
+            { gif: "assets/", speaker: " ", text: " " },
+            { gif: "assets/", speaker: "Butler", text: "Komen u verder." },
+            { gif: "assets/", speaker: "John Vick", text: "Danku." },
+            { gif: "assets/", speaker: "Rob", text: "Ik hoorde dat Mason je gestuurd heeft. Kijk maar even rond. Ik ben bijna klaar met het werk van je doelwit zoeken in de database." },
+        ],
+        nextStep: "chapter_5"
+    },
+
+    na_huis: {
+        steps: [
+            { gif: "assets/", speaker: "Rob", text: "John, ik heb een collega van hem gevonden. Zijn naam is Jantje Hoeksma, misschien weet hij wie je zoekt." },
+            { gif: "assets/", speaker: "Rob", text: "Pak mijn auto maar, dan stuur ik je het adres door." },
+            { gif: "assets/", speaker: "John Vick", text: "Bedankt Rob. Ik ga terug naar mijn hotel en morgen ga ik direct achter hem aan" },
+            { gif: "assets/", speaker: " ", text: " " }, // Terug naar hotel
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 4..." },
+            { gif: "assets/", speaker: " ", text: " " }, // Wakker worden
+        ],
+        nextStep: "chapter_6"
+    },
+
+    /*
+    [naam]: {
+        steps: [
+                { gif: "assets/", speaker: "", text: "" },
+        ],
+        nextStep: "chapter_[#]"
+    },
+    */
 }
+
+// Laad het menu
+window.onload = function () {
+    showScreen('main-menu');
+    document.getElementById('cutscene-container').classList.add('hidden');
+    initClubPuzzle();
+    initMaze();
+};
+
+window.addEventListener('mousemove', drag);
+window.addEventListener('mouseup', endDrag);
+
+// Functies voor het menu
+function showScreen(screenId) {
+    const screens = document.querySelectorAll('.menu-screen');
+    screens.forEach(s => s.classList.add('hidden'));
+    document.getElementById(screenId).classList.remove('hidden');
+}
+
+// Start een volledig nieuw spel
+function startGame() {
+    gameState = { currentDay: 1, inventory: [], lastScene: 'tuin' };
+    playCutscene('intro_dag1');
+    saveGame();
+}
+
+function startGameplay() {
+    document.getElementById('cutscene-container').classList.add('hidden');
+    showScreen('garden-screen');
+}
+
+
+// Slaat de huidige gameState op in de browser
+function saveGame() {
+    localStorage.setItem('johnVickSave', JSON.stringify(gameState));
+}
+
+// Laadt het spel vanuit de browser
+function loadGame() {
+    const savedData = localStorage.getItem('johnVickSave');
+
+    if (savedData) {
+        gameState = JSON.parse(savedData);
+        alert("Spel geladen! Je bent bij Dag " + gameState.currentChapter);
+        showScreen('garden-screen');
+    } else {
+        alert("Geen opgeslagen spel gevonden.");
+    }
+}
+
+// Update de 'laad spel' knop tekst als er een save is
+function checkSaveGame() {
+    const savedData = localStorage.getItem('johnVickSave');
+    const loadBtn = document.querySelector("button[onclick*='load-menu']");
+
+    if (savedData && loadBtn) {
+        const data = JSON.parse(savedData);
+        loadBtn.innerText = "LAAD SPEL (Hoofdstuk " + data.currentChapter + ")";
+    }
+}
+
+
 
 // Speelt de cutscene af
 function playCutscene(id) {
@@ -142,14 +176,20 @@ let typewriterInterval;
 
 function updateCutsceneUI() {
     const step = activeCutscene.steps[currentCutsceneIndex];
-    const gifElement = document.getElementById('cutscene-gif');
+    const container = document.getElementById('cutscene-container');
     const textElement = document.getElementById('dialogue-text');
     const nameElement = document.getElementById('speaker-name');
     const nextBtn = document.getElementById('next-btn');
 
-    nameElement.innerText = step.speaker || "*Onbekend*"
+    nameElement.innerText = step.speaker || "*Onbekend*";
 
-    gifElement.src = step.gif;
+    if (step.gif) {
+        container.style.backgroundImage = `url('${step.gif}')`;
+        container.style.backgroundSize = "cover";
+        container.style.backgroundPosition = "center";
+        container.style.backgroundRepeat = "no-repeat";
+    }
+
     let i = 0;
     textElement.innerText = "";
     nextBtn.style.display = "none";
@@ -167,23 +207,33 @@ function updateCutsceneUI() {
     }, 1);
 }
 
-// Maakt de 'verder' knop werkend in de cutscenes
 function nextCutsceneStep() {
+    clearInterval(typewriterInterval);
     currentCutsceneIndex++;
-
     if (currentCutsceneIndex < activeCutscene.steps.length) {
         updateCutsceneUI();
     } else {
-        document.getElementById('cutscene-container').classList.add('hidden');
-        if (activeCutscene.nextStep === "chapter_1") {
-            showScreen('garden-screen');
-        } else if (activeCutscene.nextStep === "chapter_2") {
-            showScreen('shooting-range');
-        } else if (activeCutscene.nextStep === "chapter_3") {
-            showScreen('strip-club');
-            document.getElementById('unblock-puzzle-overlay').classList.remove('hidden');
-        } else {
-            showScreen('main-menu');
+        const container = document.getElementById('cutscene-container');
+        container.classList.add('hidden');
+
+        container.style.backgroundImage = "none";
+
+        switch (activeCutscene.nextStep) {
+            case "chapter_1":
+                showScreen('garden-screen');
+                break;
+            case "chapter_2":
+                showScreen('shooting-range');
+                break;
+            case "chapter_3":
+                showScreen('choice-screen');
+                break;
+            case "chapter_4":
+                showScreen('maze-screen');
+                break;
+            default:
+                showScreen('main-menu');
+                break;
         }
     }
 }
@@ -222,6 +272,21 @@ function setDiskRotation(index, rot) {
     }
 }
 
+// Genereert de tekstboxen voor de teksten
+function showGardenMessage(message) {
+    const feedback = document.getElementById('garden-feedback');
+    const text = document.getElementById('garden-feedback-text');
+
+    text.innerText = message;
+    feedback.classList.remove('hidden');
+
+    if (window.gardenTimeout) clearTimeout(window.gardenTimeout);
+
+    window.gardenTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
 // Controleert of de schijven goed zijn
 function checkElectricalPuzzle() {
     let allCorrect = true;
@@ -248,25 +313,25 @@ function checkElectricalPuzzle() {
 
     if (allCorrect) {
         shedIsUnlocked = true;
-        alert("De schakeling is compleet. Het tuinhuisje-slot klikt open!");
+        showGardenMessage("De schakeling is compleet. Het tuinhuisje-slot klikt open!");
         closeElectricalPuzzleOverlay();
     } else {
-        alert("De stroom vloeit nog niet door... Controleer de schakeling.");
+        showGardenMessage("De stroom vloeit nog niet door... Controleer de schakeling.");
     }
 }
 
 // Interactie met het tuinhuisje
 function interactWithShed() {
     if (!shedIsUnlocked) {
-        alert("Mason Bourne: 'Slim zijn, zeg ik toch!'. Het slot zit erop.");
+        showGardenMessage("Mason Bourne: 'Slim zijn, zeg ik toch!'. Het slot zit erop.");
     } else {
         if (!playerHasShovel) {
-            alert("Je opent het tuinhuisje. Binnenin staat een schep!");
+            showGardenMessage("Je opent het tuinhuisje. Binnenin staat een schep!");
             playerHasShovel = true;
             gameState.inventory.push("Schep");
             saveGame();
         } else {
-            alert("Er is niets meer te vinden.");
+            showGardenMessage("Er is niets meer te vinden.");
         }
     }
 }
@@ -274,15 +339,17 @@ function interactWithShed() {
 // Graven
 function interactWithDigSite() {
     if (!playerHasShovel) {
-        alert("Mason Bourne: Graven met je handen duurt te lang...");
+        showGardenMessage("Mason Bourne: Graven met je handen duurt te lang...");
     } else {
-        alert("Gefeliciteerd, je hebt je geweer!");
+        showGardenMessage("Gefeliciteerd, je hebt je geweer!");
         gameState.inventory.push("Geladen Pistool");
         gameState.currentChapter = 2;
         saveGame();
         playCutscene('na_geweer_vinden');
     }
 }
+
+
 
 // Schieten op de dummies
 function shootDummy(element) {
@@ -296,9 +363,29 @@ function shootDummy(element) {
     if (activeDummies.length === 0) {
         setTimeout(() => {
             gameState.currentChapter = 3;
+            saveGame();
             playCutscene('na_schieten');
         }, 800);
     }
+}
+
+
+// Tunnel "keuze"
+function showTunnelText() {
+    const feedback = document.getElementById('choice-feedback');
+    const text = document.getElementById('choice-feedback-text');
+
+    text.innerText = "Daar ga ik verdwaald raken...";
+    feedback.classList.remove('hidden');
+    setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+// Start de Club puzzel
+function startClubPuzzle() {
+    showScreen('strip-club');
+    document.getElementById('unblock-puzzle-overlay').classList.remove('hidden');
 }
 
 // Initialisatie van de blokken
@@ -371,6 +458,7 @@ function drag(e) {
 
     checkClubWin();
 }
+
 function startDrag(e) {
     activeBlock = e.target;
     const rect = activeBlock.getBoundingClientRect();
@@ -388,6 +476,7 @@ function endDrag() {
     }
 }
 
+// Functie voor de collision
 function hasCollision(currentBlock) {
     const allBlocks = document.querySelectorAll('.block');
     const currentRect = currentBlock.getBoundingClientRect();
@@ -411,6 +500,7 @@ function hasCollision(currentBlock) {
     return false;
 }
 
+// Win check
 function checkClubWin() {
     const target = document.querySelector('.block.target');
     const currentLeft = parseInt(target.style.left);
@@ -425,10 +515,150 @@ function checkClubWin() {
             activeBlock = null;
             setTimeout(() => {
                 gameState.currentChapter = 4;
+                saveGame();
                 playCutscene('na_puzzel_club');
             }, 1000);
         }
     }
+}
+
+// Initialiseer het doolhof
+let mazeCanvas, mazeCtx, mazeImg;
+let playerPos = { x: 233, y: 10 };
+const playerSize = 7;
+const moveSpeed = 2;
+
+function initMaze() {
+    mazeCanvas = document.getElementById('maze-canvas');
+    mazeCtx = mazeCanvas.getContext('2d', { willReadFrequently: true });
+
+    mazeImg = new Image();
+    mazeImg.src = 'assets/maze.png';
+    mazeImg.onload = function () {
+        drawMazeFrame();
+        window.addEventListener('keydown', handleMazeMovement);
+    };
+}
+
+function drawMazeFrame() {
+    if (!mazeCtx || !mazeImg) return;
+    mazeCtx.clearRect(0, 0, 466, 466);
+    mazeCtx.drawImage(mazeImg, 0, 0, 466, 466);
+    mazeCtx.beginPath();
+    mazeCtx.arc(playerPos.x, playerPos.y, playerSize / 2, 0, Math.PI * 2);
+    mazeCtx.fillStyle = "#891717";
+    mazeCtx.fill();
+    mazeCtx.closePath();
+}
+
+// Funcites voor het bewegen
+function handleMazeMovement(e) {
+    const key = e.key.toLowerCase();
+    let nextX = playerPos.x;
+    let nextY = playerPos.y;
+
+    if (key === 'arrowup' || key === 'w') nextY -= moveSpeed;
+    if (key === 'arrowdown' || key === 's') nextY += moveSpeed;
+    if (key === 'arrowleft' || key === 'a') nextX -= moveSpeed;
+    if (key === 'arrowright' || key === 'd') nextX += moveSpeed;
+
+    if (canMove(nextX, nextY)) {
+        playerPos.x = nextX;
+        playerPos.y = nextY;
+        drawMazeFrame();
+        checkMazeWin();
+    }
+}
+
+function canMove(x, y) {
+    const r = playerSize / 2;
+    const points = [
+        { x: x, y: y - r }, { x: x, y: y + r },
+        { x: x - r, y: y }, { x: x + r, y: y },
+        { x: x - r, y: y - r }, { x: x + r, y: y - r },
+        { x: x - r, y: y + r }, { x: x + r, y: y + r }
+    ];
+
+    for (let p of points) {
+        if (p.y < 0 || p.y > 466) return true;
+        if (p.x < 0 || p.x > 466) return false;
+
+        const pixel = mazeCtx.getImageData(p.x, p.y, 1, 1).data;
+        const isDark = pixel[0] < 120 && pixel[1] < 120 && pixel[2] < 120;
+
+        if (isDark) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Win-ceck
+function checkMazeWin() {
+    if (playerPos.y >= 460) {
+        if (playerPos.x > 220 && playerPos.x < 246) {
+            window.removeEventListener('keydown', handleMazeMovement);
+            setTimeout(() => {
+                gameState.currentChapter = 5;
+                saveGame();
+                playCutscene('na_doolhof');
+            }, 500);
+        }
+    }
+}
+
+// Skip-knop zodat ik niet elke keer de hele game hoef te spelen
+function devSkip() {
+
+    const cutsceneContainer = document.getElementById('cutscene-container');
+    if (!cutsceneContainer.classList.contains('hidden')) {
+        currentCutsceneIndex = activeCutscene.steps.length - 1;
+        nextCutsceneStep();
+        return;
+    }
+
+    const electricalPuzzel = document.getElementById('garden-screen');
+    if (electricalPuzzel && !electricalPuzzel.classList.contains('hidden')) {
+        gameState.currentChapter = 2;
+        gameState.inventory.push("Schep");
+        gameState.inventory.push("Geladen Pistool");
+        saveGame();
+        playCutscene('na_geweer_vinden');
+        return;
+    }
+
+    const shootingScreen = document.getElementById('shooting-range');
+    if (shootingScreen && !shootingScreen.classList.contains('hidden')) {
+        gameState.currentChapter = 3;
+        saveGame();
+        playCutscene('na_schieten');
+        return;
+    }
+
+    const choiceScreen = document.getElementById('choice-screen');
+    if (choiceScreen && !choiceScreen.classList.contains('hidden')) {
+        startClubPuzzle();
+        return;
+    }
+
+    const clubOverlay = document.getElementById('strip-club');
+    if (clubOverlay && !clubOverlay.classList.contains('hidden')) {
+        gameState.currentChapter = 4;
+        saveGame();
+        playCutscene('na_puzzel_club');
+        return;
+    }
+
+    const mazeScreen = document.getElementById('maze-screen');
+    if (mazeScreen && !mazeScreen.classList.contains('hidden')) {
+        window.removeEventListener('keydown', handleMazeMovement);
+        gameState.currentChapter = 5;
+        saveGame();
+        playCutscene('na_doolhof');
+        return;
+    }
+
+    alert("Niets om hier te skippen!");
 }
 
 // Check save game bij laden van script
