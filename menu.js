@@ -11,7 +11,9 @@ const offsetMargin = 6;
 const cutsceneData = {
     intro_dag1: {
         steps: [
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Jij... JIJ... Bent precies waar ik naar op zoek ben." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Jij..." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "JIJ..." },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "bent precies degene waar ik naar opzoek ben." },
             { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
             { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
         ],
@@ -57,8 +59,7 @@ const cutsceneData = {
 
     na_puzzel_club: {
         steps: [
-            { gif: "assets/", speaker: " ", text: " " }, //stripclub - hotel
-            { gif: "assets/", speaker: " ", text: " " },
+            { gif: "assets/stripclub.gif", speaker: "John Vick", text: "Laat ik maar naar een hotel gaan en morgen Rob opzoeken." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 3..." },
             { gif: "assets/hotel_john.png", speaker: " ", text: "John wordt wakker." },
         ],
@@ -204,7 +205,7 @@ function updateCutsceneUI() {
             clearInterval(typewriterInterval);
             nextBtn.style.display = "block";
         }
-    }, 1);
+    }, 40);
 }
 
 function nextCutsceneStep() {
@@ -397,6 +398,22 @@ function showTunnelText() {
     }, 3000);
 }
 
+function interactWithDoor() {
+    const hasLock = gameState.inventory.includes("Slot");
+
+    if (hasLock) {
+        const feedback = document.getElementById('choice-feedback');
+        feedback.classList.add('hidden');
+        gameState.currentChapter = 4;
+        saveGame();
+        playCutscene('na_puzzel_club');
+
+    } else {
+        showTunnelText("Het slot zit er op...");
+        startClubPuzzle();
+    }
+}
+
 // Start de Club puzzel
 function startClubPuzzle() {
     showScreen('strip-club');
@@ -529,9 +546,9 @@ function checkClubWin() {
             target.classList.add('solved');
             activeBlock = null;
             setTimeout(() => {
-                gameState.currentChapter = 4;
+                gameState.inventory.push('Slot');
                 saveGame();
-                playCutscene('na_puzzel_club');
+                showScreen('choice-screen');
             }, 1000);
         }
     }
