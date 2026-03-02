@@ -11,10 +11,10 @@ const offsetMargin = 6;
 const cutsceneData = {
     intro_dag1: {
         steps: [
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Jij..." },
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "JIJ..." },
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "bent precies degene waar ik naar opzoek ben." },
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Jij..." },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "JIJ..." },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "bent precies degene waar ik naar opzoek ben." },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
             { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
         ],
         nextStep: "chapter_1"
@@ -22,7 +22,7 @@ const cutsceneData = {
 
     na_geweer_vinden: {
         steps: [
-            { gif: "assets/", speaker: "Mason Bourne", text: "'klapt'" },
+            { gif: "assets/mason_buiten", speaker: "Mason Bourne", text: "'klapt'" },
             { gif: "assets/", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen." },
             { gif: "assets/", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten." },
             { gif: "assets/", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm." },
@@ -84,10 +84,10 @@ const cutsceneData = {
         steps: [
             { gif: "assets/rob.gif", speaker: "Rob", text: "John, ik heb een collega van hem gevonden. Zijn naam is Jantje Hoeksma, misschien weet hij wie je zoekt." },
             { gif: "assets/rob.gif", speaker: "Rob", text: "Pak mijn auto maar, dan stuur ik je het adres door." },
-            { gif: "assets/rob.gif", speaker: "John Vick", text: "Bedankt Rob. Ik ga terug naar mijn hotel en morgen ga ik direct achter hem aan" },
-            { gif: "assets/", speaker: " ", text: " " }, // Terug naar hotel
+            { gif: "assets/rob.gif", speaker: "John Vick", text: "Bedankt Rob. Ik ga terug naar mijn hotel en morgen ga ik direct achter hem aan." },
+            { gif: "assets/hotel_john.png", speaker: " ", text: "John komt terug in zijn hotel." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 4..." },
-            { gif: "assets/", speaker: " ", text: " " }, // Wakker worden
+            { gif: "assets/hotel_john.png", speaker: " ", text: "John wordt wakker en gaat naar Jantje." },
         ],
         nextStep: "chapter_6"
     },
@@ -235,6 +235,10 @@ function nextCutsceneStep() {
             case "chapter_5":
                 showScreen('rob-home');
                 break;
+            case "chapter_6":
+                showScreen('highway-screen');
+                startHighwayGame();
+                break;
             default:
                 showScreen('main-menu');
                 break;
@@ -326,14 +330,26 @@ function checkElectricalPuzzle() {
 
 // Interactie met het tuinhuisje
 function interactWithShed() {
+    const gardenView = document.getElementById('garden-view');
     if (!shedIsUnlocked) {
         showGardenMessage("Mason Bourne: 'Slim zijn, zeg ik toch!'. Het slot zit erop.");
     } else {
         if (!playerHasShovel) {
             showGardenMessage("Je opent het tuinhuisje. Binnenin staat een schep!");
-            playerHasShovel = true;
-            gameState.inventory.push("Schep");
-            saveGame();
+            gardenView.style.backgroundImage = "url('assets/tuin_dicht_schep.png')";
+            gardenView.style.backgroundSize = "cover";
+            gardenView.style.backgroundPosition = "center";
+
+            setTimeout(() => {
+                gardenView.style.backgroundImage = "url('assets/tuin_dicht_geen_schep.png')";
+                gardenView.style.backgroundSize = "cover";
+                gardenView.style.backgroundPosition = "center";
+                playerHasShovel = true;
+                if (!gameState.inventory.includes("Schep")) {
+                    gameState.inventory.push("Schep");
+                }
+                saveGame();
+            }, 3000);
         } else {
             showGardenMessage("Er is niets meer te vinden.");
         }
@@ -347,21 +363,24 @@ function interactWithDigSite() {
     } else {
         const gardenView = document.getElementById('garden-view');
         if (gardenView) {
-            gardenView.style.backgroundImage = "url('assets/tuin_open.png')";
-
+            gardenView.style.backgroundImage = "url('assets/tuin_open_pistool.png')";
             gardenView.style.backgroundSize = "cover";
             gardenView.style.backgroundPosition = "center";
+            showGardenMessage("Gefeliciteerd, je hebt je geweer!");
         }
 
-        showGardenMessage("Gefeliciteerd, je hebt je geweer!");
-        gameState.inventory.push("Geladen Pistool");
-
-        gameState.currentChapter = 2;
-        saveGame();
+        setTimeout(() => {
+            gardenView.style.backgroundImage = "url('assets/tuin_open_geen_pistool.png')";
+            gardenView.style.backgroundSize = "cover";
+            gardenView.style.backgroundPosition = "center";
+            gameState.inventory.push("Geladen Pistool");
+            gameState.currentChapter = 2;
+            saveGame();
+        }, 3000);
 
         setTimeout(() => {
             playCutscene('na_geweer_vinden');
-        }, 3000);
+        }, 4000);
     }
 }
 
@@ -462,26 +481,34 @@ function drag(e) {
     const grid = document.getElementById('unblock-grid').getBoundingClientRect();
     const oldLeft = parseInt(activeBlock.style.left);
     const oldTop = parseInt(activeBlock.style.top);
-    let newLeft = Math.round((e.clientX - grid.left - offset.x - offsetMargin) / gridSize) * gridSize + offsetMargin;
-    let maxLeft = 972 - activeBlock.offsetWidth;
 
-    if (activeBlock.classList.contains('target')) {
-        const winRowTop = 320 + offsetMargin;
-        if (oldTop === winRowTop) {
-            maxLeft = 1100;
-        } else {
-            maxLeft = 972 - activeBlock.offsetWidth;
+    const isHorizontal = activeBlock.offsetWidth > activeBlock.offsetHeight;
+
+    if (isHorizontal) {
+        let newLeft = Math.round((e.clientX - grid.left - offset.x - offsetMargin) / gridSize) * gridSize + offsetMargin;
+        let maxLeft = 972 - activeBlock.offsetWidth;
+
+        if (activeBlock.classList.contains('target')) {
+            const winRowTop = 320 + offsetMargin;
+            if (oldTop === winRowTop) {
+                maxLeft = 1100;
+            }
         }
+
+        newLeft = Math.max(offsetMargin, Math.min(newLeft, maxLeft));
+
+        activeBlock.style.left = newLeft + "px";
+        activeBlock.style.top = oldTop + "px";
+
+    } else {
+        let newTop = Math.round((e.clientY - grid.top - offset.y - offsetMargin) / gridSize) * gridSize + offsetMargin;
+        const maxTop = 972 - activeBlock.offsetHeight;
+
+        newTop = Math.max(offsetMargin, Math.min(newTop, maxTop));
+
+        activeBlock.style.top = newTop + "px";
+        activeBlock.style.left = oldLeft + "px";
     }
-
-    newLeft = Math.max(offsetMargin, Math.min(newLeft, maxLeft));
-
-    let newTop = Math.round((e.clientY - grid.top - offset.y - offsetMargin) / gridSize) * gridSize + offsetMargin;
-    const maxTop = 972 - activeBlock.offsetHeight;
-    newTop = Math.max(offsetMargin, Math.min(newTop, maxTop));
-
-    activeBlock.style.left = newLeft + "px";
-    activeBlock.style.top = newTop + "px";
 
     if (hasCollision(activeBlock)) {
         activeBlock.style.left = oldLeft + "px";
@@ -734,6 +761,255 @@ function interactWithRobDoor() {
     }
 }
 
+// Doodswens
+let highwayCanvas, ctx;
+let highwayActive = false;
+let highwayTime = 90;
+let highwayTimerInterval;
+let traffic = [];
+let keys = {};
+let isInvincible = false;
+
+const allLanes = [
+    103, 213, 323, 433,
+    605, 715, 825, 935,
+];
+
+const bgImg = new Image();
+bgImg.src = 'assets/weg.png';
+let bgX = 0;
+const scrollSpeed = 4;
+
+const carTypes = [
+    { color: 'green', speed: 8 },
+    { color: 'yellow', speed: 12 },
+    { color: 'blue', speed: 16 },
+    { color: 'purple', speed: 20 }
+];
+
+let currentLaneIndex = 5;
+const player = {
+    x: 200,
+    y: allLanes[5],
+    width: 160,
+    height: 56,
+    speed: 16,
+    color: 'red'
+};
+
+let canMoveVertical = true;
+let canMoveHorizontal = true;
+
+const carImages = {};
+const colors = ['red', 'green', 'yellow', 'blue', 'purple'];
+colors.forEach(color => {
+    carImages[color] = new Image();
+    carImages[color].src = `assets/car_${color}.gif`;
+});
+
+function showHighwayMessage(message) {
+    const feedback = document.getElementById('highway-feedback');
+    const text = document.getElementById('highway-feedback-text');
+
+    text.innerText = message;
+    feedback.classList.remove('hidden');
+
+    if (window.highwayTimeout) clearTimeout(window.highwayTimeout);
+
+    window.highwayTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+function startHighwayGame() {
+    const screen = document.getElementById('highway-screen');
+    if (screen) screen.classList.remove('hidden');
+
+    highwayCanvas = document.getElementById('highway-canvas');
+    highwayCanvas.width = 1920;
+    highwayCanvas.height = 1080;
+    ctx = highwayCanvas.getContext('2d');
+
+    highwayActive = true;
+    highwayTime = 90;
+    traffic = [];
+    currentLaneIndex = 5;
+    player.x = 200;
+    player.y = allLanes[currentLaneIndex];
+
+    if (!window.highwayInputAdded) {
+        window.addEventListener('keydown', (e) => keys[e.code] = true);
+        window.addEventListener('keyup', (e) => keys[e.code] = false);
+        window.highwayInputAdded = true;
+    }
+
+    const timerDisplay = document.getElementById('timer-display');
+    if (timerDisplay) timerDisplay.innerText = `TIJD OVER: ${highwayTime}s`;
+
+    clearInterval(highwayTimerInterval);
+    highwayTimerInterval = setInterval(() => {
+        if (!highwayActive) return;
+        highwayTime--;
+        if (timerDisplay) timerDisplay.innerText = `TIJD OVER: ${highwayTime}s`;
+        if (highwayTime <= 0) finishHighway(true);
+    }, 1000);
+
+    spawnTraffic();
+    requestAnimationFrame(updateHighway);
+}
+
+function updateHighway() {
+    if (!highwayActive) return;
+
+    ctx.clearRect(0, 0, 1920, 1080);
+
+    bgX -= scrollSpeed;
+    if (bgX <= -1920) {
+        bgX = 0;
+    }
+
+    if (bgImg.complete) {
+        ctx.drawImage(bgImg, bgX, 0, 1920, 1080);
+        ctx.drawImage(bgImg, bgX + 1920, 0, 1920, 1080);
+    }
+
+    if (canMoveVertical) {
+        if (keys['KeyW'] || keys['ArrowUp']) {
+            if (currentLaneIndex > 0) {
+                currentLaneIndex--;
+                player.y = allLanes[currentLaneIndex];
+                lockVertical();
+            }
+        } else if (keys['KeyS'] || keys['ArrowDown']) {
+            if (currentLaneIndex < allLanes.length - 1) {
+                currentLaneIndex++;
+                player.y = allLanes[currentLaneIndex];
+                lockVertical();
+            }
+        }
+    }
+
+    if (canMoveHorizontal) {
+        if (keys['KeyA'] || keys['ArrowLeft']) if (player.x > 20) player.x -= player.speed;
+        if (keys['KeyD'] || keys['ArrowRight']) if (player.x < 1740) player.x += player.speed;
+    }
+
+    for (let i = traffic.length - 1; i >= 0; i--) {
+        let car = traffic[i];
+
+        car.x += car.speed;
+
+        const img = carImages[car.color];
+        if (img && img.complete) {
+            if (car.speed < 0) {
+                ctx.save();
+                ctx.translate(car.x + car.width, car.y);
+                ctx.scale(-1, 1);
+                ctx.drawImage(img, 0, 0, car.width, car.height);
+                ctx.restore();
+            } else {
+                ctx.drawImage(img, car.x, car.y, car.width, car.height);
+            }
+        }
+
+        if (!isInvincible) {
+            if (player.x + 15 < car.x + car.width - 15 &&
+                player.x + player.width - 15 > car.x + 15 &&
+                player.y + 5 < car.y + car.height - 5 &&
+                player.y + player.height - 5 > car.y + 5) {
+                finishHighway(false);
+            }
+        }
+
+        if (car.x < -500 || car.x > 2500) traffic.splice(i, 1);
+    }
+
+    const pImg = carImages.red;
+    if (pImg && pImg.complete) {
+        ctx.drawImage(pImg, player.x, player.y, player.width, player.height);
+    }
+
+    requestAnimationFrame(updateHighway);
+}
+
+function spawnTraffic() {
+    if (!highwayActive) return;
+
+    const laneIdx = Math.floor(Math.random() * allLanes.length);
+    const isTop = laneIdx < 4;
+    const type = carTypes[Math.floor(Math.random() * carTypes.length)];
+
+    traffic.push({
+        x: isTop ? 2000 : -200,
+        y: allLanes[laneIdx],
+        width: 160,
+        height: 56,
+        speed: isTop ? -type.speed : type.speed,
+        color: type.color
+    });
+
+    let nextSpawnTime;
+
+    if (highwayTime > 60) {
+        nextSpawnTime = Math.random() * 300 + 300;
+    } else if (highwayTime > 30) {
+        showHighwayMessage("Het wordt drukker!!");
+        nextSpawnTime = Math.random() * 200 + 200;
+    } else {
+        showHighwayMessage("Het wordt drukker!!");
+        nextSpawnTime = Math.random() * 100 + 100;
+    }
+    setTimeout(spawnTraffic, nextSpawnTime);
+}
+
+function lockVertical() {
+    canMoveVertical = false;
+    setTimeout(() => { canMoveVertical = true; }, 150);
+}
+
+function lockHorizontal() {
+    canMoveHorizontal = false;
+    setTimeout(() => { canMoveVertical = true; }, 150);
+}
+
+function finishHighway(success) {
+    if (success) {
+        highwayActive = false;
+        clearInterval(highwayTimerInterval);
+        showHighwayMessage('Je bent veilig aangekomen bij Jantje!');
+        gameState.currentChapter = 7;
+        saveGame();
+        setTimeout(() => playCutscene('na_doodswens'), 1500);
+    } else {
+        handleCrash();
+    }
+}
+
+function handleCrash() {
+    if (isInvincible) return;
+
+    isInvincible = true;
+    canMoveVertical = false;
+    canMoveHorizontal = false;
+    highwayTime += 3;
+
+    const timerDisplay = document.getElementById('timer-display');
+    if (timerDisplay) {
+        timerDisplay.innerText = `TIJD OVER: ${highwayTime}s`;
+        timerDisplay.style.color = "red";
+        setTimeout(() => timerDisplay.style.color = "white", 500);
+    }
+
+    showHighwayMessage('Gecrasht! 3 seconden straftijd...')
+
+    setTimeout(() => {
+        canMoveVertical = true;
+        canMoveHorizontal = true;
+        isInvincible = false;
+        if (feedback) feedback.classList.add('hidden');
+    }, 2000);
+}
+
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
 function devSkip() {
 
@@ -781,7 +1057,7 @@ function devSkip() {
         window.removeEventListener('keydown', handleMazeMovement);
         gameState.currentChapter = 5;
         gameState.inventory.push("Kaart");
-        saveGame()
+        saveGame();
         playCutscene('na_doolhof');
         return;
     }
@@ -791,7 +1067,7 @@ function devSkip() {
         window.removeEventListener('keydown', handleMazeMovement);
         gameState.currentChapter = 5;
         gameState.inventory.push("Kaart");
-        saveGame()
+        saveGame();
         playCutscene('na_doolhof');
         return;
     }
@@ -802,9 +1078,16 @@ function devSkip() {
         gameState.inventory.push("PWS");
         gameState.inventory.push("EBS");
         gameState.inventory.push("Nuclear Receiver");
-        saveGame()
+        saveGame();
         playCutscene('na_huis');
         return;
+    }
+
+    const highwayScreen = document.getElementById('highway-screen');
+    if (highwayScreen && !highwayScreen.classList.contains('hidden')) {
+        gameState.currentChapter = 7;
+        saveGame();
+        playCutscene('na_doodswens');
     }
 
     alert("Niets om hier te skippen!");

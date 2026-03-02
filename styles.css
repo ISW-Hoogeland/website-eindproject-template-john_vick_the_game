@@ -294,17 +294,17 @@ nav button:hover {
 }
 
 #shed-click-spot {
-   width: 15%;
-   height: 40%;
-   top: 30%;
-   left: 40%;
+   width: 8%;
+   height: 38%;
+   top: 45%;
+   right: 7%;
 }
 
 #junction-box-click-spot {
-   width: 8%;
-   height: 12%;
-   top: 50%;
-   left: 60%;
+   width: 5%;
+   height: 20%;
+   top: 47%;
+   right: 24%;
 }
 
 #dig-site {
@@ -524,7 +524,7 @@ nav button:hover {
 
 #choice-feedback {
    position: absolute;
-   bottom: 50px;
+   bottom: 5%;
    left: 50%;
    transform: translateX(-50%);
    background: rgba(0, 0, 0, 0.8);
@@ -538,7 +538,7 @@ nav button:hover {
 
 #garden-feedback {
    position: absolute;
-   bottom: 50px;
+   bottom: 5%;
    left: 50%;
    transform: translateX(-50%);
    background: rgba(0, 0, 0, 0.8);
@@ -551,7 +551,7 @@ nav button:hover {
 
 #hotel-feedback {
    position: absolute;
-   bottom: 50px;
+   bottom: 5%;
    left: 50%;
    transform: translateX(-50%);
    background: rgba(0, 0, 0, 0.8);
@@ -675,6 +675,53 @@ nav button:hover {
 #rob-feedback {
    position: absolute;
    bottom: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#highway-screen {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: #000;
+   overflow: hidden;
+   z-index: 8000;
+}
+
+#highway-canvas {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   display: block;
+   background: transparent;
+}
+
+#timer-display {
+   position: absolute;
+   top: 0.5%;
+   right: 4%;
+   color: white;
+   font-size: 2.5rem;
+   font-family: 'Courier New', monospace;
+   z-index: 8001;
+   background: rgba(0, 0, 0, 0.5);
+   padding: 10px;
+   border-radius: 5px;
+}
+
+#highway-feedback {
+   position: absolute;
+   bottom: 5%;
    left: 50%;
    transform: translateX(-50%);
    background: rgba(0, 0, 0, 0.8);
