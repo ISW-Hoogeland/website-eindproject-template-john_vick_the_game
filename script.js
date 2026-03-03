@@ -92,6 +92,13 @@ const cutsceneData = {
         nextStep: "chapter_6"
     },
 
+    na_highway: {
+        steps: [
+            { gif: "assets/huis_jantje_buiten", speaker: "John Vick", text: "Hier woont Jantje. Ik moet hier binnen zien te komen." },
+        ],
+        nextStep: "chapter_7"
+    },
+
     /*
     [naam]: {
         steps: [
@@ -222,6 +229,7 @@ function nextCutsceneStep() {
         switch (activeCutscene.nextStep) {
             case "chapter_1":
                 showScreen('garden-screen');
+                showGardenMessage('Mason Bourne: El Patrón, El Chapo, Al Capone, weet je wat ze gemeen hadden? Ze gebruikten hun hersens!')
                 break;
             case "chapter_2":
                 showScreen('shooting-range');
@@ -238,6 +246,9 @@ function nextCutsceneStep() {
             case "chapter_6":
                 showScreen('highway-screen');
                 startHighwayGame();
+                break;
+            case "chapter_7":
+                showScreen('jantje-home');
                 break;
             default:
                 showScreen('main-menu');
@@ -292,7 +303,7 @@ function showGardenMessage(message) {
 
     window.gardenTimeout = setTimeout(() => {
         feedback.classList.add('hidden');
-    }, 3000);
+    }, 5000);
 }
 
 // Controleert of de schijven goed zijn
