@@ -115,6 +115,7 @@ window.onload = function () {
     document.getElementById('cutscene-container').classList.add('hidden');
     initClubPuzzle();
     initMaze();
+    initShootingRange();
 };
 
 window.addEventListener('mousemove', drag);
@@ -398,13 +399,44 @@ function interactWithDigSite() {
 
 
 // Schieten op de dummies
+function initShootingRange() {
+    setTimeout(() => {
+        const dummies = document.querySelectorAll('.dummy');
+        console.log("Dummies geïnitialiseerd:", dummies.length);
+
+        dummies.forEach(dummy => {
+            dummy.classList.remove('hit');
+
+            dummy.style.backgroundImage = "";
+
+            if (dummy.classList.contains('large')) {
+                dummy.style.backgroundImage = "url('assets/dummy_large.gif')";
+            } else if (dummy.classList.contains('medium')) {
+                dummy.style.backgroundImage = "url('assets/dummy_medium.gif')";
+            } else if (dummy.classList.contains('small')) {
+                dummy.style.backgroundImage = "url('assets/dummy_small.gif')";
+            }
+
+            dummy.onclick = function (e) {
+                e.stopPropagation();
+                shootDummy(this);
+            };
+        });
+    }, 50);
+}
+
 function shootDummy(element) {
+    if (element.classList.contains('hit')) return;
+
     const range = document.getElementById('shooting-range');
+
     range.classList.add('flash-active');
     setTimeout(() => {
         range.classList.remove('flash-active');
     }, 100);
+
     element.classList.add('hit');
+
     const activeDummies = document.querySelectorAll('.dummy:not(.hit)');
     if (activeDummies.length === 0) {
         setTimeout(() => {
