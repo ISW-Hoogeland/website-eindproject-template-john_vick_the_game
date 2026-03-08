@@ -1,15 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
+<link rel="stylesheet" href="styles.css">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Mijn Website</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>John Vick The Game</title>
 </head>
 
 <body>
-  Mijn favoriete kleur is ...
+  <div id="game-wrapper">
+    <div id="main-menu" class="menu-screen">
+      <h1 class="glitch-title">JOHN VICK</h1>
+      <nav>
+        <button onclick="startGame()">NIEUW SPEL</button>
+        <button onclick="showScreen('load-menu')">LAAD SPEL</button>
+        <button onclick="showScreen('settings-menu')">INSTELLINGEN</button>
+        <button onclick="showScreen('credits-menu')">CREDITS</button>
+      </nav>
+    </div>
+
+    <div id="load-menu" class="menu-screen hidden">
+      <h2>LAAD SPEL</h2>
+      <p>Geen opgeslagen spellen gevonden...</p>
+      <button onclick="showScreen('main-menu')">TERUG</button>
+    </div>
+
+    <div id="settings-menu" class="menu-screen hidden">
+      <h2>INSTELLINGEN</h2>
+      <button onclick="showScreen('main-menu')">TERUG</button>
+    </div>
+
+    <div id="credits-menu" class="menu-screen hidden">
+      <h2>CREDITS</h2>
+      <button onclick="showScreen('main-menu')">TERUG</button>
+    </div>
+  </div>
+
+  <div id="cutscene-container" class="hidden">
+    <div class="dialogue-box">
+      <h3 id="speaker-name"></h3>
+      <p id="dialogue-text"></p>
+      <button id="next-btn" onclick="nextCutsceneStep()">VERDER ></button>
+    </div>
+  </div>
+
+  <div id="garden-screen" class="menu-screen hidden">
+    <div id="garden-view">
+      <button class="game-object" id="shed-click-spot" onclick="interactWithShed()"></button>
+      <button class="game-object" id="junction-box-click-spot" onclick="openElectricalPuzzleOverLay()"></button>
+      <button class="game-object" id="dig-site" onclick="interactWithDigSite()"></button>
+      <div id="garden-feedback" class="hidden">
+        <p id="garden-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="shooting-range" class="menu-screen hidden">
+    <div id="dummy-container">
+      <div class="dummy large" onclick="shootDummy(this)" style="left: 40%; bottom: 40%"></div>
+      <div class="dummy medium" onclick="shootDummy(this)" style="left: 30%; bottom: 60%"></div>
+      <div class="dummy medium" onclick="shootDummy(this)" style="left: 60%; bottom: 60%"></div>
+      <div class="dummy small" onclick="shootDummy(this)" style="left: 35%; bottom: 75%"></div>
+      <div class="dummy small" onclick="shootDummy(this)" style="left: 50%; bottom: 75%"></div>
+    </div>
+  </div>
+
+  <div id="choice-screen" class="menu-screen hidden">
+    <div id="choice-view">
+      <div id="tunnel-click" onclick="showTunnelText()"></div>
+      <div id="door-click" onclick="interactWithDoor()"></div>
+      <div id="choice-feedback" class="hidden">
+        <p id="choice-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="hotel-screen" class="menu-screen hidden">
+    <div id="hotel-view">
+      <div id="table-click" onclick="startMazePuzzle()"></div>
+      <div id="hoteldoor-click" onclick="interactWithHotelDoor()"></div>
+      <div id="hotel-feedback" class="hidden">
+        <p id="hotel-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="strip-club" class="menu-screen hidden">
+    <div id="unblock-grid">
+      <div class="block target" data-id="0" data-orientation="horizontal_target" data-length="2"></div>
+      <div class="block" data-id="1" data-orientation="vertical_short" data-length="2"></div>
+      <div class="block" data-id="2" data-orientation="vertical_long" data-length="3"></div>
+      <div class="block" data-id="3" data-orientation="horizontal" data-length="2"></div>
+      <div class="block" data-id="4" data-orientation="vertical_short" data-length="2"></div>
+      <div class="block" data-id="5" data-orientation="vertical_long" data-length="3"></div>
+      <div class="block" data-id="6" data-orientation="horizontal" data-length="2"></div>
+      <div class="block" data-id="7" data-orientation="vertical_short" data-length="2"></div>
+      <div class="block" data-id="8" data-orientation="horizontal" data-length="2"></div>
+      <div class="block" data-id="9" data-orientation="horizontal" data-length="2"></div>
+      <div id="exit-gate"></div>
+    </div>
+  </div>
+
+  <div id="maze-screen" class="menu-screen hidden">
+    <canvas id="maze-canvas" class="hidden"></canvas>
+  </div>
+
+  <div id="electrical-puzzle-overlay" class="hidden">
+    <div id="electrical-puzzle-frame">
+      <button id="close-electrical-puzzle" onclick="closeElectricalPuzzleOverlay()">X</button>
+
+      <div id="circuit-container">
+        <div class="circuit-disk type-bocht" id="disk-0" onclick="rotateDisk(0)"></div>
+        <div class="circuit-disk type-bocht" id="disk-1" onclick="rotateDisk(1)"></div>
+        <div class="circuit-disk type-recht" id="disk-2" onclick="rotateDisk(2)"></div>
+        <div class="circuit-disk type-bocht" id="disk-3" onclick="rotateDisk(3)"></div>
+        <div class="circuit-disk type-bocht" id="disk-4" onclick="rotateDisk(4)"></div>
+        <div class="circuit-disk type-bocht" id="disk-5" onclick="rotateDisk(5)"></div>
+        <div class="circuit-disk type-t" id="disk-6" onclick="rotateDisk(6)"></div>
+        <div class="circuit-disk type-recht" id="disk-7" onclick="rotateDisk(7)"></div>
+      </div>
+      <button id="check-electrical-puzzle-btn" onclick="checkElectricalPuzzle()">CONTROLEER SCHAKELING</button>
+    </div>
+  </div>
+
+  <div id="rob-home" class="menu-screen hidden">
+    <div id="rob-view">
+      <div id="pws-click" onclick="interactWithPWS()"></div>
+      <div id="ebs-click" onclick="interactWithEBS()"></div>
+      <div id="nuclear-click" onclick="interactWithNuclear()"></div>
+      <div id="robdoor-click" onclick="interactWithRobDoor()"></div>
+      <div id="rob-feedback" class="hidden">
+        <p id="rob-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="highway-screen" class="menu-screen hidden">
+    <div id="timer-display">TIJD OVER: 90s</div>
+    <canvas id="highway-canvas"></canvas>
+    <div id="highway-feedback" class="dialogue-box hidden">
+      <p id="highway-feedback-text"></p>
+    </div>
+  </div>
+
+  <div id="jantje-home" class="menu-screen hidden">
+    <div id="jantje-view">
+      <div id="paper-click" onclick="showJantjeMessage('Hij heeft veel post')"></div>
+      <div id="plant-click" onclick="interactWithPlant()"></div>
+      <div id="jantjedoor-click" onclick="interactWithJantjeDoor()"></div>
+      <div id="jantje-feedback" class="hidden">
+        <p id="jantje-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="jantje-binnen" class="menu-screen hidden">
+    <div id="jantje-binnen-view">
+      <div id="tv-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
+      <div id="coke-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
+      <div id="carpet-click" onclick="showJantjeBMessage('Een tapijt met ... VLEKKEN!?')"></div>
+      <div id="laptop-click" onclick="interactWithLaptop()"></div>
+      <div id="jantje-binnen-feedback" class="hidden">
+        <p id="jantje-binnen-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="jantje-laptop" class="menu-screen hidden">
+    <div id="jantje-laptop-view">
+      <div id="screen-click" onclick="interactWithScreen()"></div>
+      <div id="jantje-laptop-feedback" class="hidden">
+        <p id="jantje-laptop-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+    
+  <div id="NGD-hotel-screen" class="menu-screen hidden">
+    <div id="NGD-hotel-screen-view">
+      <div id="NGD-feedback" class="hidden">
+        <p id="NGD-feedback-text"></p>      
+      </div>
+    </div>
+  </div>
+
+  <button id="dev-skip-button" onclick="devSkip()" style="
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 9999; 
+    padding: 10px; 
+    background: orange; 
+    color: black; 
+    font-weight: bold; 
+    border: 2px solid black; 
+    cursor: pointer;
+  ">dev skip</button>
+
+      <script src="script.js"></script>
 </body>
 
 </html>

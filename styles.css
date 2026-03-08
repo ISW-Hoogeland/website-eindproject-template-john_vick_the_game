@@ -1,0 +1,909 @@
+body {
+   background-color: #050505;
+   color: #eee;
+   font-family: 'Courier New', monospace;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   width: 100vw;
+   margin: 0;
+   overflow: hidden;
+}
+
+.menu-screen {
+   text-align: center;
+   width: 400px;
+   border: 1px solid #333;
+   padding: 40px;
+   background: rgba(0, 0, 0, 0.9);
+   box-shadow: 0 0 20px rgb(137, 23, 23);
+}
+
+.hidden {
+   display: none !important;
+}
+
+h1 {
+   font-size: 3rem;
+   letter-spacing: 5px;
+   color: #fff;
+   text-shadow: 2px 2px #891717;
+   margin-bottom: 50px;
+}
+
+nav button {
+   display: block;
+   width: 100%;
+   padding: 15px;
+   margin: 10px 0;
+   background: transparent;
+   color: #ccc;
+   border: 1px solid #444;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+}
+
+nav button:hover {
+   background: #891717;
+   color: #fff;
+   border-color: #891717;
+   box-shadow: 0 0 15px #891717;
+   transform: scale(1.05);
+}
+
+#cutscene-container {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: 9999;
+   background-color: #000;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   margin: 0;
+   padding: 0;
+}
+
+.top {
+   top: 0;
+}
+
+.bottom {
+   bottom: 0;
+}
+
+#cutscene-gif {
+   display: none !important;
+}
+
+.dialogue-box {
+   position: absolute;
+   bottom: 5vh;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 90%;
+   max-width: 1100px;
+   background: rgba(0, 0, 0, 0.85);
+   padding: 20px 30px;
+   border-left: 6px solid #891717;
+   border-radius: 4px;
+   color: white;
+   font-family: 'Courier New', monospace;
+   z-index: 10001;
+   box-sizing: border-box;
+}
+
+#speaker-name {
+   color: #891717;
+   margin: 0;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+}
+
+#dialogue-text {
+   font-size: 1.2rem;
+   line-height: 1.5;
+}
+
+#next-btn {
+   float: right;
+   background: transparent;
+   border: 1px solid #fff;
+   color: white;
+   padding: 10px 20px;
+   cursor: pointer;
+}
+
+#garden-screen {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#garden-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/tuin_dicht.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#dialogue-text::after {
+   content: "|";
+   animation: blink 0.8s infinite;
+   color: #ffffff;
+   margin-left: 5px;
+}
+
+@keyframes blink {
+   0% {
+      opacity: 0;
+   }
+
+   50% {
+      opacity: 1;
+   }
+
+   100% {
+      opacity: 0;
+   }
+}
+
+#electrical-puzzle-overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1000;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-image: url("assets/tuin_dicht.png");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+
+#electrical-puzzle-frame {
+   width: 500px;
+   height: 700px;
+   background-image: url('assets/elektriciteitskastje.gif');
+   background-size: cover;
+   background-position: center;
+   border: 3px solid #333;
+   border-radius: 5px;
+   box-shadow: 0 0 50px #891717;
+   position: relative;
+   overflow: hidden;
+}
+
+#close-electrical-puzzle {
+   position: absolute;
+   top: 17px;
+   right: 17px;
+   background: transparent;
+   border: none;
+   color: #891717;
+   font-size: 1.5rem;
+   cursor: pointer;
+   z-index: 100;
+}
+
+#check-electrical-puzzle-btn {
+   position: absolute;
+   bottom: 20px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: #000;
+   border: 1px solid #891717;
+   color: white;
+   padding: 10px 20px;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+#check-electrical-puzzle-btn:hover {
+   background: #000;
+   box-shadow: 0 0 10px #891717;
+}
+
+.circuit-disk {
+   width: 128px;
+   height: 128px;
+   position: absolute;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+   transform-origin: center;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.type-bocht {
+   background-image: url('assets/schijf_bocht.gif');
+}
+
+.type-recht {
+   background-image: url('assets/schijf_recht.gif');
+}
+
+.type-t {
+   background-image: url('assets/schijf_t.gif');
+}
+
+
+#disk-0 {
+   top: 12.94%;
+   left: 33.0%;
+}
+
+#disk-2 {
+   top: 31.24%;
+   left: 33.0%;
+}
+
+#disk-4 {
+   top: 49.54%;
+   left: 33.0%;
+}
+
+#disk-6 {
+   top: 67.84%;
+   left: 33.0%;
+}
+
+#disk-1 {
+   top: 12.94%;
+   left: 58.6%;
+}
+
+#disk-3 {
+   top: 31.24%;
+   left: 58.6%;
+}
+
+#disk-5 {
+   top: 49.54%;
+   left: 58.6%;
+}
+
+#disk-7 {
+   top: 67.84%;
+   left: 58.6%;
+}
+
+.game-object {
+   position: absolute;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   cursor: pointer;
+}
+
+#shed-click-spot {
+   width: 8%;
+   height: 38%;
+   top: 45%;
+   right: 7%;
+}
+
+#junction-box-click-spot {
+   width: 5%;
+   height: 20%;
+   top: 47%;
+   right: 24%;
+}
+
+#dig-site {
+   width: 22%;
+   height: 15%;
+   top: 69%;
+   left: 42%;
+}
+
+#shooting-range {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/schietbaan.gif');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   cursor: crosshair;
+   z-index: 1;
+}
+
+#dummy-container {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   perspective: 1000px;
+   pointer-events: none;
+}
+
+.dummy {
+   position: absolute;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: bottom center;
+   cursor: crosshair;
+   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   transform-origin: bottom;
+   pointer-events: auto;
+   backface-visibility: visible;
+}
+
+.dummy.hit {
+   transform: rotateX(85deg);
+   pointer-events: none;
+   filter: brightness(0.3);
+}
+
+.large {
+   width: 350px;
+   height: 400px;
+   bottom: 10%;
+   left: 15%;
+}
+
+.medium {
+   width: 200px;
+   height: 275px;
+   bottom: 35%;
+   left: 45%;
+}
+
+.small {
+   width: 200px;
+   height: 200px;
+   bottom: 55%;
+   left: 75%;
+}
+
+.dummy:active {
+   transform: scale(0.9);
+}
+
+
+@keyframes muzzle-flash {
+   0% {
+      background-color: rgba(255, 174, 0, 50);
+      box-shadow: inset 0 0 100px 50px #ffe100;
+      filter: brightness(2);
+   }
+
+   100% {
+      background-color: transparent;
+      box-shadow: inset 0 0 0 0 transparent;
+      filter: brightness(1);
+   }
+}
+
+.flash-active {
+   animation: muzzle-flash 0.15s ease-out;
+}
+
+#unblock-grid {
+   width: 972px;
+   height: 972px;
+   background-image: url("assets/lock.png");
+   position: relative;
+   overflow: visible;
+}
+
+#strip-club {
+   width: 100vw;
+   height: 100vh;
+   background-image: url("assets/strip_club.gif");
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-right: 420px;
+}
+
+#unblock-puzzle-overlay {
+   display: block;
+}
+
+.block.target[data-orientation="horizontal_target"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 320px;
+   height: 160px;
+   background-image: url("assets/blok_doel.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block.target.solved {
+   filter: brightness(1.5) drop-shadow(0 0 15px #4CAF50);
+   transition: filter 0.3s;
+}
+
+.block[data-orientation="vertical_short"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 160px;
+   height: 320px;
+   background-image: url("assets/blok_verticaal.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block[data-orientation="vertical_long"][data-length="3"] {
+   position: absolute;
+   cursor: grab;
+   width: 160px;
+   height: 480px;
+   background-image: url("assets/blok_verticaal_groot.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+.block[data-orientation="horizontal"][data-length="2"] {
+   position: absolute;
+   cursor: grab;
+   width: 320px;
+   height: 160px;
+   background-image: url("assets/blok_horizontaal.gif");
+   z-index: 10;
+   touch-action: none;
+}
+
+#exit-gate {
+   position: absolute;
+   left: 960px;
+   top: 0;
+   width: 420px;
+   height: 972px;
+   background-image: url('assets/blok_einde.png');
+   background-size: contain;
+   background-repeat: no-repeat;
+   z-index: 0;
+   pointer-events: none;
+}
+
+#maze-screen {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   background-color: #bab198;
+}
+
+#maze-canvas {
+   width: 100%;
+   height: 100%;
+   display: block;
+   border: none;
+   box-shadow: none;
+}
+
+#maze-canvas {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+
+#choice-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/tunnel_binnen.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#door-click {
+   position: absolute;
+   top: 10%;
+   left: 5%;
+   width: 33%;
+   height: 80%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#tunnel-click {
+   position: absolute;
+   top: 10%;
+   right: 3%;
+   width: 33%;
+   height: 80%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#choice-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#garden-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#hotel-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#hotel-screen {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#hotel-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/hotel_john.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#hoteldoor-click {
+   position: absolute;
+   top: 35%;
+   left: 0%;
+   width: 9%;
+   height: 60%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#table-click {
+   position: absolute;
+   top: 35%;
+   left: 22%;
+   width: 9%;
+   height: 7%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#rob-home {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
+#rob-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_rob_binnen.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#pws-click {
+   position: absolute;
+   top: 62%;
+   left: 10%;
+   width: 20%;
+   height: 15%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#ebs-click {
+   position: absolute;
+   top: 11%;
+   left: 3.61%;
+   width: 35.15%;
+   height: 44.62%;
+   cursor: pointer;
+   background: url('assets/ebs_promotiefilmpje.gif');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+}
+
+#nuclear-click {
+   position: absolute;
+   top: 9%;
+   right: 29%;
+   width: 21%;
+   height: 52%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#robdoor-click {
+   position: absolute;
+   top: 10%;
+   right: 2%;
+   width: 15%;
+   height: 75%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#rob-feedback {
+   position: absolute;
+   bottom: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#highway-screen {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: #000;
+   overflow: hidden;
+   z-index: 8000;
+}
+
+#highway-canvas {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   display: block;
+   background: transparent;
+}
+
+#timer-display {
+   position: absolute;
+   top: 0.5%;
+   right: 4%;
+   color: white;
+   font-size: 2.5rem;
+   font-family: 'Courier New', monospace;
+   z-index: 8001;
+   background: rgba(0, 0, 0, 0.5);
+   padding: 10px;
+   border-radius: 5px;
+}
+
+#highway-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#jantje-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_jantje_buiten.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#plant-click {
+   position: absolute;
+   bottom: 5%;
+   right: 17%;
+   width: 12%;
+   height: 40%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantjedoor-click {
+   position: absolute;
+   bottom: 16.5%;
+   right: 40.8%;
+   width: 19.3%;
+   height: 60%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#paper-click {
+   position: absolute;
+   bottom: 13%;
+   left: 33%;
+   width: 7%;
+   height: 11%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantje-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#jantje-binnen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_jantje_binnen.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#jantje-binnen-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#tv-click {
+   position: absolute;
+   top: 6.2%;
+   left: 6.6%;
+   width: 31.8%;
+   height: 41.8%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#carpet-click {
+   position: absolute;
+   bottom: 0%;
+   left: 2%;
+   width: 41%;
+   height: 30%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#coke-click {
+   position: absolute;
+   bottom: 31%;
+   left: 3%;
+   width: 38%;
+   height: 10%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#laptop-click {
+   position: absolute;
+   bottom: 43%;
+   right: 15%;
+   width: 8%;
+   height: 7%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantje-laptop-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#jantje-laptop-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/jantje_laptop.gif');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#screen-click {
+   position: absolute;
+   bottom: 0%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
