@@ -324,7 +324,7 @@ nav button:hover {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
-   cursor: crosshair;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
    z-index: 1;
 }
 
@@ -341,7 +341,6 @@ nav button:hover {
    background-size: contain;
    background-repeat: no-repeat;
    background-position: bottom center;
-   cursor: crosshair;
    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
    transform-origin: bottom;
    pointer-events: auto;
@@ -349,7 +348,7 @@ nav button:hover {
 }
 
 .dummy.hit {
-   transform: rotateX(85deg);
+   transform: rotateX(-85deg);
    pointer-events: none;
    filter: brightness(0.3);
 }
@@ -409,7 +408,7 @@ nav button:hover {
 #strip-club {
    width: 100vw;
    height: 100vh;
-   background-image: url("assets/strip_club.gif");
+   background-image: url("assets/tunnel_binnen.png");
    background-size: cover;
    display: flex;
    justify-content: center;
@@ -906,4 +905,201 @@ nav button:hover {
    cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+}
+
+#magazines-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#NGD-hotel-screen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/ngd_hotel_dicht.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#magazines-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/magazines.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#curtain-click {
+   position: absolute;
+   top: 0%;
+   left: 57%;
+   width: 17%;
+   height: 49%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 100;
+}
+
+#window-click {
+   position: absolute;
+   top: 18%;
+   left: 63%;
+   width: 5%;
+   height: 13%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 50;
+}
+
+#magazine-click {
+   position: absolute;
+   top: 63%;
+   left: 66%;
+   width: 7%;
+   height: 7%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#back-click {
+   position: absolute;
+   top: 0%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 100;
+}
+
+#lady-click {
+   position: absolute;
+   top: 36%;
+   left: 35%;
+   width: 23%;
+   height: 42%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 150;
+}
+
+#manual-click {
+   position: absolute;
+   top: 39%;
+   left: 50%;
+   width: 15%;
+   height: 42%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 125;
+}
+
+#hoogeblad-click {
+   position: absolute;
+   top: 17%;
+   left: 39%;
+   width: 18%;
+   height: 30%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 175;
+}
+
+#chase-container {
+   position: absolute;
+   left: 960px;
+   top: 344px;
+
+   width: 350px;
+   height: 250px;
+   opacity: 0;
+   transform: translate(-50%, -50%) scale(0.1);
+   transition:
+      top 4s ease-out,
+      left 4s ease-out,
+      transform 4s ease-out,
+      opacity 1s ease-in;
+   pointer-events: auto;
+   z-index: 500;
+}
+
+#chase-container.approaching {
+   opacity: 1;
+   top: 621px;
+   transform: translate(-50%, -50%) scale(1.5);
+}
+
+#chase-container.retreating {
+   opacity: 0;
+   top: 344px;
+   transform: translate(-50%, -50%) scale(0.1);
+   pointer-events: none;
+}
+
+#police-car-img {
+   width: 100%;
+   height: 100%;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.hitbox {
+   position: absolute;
+}
+
+.driver {
+   width: 15%;
+   height: 23%;
+   top: 23%;
+   left: 50%;
+   background: rgba(0, 0, 0, 0);
+}
+
+.passenger {
+   width: 15%;
+   height: 23%;
+   top: 23%;
+   left: 22%;
+   background: rgba(0, 0, 0, 0);
+}
+
+.car-crash-away {
+   transform: translate(1000px, 200px) rotate(15deg);
+   opacity: 0;
+}
+
+#chase-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/weg_achtervolging.gif');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }

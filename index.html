@@ -173,11 +173,33 @@
       </div>
     </div>
   </div>
-    
+
   <div id="NGD-hotel-screen" class="menu-screen hidden">
     <div id="NGD-hotel-screen-view">
-      <div id="NGD-feedback" class="hidden">
-        <p id="NGD-feedback-text"></p>      
+      <div id="curtain-click" onclick="interactWithCurtain()"></div>
+      <div id="window-click" onclick="interactWithWindow()"></div>
+      <div id="magazine-click" onclick="showScreen('magazines-screen')"></div>
+    </div>
+  </div>
+
+  <div id="magazines-screen" class="menu-screen hidden">
+    <div id="magazines-view">
+      <div id="manual-click" onclick="interactWithManual()"></div>
+      <div id="hoogeblad-click" onclick="interactWithHoogeblad()"></div>
+      <div id="lady-click" onclick="interactWithLady()"></div>
+      <div id="back-click" onclick="showScreen('NGD-hotel-screen')"></div>
+      <div id="magazines-feedback" class="hidden">
+        <p id="magazines-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="chase-screen" class="menu-screen hidden">
+    <div id="chase-view">
+      <div id="chase-container">
+        <div id="police-car-img"></div>
+        <div class="hitbox driver" onclick="shootAgent('driver')"></div>
+        <div class="hitbox passenger" onclick="shootAgent('passenger')"></div>
       </div>
     </div>
   </div>
@@ -195,7 +217,7 @@
     cursor: pointer;
   ">dev skip</button>
 
-      <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

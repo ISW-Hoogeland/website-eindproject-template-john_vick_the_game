@@ -9,7 +9,7 @@ const offsetMargin = 6;
 
 // Teksten van de Cutscenes
 const cutsceneData = {
-    intro_dag1: {
+    intro: {
         steps: [
             { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Jij..." },
             { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "JIJ..." },
@@ -103,12 +103,27 @@ const cutsceneData = {
         steps: [
             { gif: "assets/huis_jantje_binnen.png", speaker: "John Vick", text: "Shit! Ik hoor iemand! Ik moet hier weg." },
             { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "John pakt het wapen van de tafel. Wat hij niet weet is dat hier een tracker in zit." },
-            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "Hij vlucht naar zijn auto en gaat terug naar het hotel." },
+            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "Hij vlucht naar zijn auto en gaat naar een ander hotel." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 5..." },
-            { gif: "assets/", speaker: " ", text: " " }
-
+            { gif: "assets/ngd_hotel_dicht.png", speaker: " ", text: "John wordt wakker en van het geluid van een lichtknop die snel aan en uit wordt gedaan." },
+            { gif: "assets/ngd_hotel_dicht.png", speaker: "John Vick", text: "Oh shit..." },
+            { gif: "assets/ngd_hotel_open.png", speaker: " ", text: "John doet de gordijnen open en ziet iets wat hem niet blij maakt..." },
+            { gif: "assets/ngd_hotel_kijken.gif", speaker: " ", text: "De Nederlandse Geheime Dienst (NGD) staat hem op te wachten!" },
+            { gif: "assets/ngd_hotel_deur.gif", speaker: " ", text: "John loopt naar de deur om te onstsnappen." },
+            { gif: "assets/ngd_hotel_deur.gif", speaker: "John Vick", text: "Een elektronisch slot, niemand kan naar binnen of naar buiten..." },
         ],
         nextStep: "chapter_8"
+    },
+
+    na_touw: {
+        steps: [
+            { gif: "assets/ngd_hotel_open.png", speaker: "John Vick", text: "Je moet wel gek zijn dit te doen" },
+            { gif: "assets/touw_bewegend.gif", speaker: " ", text: "John gaat naar beneden met het touw." },
+            { gif: "assets/touw_stilstaand.gif", speaker: " ", text: "Beneden aangekomen springt hij op een olietruck die heel toevallig op dat moment wegrijdt." },
+            { gif: "assets/weg_achtervolging.gif", speaker: " ", text: "De NGD achtervolgt je! Schakel ze uit door op ze te schieten!" },
+
+        ],
+        nextStep: "chapter_9"
     },
 
     /*
@@ -143,7 +158,7 @@ function showScreen(screenId) {
 // Start een volledig nieuw spel
 function startGame() {
     gameState = { currentDay: 1, inventory: [], lastScene: 'tuin' };
-    playCutscene('intro_dag1');
+    playCutscene('intro');
     saveGame();
 }
 
@@ -265,6 +280,11 @@ function nextCutsceneStep() {
                 break;
             case "chapter_8":
                 showScreen('NGD-hotel-screen');
+                break;
+            case "chapter_9":
+                showScreen('chase-screen');
+                currentSequenceIndex = 0;
+                startChaseGame(chaseSequence[0]);
                 break;
             default:
                 showScreen('main-menu');
@@ -417,7 +437,6 @@ function interactWithDigSite() {
 function initShootingRange() {
     setTimeout(() => {
         const dummies = document.querySelectorAll('.dummy');
-        console.log("Dummies geïnitialiseerd:", dummies.length);
 
         dummies.forEach(dummy => {
             dummy.classList.remove('hit');
@@ -1160,6 +1179,197 @@ function interactWithScreen() {
 
 }
 
+//NGD-scenes
+function showMagazineMessage(message) {
+    const feedback = document.getElementById('magazines-feedback');
+    const text = document.getElementById('magazines-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.magazinesTimeout) clearTimeout(window.magazinesTimeout);
+
+    window.magazinesTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+function interactWithCurtain() {
+    const NGDView = document.getElementById('NGD-hotel-screen-view');
+    const curtainView = document.getElementById('curtain-click');
+    NGDView.style.backgroundImage = "url('assets/ngd_hotel_open.png')";
+    NGDView.style.backgroundSize = "cover";
+    NGDView.style.backgroundPosition = "center";
+    curtainView.style.zIndex = 1;
+}
+
+function interactWithWindow() {
+    gameState.currentChapter = 9;
+    saveGame();
+    playCutscene('na_touw');
+}
+
+function interactWithLady() {
+    const LadyView = document.getElementById('lady-click');
+    LadyView.style.zIndex = 50;
+    showMagazineMessage('Hmm, deze bladzijden lijken wel aan elkaar vast geplakt.')
+}
+
+function interactWithHoogeblad() {
+    const HoogebladView = document.getElementById('hoogeblad-click');
+    const MagazinesView = document.getElementById('magazines-view');
+    HoogebladView.style.zIndex = 75;
+    MagazinesView.style.backgroundImage = "url('assets/magazines_hoogeblad.png')";
+    setTimeout(() => {
+        MagazinesView.style.backgroundImage = "url('assets/magazines.png')";
+    }, 5000)
+}
+
+function interactWithManual() {
+    const ManualView = document.getElementById('manual-click');
+    const MagazinesView = document.getElementById('magazines-view');
+    ManualView.style.zIndex = 25;
+    MagazinesView.style.backgroundImage = "url('assets/magazines_handboek.png')";
+    setTimeout(() => {
+        MagazinesView.style.backgroundImage = "url('assets/magazines.png')";
+    }, 7500)
+}
+
+//Chase-scene
+let currentVehicle = null;
+
+let policeStatus = {
+    driverHp: 1,
+    passengerHp: 1,
+    active: false,
+    type: 'police_car'
+};
+
+const vehicleTypes = {
+    police_car: {
+        hp: 1,
+        images: {
+            bothAlive: 'assets/car_both.gif',
+            driverOnly: 'assets/car_driver_only.gif',
+            passengerOnly: 'assets/car_passenger_only.gif',
+            bothDead: 'assets/car_both_dead.gif'
+        }
+    },
+    police_van: {
+        hp: 2,
+        images: {
+            bothAlive: 'assets/van_both.gif',
+            driverOnly: 'assets/van_driver_only.gif',
+            passengerOnly: 'assets/van_passenger_only.gif',
+            bothDead: 'assets/van_both_dead.gif'
+        }
+    },
+    armored_truck: {
+        hp: 3,
+        images: {
+            bothAlive: 'assets/armored_both.gif',
+            driverOnly: 'assets/armored_driver_only.gif',
+            passengerOnly: 'assets/armored_passenger_only.gif',
+            bothDead: 'assets/armored_both_dead.gif'
+        }
+    }
+};
+
+const policeImages = {
+    bothAlive: 'assets/car_both.gif',
+    driverOnly: 'assets/car_driver_only.gif',
+    passengerOnly: 'assets/car_passenger_only.gif',
+    bothDead: 'assets/car_both_dead.gif'
+};
+
+const chaseSequence = ['police_car', 'police_car', 'police_van', 'armored_truck'];
+let currentSequenceIndex = 0;
+
+function startChaseGame(vehicleKey = 'police_car') {
+    const container = document.getElementById('chase-container');
+    const screen = document.getElementById('chase-screen');
+
+    currentVehicle = vehicleTypes[vehicleKey];
+
+    policeStatus.type = vehicleKey;
+    policeStatus.driverHp = currentVehicle.hp;
+    policeStatus.passengerHp = currentVehicle.hp;
+    policeStatus.active = true;
+
+    screen.classList.remove('hidden');
+    container.classList.remove('approaching', 'retreating');
+
+    updatePoliceCarImage();
+
+    setTimeout(() => {
+        container.classList.add('approaching');
+    }, 100);
+}
+
+function shootAgent(role) {
+    if (!policeStatus.active) return;
+
+    const screen = document.getElementById('chase-screen');
+    screen.classList.add('flash-active');
+    setTimeout(() => screen.classList.remove('flash-active'), 100);
+
+    if (role === 'driver' && policeStatus.driverHp > 0) {
+        policeStatus.driverHp--;
+    } else if (role === 'passenger' && policeStatus.passengerHp > 0) {
+        policeStatus.passengerHp--;
+    }
+
+    updatePoliceCarImage();
+
+    if (policeStatus.driverHp <= 0) {
+        policeStatus.active = false;
+        crashPoliceCar();
+    }
+}
+
+function updatePoliceCarImage() {
+    const carImgDiv = document.getElementById('police-car-img');
+    const imgs = currentVehicle.images;
+    const driverAlive = policeStatus.driverHp > 0;
+    const passengerAlive = policeStatus.passengerHp > 0;
+
+    if (driverAlive && passengerAlive) {
+        carImgDiv.style.backgroundImage = `url('${imgs.bothAlive}')`;
+    }
+    else if (driverAlive && !passengerAlive) {
+        carImgDiv.style.backgroundImage = `url('${imgs.driverOnly}')`;
+    }
+    else if (!driverAlive && passengerAlive) {
+        carImgDiv.style.backgroundImage = `url('${imgs.passengerOnly}')`;
+    }
+    else {
+        carImgDiv.style.backgroundImage = `url('${imgs.bothDead}')`;
+    }
+}
+
+function crashPoliceCar() {
+    const container = document.getElementById('chase-container');
+
+    setTimeout(() => {
+        container.classList.remove('approaching');
+        container.classList.add('retreating');
+
+        setTimeout(() => {
+            currentSequenceIndex++;
+
+            if (currentSequenceIndex < chaseSequence.length) {
+                const nextVehicle = chaseSequence[currentSequenceIndex];
+                startChaseGame(nextVehicle);
+            } else {
+                policeStatus.active = false;
+                gameState.currentChapter = 10;
+                saveGame();
+                playCutscene('na_chase');
+            }
+        }, 4000);
+    }, 500);
+}
+
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
 function devSkip() {
 
@@ -1255,6 +1465,14 @@ function devSkip() {
         gameState.inventory.push("Laptop");
         saveGame();
         playCutscene('na_jantje');
+        return;
+    }
+
+    const ngdBinnen = document.getElementById('NGD-hotel-screen');
+    if (ngdBinnen && !ngdBinnen.classList.contains('hidden')) {
+        gameState.currentChapter = 9;
+        saveGame();
+        playCutscene('na_touw');
         return;
     }
 
