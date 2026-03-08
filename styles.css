@@ -288,8 +288,8 @@ nav button:hover {
 
 .game-object {
    position: absolute;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
+   background: rgba(0, 0, 0, 0);
+   border: none;
    cursor: pointer;
 }
 
@@ -382,7 +382,7 @@ nav button:hover {
 
 @keyframes muzzle-flash {
    0% {
-      background-color: rgba(255, 174, 0);
+      background-color: rgba(255, 174, 0, 50);
       box-shadow: inset 0 0 100px 50px #ffe100;
       filter: brightness(2);
    }
@@ -525,9 +525,8 @@ nav button:hover {
    width: 33%;
    height: 80%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #tunnel-click {
@@ -537,9 +536,8 @@ nav button:hover {
    width: 33%;
    height: 80%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #choice-feedback {
@@ -553,7 +551,6 @@ nav button:hover {
    border-radius: 10px;
    border: 1px solid #891717;
    z-index: 9999;
-
 }
 
 #garden-feedback {
@@ -608,9 +605,8 @@ nav button:hover {
    width: 9%;
    height: 60%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #table-click {
@@ -620,9 +616,8 @@ nav button:hover {
    width: 9%;
    height: 7%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #rob-home {
@@ -651,21 +646,21 @@ nav button:hover {
    width: 20%;
    height: 15%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #ebs-click {
    position: absolute;
-   top: 10%;
-   left: 3%;
-   width: 36%;
-   height: 46%;
+   top: 11%;
+   left: 3.61%;
+   width: 35.15%;
+   height: 44.62%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: url('assets/ebs_promotiefilmpje.gif');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
 }
 
 #nuclear-click {
@@ -675,9 +670,8 @@ nav button:hover {
    width: 21%;
    height: 52%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #robdoor-click {
@@ -687,9 +681,8 @@ nav button:hover {
    width: 15%;
    height: 75%;
    cursor: pointer;
-   background: rgba(255, 0, 0, 0.2);
-   border: 2px solid yellow;
-   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
 
 #rob-feedback {
@@ -750,4 +743,167 @@ nav button:hover {
    border-radius: 10px;
    border: 1px solid #891717;
    z-index: 9999;
+}
+
+#jantje-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_jantje_buiten.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#plant-click {
+   position: absolute;
+   bottom: 5%;
+   right: 17%;
+   width: 12%;
+   height: 40%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantjedoor-click {
+   position: absolute;
+   bottom: 16.5%;
+   right: 40.8%;
+   width: 19.3%;
+   height: 60%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#paper-click {
+   position: absolute;
+   bottom: 13%;
+   left: 33%;
+   width: 7%;
+   height: 11%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantje-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#jantje-binnen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/huis_jantje_binnen.png');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#jantje-binnen-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#tv-click {
+   position: absolute;
+   top: 6.2%;
+   left: 6.6%;
+   width: 31.8%;
+   height: 41.8%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#carpet-click {
+   position: absolute;
+   bottom: 0%;
+   left: 2%;
+   width: 41%;
+   height: 30%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#coke-click {
+   position: absolute;
+   bottom: 31%;
+   left: 3%;
+   width: 38%;
+   height: 10%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#laptop-click {
+   position: absolute;
+   bottom: 43%;
+   right: 15%;
+   width: 8%;
+   height: 7%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#jantje-laptop-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#jantje-laptop-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('assets/jantje_laptop.gif');
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#screen-click {
+   position: absolute;
+   bottom: 0%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
