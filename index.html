@@ -56,11 +56,11 @@
 
   <div id="shooting-range" class="menu-screen hidden">
     <div id="dummy-container">
-      <div class="dummy large" onclick="shootDummy(this)"></div>
-      <div class="dummy medium" onclick="shootDummy(this)" style="left: 30%;"></div>
-      <div class="dummy medium" onclick="shootDummy(this)" style="left: 60%;"></div>
-      <div class="dummy small" onclick="shootDummy(this)" style="left: 20%;"></div>
-      <div class="dummy small" onclick="shootDummy(this)" style="left: 80%;"></div>
+      <div class="dummy large" onclick="shootDummy(this)" style="left: 40%; bottom: 40%"></div>
+      <div class="dummy medium" onclick="shootDummy(this)" style="left: 30%; bottom: 60%"></div>
+      <div class="dummy medium" onclick="shootDummy(this)" style="left: 60%; bottom: 60%"></div>
+      <div class="dummy small" onclick="shootDummy(this)" style="left: 35%; bottom: 75%"></div>
+      <div class="dummy small" onclick="shootDummy(this)" style="left: 50%; bottom: 75%"></div>
     </div>
   </div>
 
@@ -142,6 +142,46 @@
     </div>
   </div>
 
+  <div id="jantje-home" class="menu-screen hidden">
+    <div id="jantje-view">
+      <div id="paper-click" onclick="showJantjeMessage('Hij heeft veel post')"></div>
+      <div id="plant-click" onclick="interactWithPlant()"></div>
+      <div id="jantjedoor-click" onclick="interactWithJantjeDoor()"></div>
+      <div id="jantje-feedback" class="hidden">
+        <p id="jantje-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="jantje-binnen" class="menu-screen hidden">
+    <div id="jantje-binnen-view">
+      <div id="tv-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
+      <div id="coke-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
+      <div id="carpet-click" onclick="showJantjeBMessage('Een tapijt met ... VLEKKEN!?')"></div>
+      <div id="laptop-click" onclick="interactWithLaptop()"></div>
+      <div id="jantje-binnen-feedback" class="hidden">
+        <p id="jantje-binnen-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="jantje-laptop" class="menu-screen hidden">
+    <div id="jantje-laptop-view">
+      <div id="screen-click" onclick="interactWithScreen()"></div>
+      <div id="jantje-laptop-feedback" class="hidden">
+        <p id="jantje-laptop-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+    
+  <div id="NGD-hotel-screen" class="menu-screen hidden">
+    <div id="NGD-hotel-screen-view">
+      <div id="NGD-feedback" class="hidden">
+        <p id="NGD-feedback-text"></p>      
+      </div>
+    </div>
+  </div>
+
   <button id="dev-skip-button" onclick="devSkip()" style="
     position: fixed; 
     bottom: 20px; 
@@ -155,7 +195,7 @@
     cursor: pointer;
   ">dev skip</button>
 
-  <script src="script.js"></script>
+      <script src="script.js"></script>
 </body>
 
 </html>
