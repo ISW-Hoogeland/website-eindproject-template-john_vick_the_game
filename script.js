@@ -22,20 +22,20 @@ const cutsceneData = {
 
     na_geweer_vinden: {
         steps: [
-            { gif: "assets/mason_buiten", speaker: "Mason Bourne", text: "'klapt'" },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "10 meter, 20 meter en 30 meter. Laat maar zien wat je kunt." }
+            { gif: "assets/mason_buiten.gif", speaker: "Mason Bourne", text: "'klapt'" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen." },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten." },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm." },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "10 meter, 20 meter en 30 meter. Laat maar zien wat je kunt." }
         ],
         nextStep: "chapter_2"
     },
 
     na_schieten: {
         steps: [
-            { gif: "assets/", speaker: "Mason Bourne", text: "Ik ben serieus onder de indruk, voor hoever dat kan met stilstaande doelen natuurlijk." },
-            { gif: "assets/", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?" },
-            { gif: "assets/", speaker: "John Vick", text: "YEAH!!" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Ik ben serieus onder de indruk, voor hoever dat kan met stilstaande doelen natuurlijk." },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?" },
+            { gif: "assets/mason_range.gif", speaker: "John Vick", text: "YEAH!!" },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 2..." },
             { gif: "assets/huis_mason.gif", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
             { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
@@ -92,11 +92,23 @@ const cutsceneData = {
         nextStep: "chapter_6"
     },
 
-    na_highway: {
+    na_doodswens: {
         steps: [
-            { gif: "assets/huis_jantje_buiten", speaker: "John Vick", text: "Hier woont Jantje. Ik moet hier binnen zien te komen." },
+            { gif: "assets/huis_jantje_buiten.png", speaker: "John Vick", text: "Hier woont Jantje. Ik moet hier binnen zien te komen." },
         ],
         nextStep: "chapter_7"
+    },
+
+    na_jantje: {
+        steps: [
+            { gif: "assets/huis_jantje_binnen.png", speaker: "John Vick", text: "Shit! Ik hoor iemand! Ik moet hier weg." },
+            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "John pakt het wapen van de tafel. Wat hij niet weet is dat hier een tracker in zit." },
+            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "Hij vlucht naar zijn auto en gaat terug naar het hotel." },
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 5..." },
+            { gif: "assets/", speaker: " ", text: " " }
+
+        ],
+        nextStep: "chapter_8"
     },
 
     /*
@@ -251,6 +263,9 @@ function nextCutsceneStep() {
             case "chapter_7":
                 showScreen('jantje-home');
                 break;
+            case "chapter_8":
+                showScreen('NGD-hotel-screen');
+                break;
             default:
                 showScreen('main-menu');
                 break;
@@ -304,7 +319,7 @@ function showGardenMessage(message) {
 
     window.gardenTimeout = setTimeout(() => {
         feedback.classList.add('hidden');
-    }, 5000);
+    }, 3000);
 }
 
 // Controleert of de schijven goed zijn
@@ -361,7 +376,7 @@ function interactWithShed() {
                     gameState.inventory.push("Schep");
                 }
                 saveGame();
-            }, 3000);
+            }, 1500);
         } else {
             showGardenMessage("Er is niets meer te vinden.");
         }
@@ -388,11 +403,11 @@ function interactWithDigSite() {
             gameState.inventory.push("Geladen Pistool");
             gameState.currentChapter = 2;
             saveGame();
-        }, 3000);
+        }, 1500);
 
         setTimeout(() => {
             playCutscene('na_geweer_vinden');
-        }, 4000);
+        }, 3000);
     }
 }
 
@@ -996,13 +1011,13 @@ function spawnTraffic() {
     if (highwayTime > 60) {
         nextSpawnTime = Math.random() * 300 + 300;
     } else if (highwayTime > 30) {
-        showHighwayMessage("Het wordt drukker!!");
         nextSpawnTime = Math.random() * 200 + 200;
     } else {
-        showHighwayMessage("Het wordt drukker!!");
         nextSpawnTime = Math.random() * 100 + 100;
     }
     setTimeout(spawnTraffic, nextSpawnTime);
+
+    if (highwayTime === 60 || highwayTime === 30) showHighwayMessage('Het wordt drukker!');
 }
 
 function lockVertical() {
@@ -1051,6 +1066,98 @@ function handleCrash() {
         isInvincible = false;
         if (feedback) feedback.classList.add('hidden');
     }, 2000);
+}
+
+// Jantje's huis
+function showJantjeMessage(message) {
+    const feedback = document.getElementById('jantje-feedback');
+    const text = document.getElementById('jantje-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.jantjeTimeout) clearTimeout(window.jantjeTimeout);
+
+    window.jantjeTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+
+function interactWithPlant() {
+    const jantjeView = document.getElementById('jantje-view')
+    jantjeView.style.backgroundImage = "url('assets/huis_jantje_buiten_key.png')";
+    showJantjeMessage("Typisch...");
+    jantjeView.style.backgroundSize = "cover";
+    jantjeView.style.backgroundPosition = "center";
+
+    setTimeout(() => {
+        jantjeView.style.backgroundImage = "url('assets/huis_jantje_buiten_no_key.png')";
+        jantjeView.style.backgroundSize = "cover";
+        jantjeView.style.backgroundPosition = "center";
+        playerHasKey = true;
+        gameState.inventory.includes('Sleutel');
+        gameState.inventory.push('Sleutel');
+        saveGame();
+    }, 1500);
+}
+
+function interactWithJantjeDoor() {
+    const hasKey = gameState.inventory.includes("Sleutel");
+
+    if (hasKey) {
+        saveGame();
+        showScreen('jantje-binnen');
+
+    } else {
+        showJantjeMessage("Er moet een manier zijn binnen te komen")
+    }
+}
+
+function showJantjeBMessage(message) {
+    const feedback = document.getElementById('jantje-binnen-feedback');
+    const text = document.getElementById('jantje-binnen-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.jantjeBTimeout) clearTimeout(window.jantjeBTimeout);
+
+    window.jantjeBTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+function showJantjeLaptopMessage(message) {
+    const feedback = document.getElementById('jantje-laptop-feedback');
+    const text = document.getElementById('jantje-laptop-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.jantjeLaptopTimeout) clearTimeout(window.jantjeLaptopTimeout);
+
+    window.jantjeLaptopTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 5000);
+}
+
+function interactWithLaptop() {
+    gameState.inventory.includes('Laptop');
+    gameState.inventory.push('Laptop');
+    saveGame();
+    showScreen('jantje-laptop');
+    showJantjeLaptopMessage("Om dit soort informatie op deze manier te delen moeten die Victor en Jantje wel hele goede vrienden zijn geweest.");
+}
+
+function interactWithScreen() {
+    showScreen('jantje-binnen');
+    setTimeout(() => {
+        gameState.currentChapter = 8;
+        saveGame();
+        playCutscene('na_jantje')
+    }, 3000)
+
 }
 
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
@@ -1131,6 +1238,24 @@ function devSkip() {
         gameState.currentChapter = 7;
         saveGame();
         playCutscene('na_doodswens');
+        return;
+    }
+
+    const jantjeBuiten = document.getElementById('jantje-home');
+    if (jantjeBuiten && !jantjeBuiten.classList.contains('hidden')) {
+        gameState.inventory.push("Sleutel");
+        saveGame();
+        showScreen('jantje-binnen');
+        return;
+    }
+
+    const jantjeBinnen = document.getElementById('jantje-binnen');
+    if (jantjeBinnen && !jantjeBinnen.classList.contains('hidden')) {
+        gameState.currentChapter = 8;
+        gameState.inventory.push("Laptop");
+        saveGame();
+        playCutscene('na_jantje');
+        return;
     }
 
     alert("Niets om hier te skippen!");
