@@ -22,7 +22,7 @@ const cutsceneData = {
 
     na_geweer_vinden: {
         steps: [
-            { gif: "assets/mason_buiten.gif", speaker: "Mason Bourne", text: "'klapt'" },
+            { gif: "assets/mason_buiten.gif", speaker: "Mason Bourne", text: "*klapt*" },
             { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen." },
             { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten." },
             { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm." },
@@ -40,7 +40,7 @@ const cutsceneData = {
             { gif: "assets/huis_mason.gif", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
             { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
             { gif: "assets/mason.gif", speaker: "John Vick", text: "Zeker." },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Josef gestolen." },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Jozef gestolen." },
             { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Jij moet hem terug halen." },
             { gif: "assets/mason.gif", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?" },
             { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is," },
@@ -102,14 +102,15 @@ const cutsceneData = {
     na_jantje: {
         steps: [
             { gif: "assets/huis_jantje_binnen.png", speaker: "John Vick", text: "Shit! Ik hoor iemand! Ik moet hier weg." },
-            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "John pakt het wapen van de tafel. Wat hij niet weet is dat hier een tracker in zit." },
+            { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "John pakt het wapen van de tafel." },
             { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "Hij vlucht naar zijn auto en gaat naar een ander hotel." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 5..." },
-            { gif: "assets/ngd_hotel_dicht.png", speaker: " ", text: "John wordt wakker en van het geluid van een lichtknop die snel aan en uit wordt gedaan." },
-            { gif: "assets/ngd_hotel_dicht.png", speaker: "John Vick", text: "Oh shit..." },
-            { gif: "assets/ngd_hotel_open.png", speaker: " ", text: "John doet de gordijnen open en ziet iets wat hem niet blij maakt..." },
-            { gif: "assets/ngd_hotel_kijken.gif", speaker: " ", text: "De Nederlandse Geheime Dienst (NGD) staat hem op te wachten!" },
-            { gif: "assets/ngd_hotel_deur.gif", speaker: " ", text: "John loopt naar de deur om te onstsnappen." },
+            { gif: "assets/bo.png", speaker: "John Vick", text: "*gaapt*" },
+            { gif: "assets/bo.png", speaker: " ", text: "*klik*" },
+            { gif: "assets/bo.png", speaker: " ", text: "*klik*" },
+            { gif: "assets/bo.png", speaker: " ", text: "*klik klik klik klik klik klik*" },
+            { gif: "assets/bo.png", speaker: "John Vick", text: "Oh shit..." },
+            { gif: "assets/ngd_hotel_kijken.gif", speaker: "John Vick", text: "De NGD!" },
             { gif: "assets/ngd_hotel_deur.gif", speaker: "John Vick", text: "Een elektronisch slot, niemand kan naar binnen of naar buiten..." },
         ],
         nextStep: "chapter_8"
@@ -117,9 +118,8 @@ const cutsceneData = {
 
     na_touw: {
         steps: [
-            { gif: "assets/ngd_hotel_open.png", speaker: "John Vick", text: "Je moet wel gek zijn dit te doen" },
-            { gif: "assets/touw_bewegend.gif", speaker: " ", text: "John gaat naar beneden met het touw." },
-            { gif: "assets/touw_stilstaand.gif", speaker: " ", text: "Beneden aangekomen springt hij op een olietruck die heel toevallig op dat moment wegrijdt." },
+            { gif: "assets/touw_bewegend.gif", speaker: "John Vick", text: "Je moet wel gek zijn dit te doen." },
+            { gif: "assets/touw_stilstaand.gif", speaker: "John Vick", text: "De olietruck gaat rijden!" },
             { gif: "assets/weg_achtervolging.gif", speaker: " ", text: "De NGD achtervolgt je! Schakel ze uit door op ze te schieten!" },
 
         ],
@@ -601,13 +601,14 @@ function startDrag(e) {
     offset.x = e.clientX - rect.left;
     offset.y = e.clientY - rect.top;
     activeBlock.style.zIndex = "100";
-    activeBlock.style.cursor = 'grabbing';
+    activeBlock.style.cursor = "url('assets/cursor_0.gif') 16 16, crosshair";
 }
 
 function endDrag() {
     if (activeBlock) {
         activeBlock.style.zIndex = "10";
-        activeBlock.style.cursor = 'grab';
+        activeBlock.style.cursor = "url('assets/cursor_0.gif') 16 16, crosshair";
+        ;
         activeBlock = null;
     }
 }
@@ -1222,7 +1223,7 @@ function interactWithHoogeblad() {
     MagazinesView.style.backgroundImage = "url('assets/magazines_hoogeblad.png')";
     setTimeout(() => {
         MagazinesView.style.backgroundImage = "url('assets/magazines.png')";
-    }, 5000)
+    }, 2000)
 }
 
 function interactWithManual() {

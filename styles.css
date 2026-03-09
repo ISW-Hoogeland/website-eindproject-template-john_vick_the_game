@@ -9,6 +9,7 @@ body {
    width: 100vw;
    margin: 0;
    overflow: hidden;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .menu-screen {
@@ -18,6 +19,7 @@ body {
    padding: 40px;
    background: rgba(0, 0, 0, 0.9);
    box-shadow: 0 0 20px rgb(137, 23, 23);
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .hidden {
@@ -40,10 +42,10 @@ nav button {
    background: transparent;
    color: #ccc;
    border: 1px solid #444;
-   cursor: pointer;
    transition: all 0.3s ease;
    text-transform: uppercase;
    letter-spacing: 2px;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 nav button:hover {
@@ -116,7 +118,7 @@ nav button:hover {
    border: 1px solid #fff;
    color: white;
    padding: 10px 20px;
-   cursor: pointer;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #garden-screen {
@@ -187,6 +189,7 @@ nav button:hover {
    box-shadow: 0 0 50px #891717;
    position: relative;
    overflow: hidden;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #close-electrical-puzzle {
@@ -197,8 +200,8 @@ nav button:hover {
    border: none;
    color: #891717;
    font-size: 1.5rem;
-   cursor: pointer;
    z-index: 100;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #check-electrical-puzzle-btn {
@@ -212,20 +215,20 @@ nav button:hover {
    padding: 10px 20px;
    text-transform: uppercase;
    letter-spacing: 2px;
-   cursor: pointer;
    transition: all 0.2s ease;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #check-electrical-puzzle-btn:hover {
    background: #000;
    box-shadow: 0 0 10px #891717;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .circuit-disk {
    width: 128px;
    height: 128px;
    position: absolute;
-   cursor: pointer;
    transition: transform 0.3s ease;
    transform-origin: center;
    background-size: contain;
@@ -290,7 +293,7 @@ nav button:hover {
    position: absolute;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: pointer;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #shed-click-spot {
@@ -334,6 +337,7 @@ nav button:hover {
    height: 100%;
    perspective: 1000px;
    pointer-events: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .dummy {
@@ -351,6 +355,7 @@ nav button:hover {
    transform: rotateX(-85deg);
    pointer-events: none;
    filter: brightness(0.3);
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .large {
@@ -418,11 +423,11 @@ nav button:hover {
 
 #unblock-puzzle-overlay {
    display: block;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .block.target[data-orientation="horizontal_target"][data-length="2"] {
    position: absolute;
-   cursor: grab;
    width: 320px;
    height: 160px;
    background-image: url("assets/blok_doel.gif");
@@ -437,7 +442,6 @@ nav button:hover {
 
 .block[data-orientation="vertical_short"][data-length="2"] {
    position: absolute;
-   cursor: grab;
    width: 160px;
    height: 320px;
    background-image: url("assets/blok_verticaal.gif");
@@ -447,7 +451,6 @@ nav button:hover {
 
 .block[data-orientation="vertical_long"][data-length="3"] {
    position: absolute;
-   cursor: grab;
    width: 160px;
    height: 480px;
    background-image: url("assets/blok_verticaal_groot.gif");
@@ -457,7 +460,6 @@ nav button:hover {
 
 .block[data-orientation="horizontal"][data-length="2"] {
    position: absolute;
-   cursor: grab;
    width: 320px;
    height: 160px;
    background-image: url("assets/blok_horizontaal.gif");
@@ -476,6 +478,7 @@ nav button:hover {
    background-repeat: no-repeat;
    z-index: 0;
    pointer-events: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #maze-screen {
@@ -487,6 +490,7 @@ nav button:hover {
    margin: 0;
    padding: 0;
    background-color: #bab198;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #maze-canvas {
@@ -495,14 +499,9 @@ nav button:hover {
    display: block;
    border: none;
    box-shadow: none;
-}
-
-#maze-canvas {
    position: absolute;
    top: 0;
    left: 0;
-   width: 100%;
-   height: 100%;
 }
 
 #choice-view {
@@ -515,6 +514,7 @@ nav button:hover {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #door-click {
@@ -523,9 +523,9 @@ nav button:hover {
    left: 5%;
    width: 33%;
    height: 80%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #tunnel-click {
@@ -534,9 +534,9 @@ nav button:hover {
    right: 3%;
    width: 33%;
    height: 80%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #choice-feedback {
@@ -603,9 +603,9 @@ nav button:hover {
    left: 0%;
    width: 9%;
    height: 60%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #table-click {
@@ -614,9 +614,9 @@ nav button:hover {
    left: 22%;
    width: 9%;
    height: 7%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #rob-home {
@@ -644,9 +644,9 @@ nav button:hover {
    left: 10%;
    width: 20%;
    height: 15%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #ebs-click {
@@ -655,11 +655,11 @@ nav button:hover {
    left: 3.61%;
    width: 35.15%;
    height: 44.62%;
-   cursor: pointer;
    background: url('assets/ebs_promotiefilmpje.gif');
    background-repeat: no-repeat;
    background-position: center;
    background-size: cover;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #nuclear-click {
@@ -668,9 +668,9 @@ nav button:hover {
    right: 29%;
    width: 21%;
    height: 52%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #robdoor-click {
@@ -679,9 +679,9 @@ nav button:hover {
    right: 2%;
    width: 15%;
    height: 75%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #rob-feedback {
@@ -762,9 +762,9 @@ nav button:hover {
    right: 17%;
    width: 12%;
    height: 40%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantjedoor-click {
@@ -773,9 +773,9 @@ nav button:hover {
    right: 40.8%;
    width: 19.3%;
    height: 60%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #paper-click {
@@ -784,9 +784,9 @@ nav button:hover {
    left: 33%;
    width: 7%;
    height: 11%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantje-feedback {
@@ -833,9 +833,9 @@ nav button:hover {
    left: 6.6%;
    width: 31.8%;
    height: 41.8%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #carpet-click {
@@ -844,9 +844,9 @@ nav button:hover {
    left: 2%;
    width: 41%;
    height: 30%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #coke-click {
@@ -855,9 +855,9 @@ nav button:hover {
    left: 3%;
    width: 38%;
    height: 10%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #laptop-click {
@@ -866,9 +866,9 @@ nav button:hover {
    right: 15%;
    width: 8%;
    height: 7%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantje-laptop-feedback {
@@ -902,9 +902,9 @@ nav button:hover {
    left: 0%;
    width: 100%;
    height: 100%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #magazines-feedback {
@@ -950,10 +950,10 @@ nav button:hover {
    left: 57%;
    width: 17%;
    height: 49%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 100;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #window-click {
@@ -962,10 +962,10 @@ nav button:hover {
    left: 63%;
    width: 5%;
    height: 13%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 50;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #magazine-click {
@@ -974,9 +974,9 @@ nav button:hover {
    left: 66%;
    width: 7%;
    height: 7%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #back-click {
@@ -985,10 +985,10 @@ nav button:hover {
    left: 0%;
    width: 100%;
    height: 100%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 100;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #lady-click {
@@ -997,10 +997,10 @@ nav button:hover {
    left: 35%;
    width: 23%;
    height: 42%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 150;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #manual-click {
@@ -1009,10 +1009,10 @@ nav button:hover {
    left: 50%;
    width: 15%;
    height: 42%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 125;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #hoogeblad-click {
@@ -1021,10 +1021,10 @@ nav button:hover {
    left: 39%;
    width: 18%;
    height: 30%;
-   cursor: pointer;
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 175;
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #chase-container {
@@ -1076,6 +1076,7 @@ nav button:hover {
    top: 23%;
    left: 50%;
    background: rgba(0, 0, 0, 0);
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .passenger {
@@ -1084,6 +1085,7 @@ nav button:hover {
    top: 23%;
    left: 22%;
    background: rgba(0, 0, 0, 0);
+   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .car-crash-away {
