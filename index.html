@@ -7,6 +7,14 @@
 </head>
 
 <body>
+  <div id="global-damage-overlay"></div>
+
+  <div id="global-damage-overlay">
+    <button id="retry-button" class="hidden" onclick="resetGameToMenu()">
+      TERUG NAAR HET HOOFDMENU
+    </button>
+  </div>
+
   <div id="game-wrapper">
     <div id="main-menu" class="menu-screen">
       <h1 class="glitch-title">JOHN VICK</h1>
@@ -196,10 +204,15 @@
 
   <div id="chase-screen" class="menu-screen hidden">
     <div id="chase-view">
-      <div id="chase-container">
-        <div id="police-car-img"></div>
-        <div class="hitbox driver" onclick="shootAgent('driver')"></div>
-        <div class="hitbox passenger" onclick="shootAgent('passenger')"></div>
+      <div id="chase-container-1" class="chase-container">
+        <div id="police-car-img-1" class="police-car-img"></div>
+        <div class="hitbox driver" onclick="shootAgent(1, 'driver')"></div>
+        <div class="hitbox passenger" onclick="shootAgent(1, 'passenger')"></div>
+      </div>
+      <div id="chase-container-2" class="chase-container hidden">
+        <div id="police-car-img-2" class="police-car-img"></div>
+        <div class="hitbox driver" onclick="shootAgent(2, 'driver')"></div>
+        <div class="hitbox passenger" onclick="shootAgent(2, 'passenger')"></div>
       </div>
     </div>
   </div>
@@ -214,7 +227,6 @@
     color: black; 
     font-weight: bold; 
     border: 2px solid black; 
-    cursor: url('assets/cursor_0.gif') 16 16, crosshair;
   ">dev skip</button>
 
   <script src="script.js"></script>

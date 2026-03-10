@@ -1,3 +1,8 @@
+* {
+   cursor: inherit !important;
+}
+
+html,
 body {
    background-color: #050505;
    color: #eee;
@@ -8,8 +13,58 @@ body {
    height: 100vh;
    width: 100vw;
    margin: 0;
+   padding: 0;
    overflow: hidden;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
+   position: fixed;
+   cursor: url('assets/cursor_0.gif') 16 16, auto !important;
+}
+
+#global-damage-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   z-index: 999999;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   pointer-events: none;
+   opacity: 0;
+   transition: opacity 0.5s ease;
+}
+
+#global-damage-overlay.active {
+   opacity: 1;
+}
+
+#retry-button {
+   display: block;
+   width: auto;
+   min-width: 300px;
+   padding: 20px;
+   background: rgba(0, 0, 0, 0.8);
+   color: #fff;
+   border: 2px solid #891717;
+   transition: all 0.3s ease;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   pointer-events: auto !important;
+}
+
+#retry-button:hover {
+   background: #891717;
+   color: #fff;
+   border-color: #891717;
+   box-shadow: 0 0 15px #891717;
+   transform: scale(1.05);
+}
+
+.hidden {
+   display: none !important;
 }
 
 .menu-screen {
@@ -19,7 +74,6 @@ body {
    padding: 40px;
    background: rgba(0, 0, 0, 0.9);
    box-shadow: 0 0 20px rgb(137, 23, 23);
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .hidden {
@@ -45,7 +99,6 @@ nav button {
    transition: all 0.3s ease;
    text-transform: uppercase;
    letter-spacing: 2px;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 nav button:hover {
@@ -118,7 +171,6 @@ nav button:hover {
    border: 1px solid #fff;
    color: white;
    padding: 10px 20px;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #garden-screen {
@@ -189,7 +241,6 @@ nav button:hover {
    box-shadow: 0 0 50px #891717;
    position: relative;
    overflow: hidden;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #close-electrical-puzzle {
@@ -201,7 +252,6 @@ nav button:hover {
    color: #891717;
    font-size: 1.5rem;
    z-index: 100;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #check-electrical-puzzle-btn {
@@ -216,13 +266,11 @@ nav button:hover {
    text-transform: uppercase;
    letter-spacing: 2px;
    transition: all 0.2s ease;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #check-electrical-puzzle-btn:hover {
    background: #000;
    box-shadow: 0 0 10px #891717;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .circuit-disk {
@@ -293,7 +341,6 @@ nav button:hover {
    position: absolute;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #shed-click-spot {
@@ -327,7 +374,6 @@ nav button:hover {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
    z-index: 1;
 }
 
@@ -337,7 +383,6 @@ nav button:hover {
    height: 100%;
    perspective: 1000px;
    pointer-events: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .dummy {
@@ -355,7 +400,6 @@ nav button:hover {
    transform: rotateX(-85deg);
    pointer-events: none;
    filter: brightness(0.3);
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .large {
@@ -423,7 +467,6 @@ nav button:hover {
 
 #unblock-puzzle-overlay {
    display: block;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .block.target[data-orientation="horizontal_target"][data-length="2"] {
@@ -478,7 +521,6 @@ nav button:hover {
    background-repeat: no-repeat;
    z-index: 0;
    pointer-events: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #maze-screen {
@@ -490,7 +532,6 @@ nav button:hover {
    margin: 0;
    padding: 0;
    background-color: #bab198;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #maze-canvas {
@@ -514,7 +555,6 @@ nav button:hover {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #door-click {
@@ -525,7 +565,6 @@ nav button:hover {
    height: 80%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #tunnel-click {
@@ -536,7 +575,6 @@ nav button:hover {
    height: 80%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #choice-feedback {
@@ -605,7 +643,6 @@ nav button:hover {
    height: 60%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #table-click {
@@ -616,7 +653,6 @@ nav button:hover {
    height: 7%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #rob-home {
@@ -646,7 +682,6 @@ nav button:hover {
    height: 15%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #ebs-click {
@@ -659,7 +694,6 @@ nav button:hover {
    background-repeat: no-repeat;
    background-position: center;
    background-size: cover;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #nuclear-click {
@@ -670,7 +704,6 @@ nav button:hover {
    height: 52%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #robdoor-click {
@@ -681,7 +714,6 @@ nav button:hover {
    height: 75%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #rob-feedback {
@@ -764,7 +796,6 @@ nav button:hover {
    height: 40%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantjedoor-click {
@@ -775,7 +806,6 @@ nav button:hover {
    height: 60%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #paper-click {
@@ -786,7 +816,6 @@ nav button:hover {
    height: 11%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantje-feedback {
@@ -835,7 +864,6 @@ nav button:hover {
    height: 41.8%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #carpet-click {
@@ -846,7 +874,6 @@ nav button:hover {
    height: 30%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #coke-click {
@@ -857,7 +884,6 @@ nav button:hover {
    height: 10%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #laptop-click {
@@ -868,7 +894,6 @@ nav button:hover {
    height: 7%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #jantje-laptop-feedback {
@@ -904,7 +929,6 @@ nav button:hover {
    height: 100%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #magazines-feedback {
@@ -953,7 +977,6 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 100;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #window-click {
@@ -965,7 +988,6 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 50;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #magazine-click {
@@ -976,7 +998,6 @@ nav button:hover {
    height: 7%;
    background: rgba(0, 0, 0, 0);
    border: none;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #back-click {
@@ -988,7 +1009,6 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 100;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #lady-click {
@@ -1000,7 +1020,6 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 150;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #manual-click {
@@ -1012,7 +1031,6 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 125;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 #hoogeblad-click {
@@ -1024,41 +1042,68 @@ nav button:hover {
    background: rgba(0, 0, 0, 0);
    border: none;
    z-index: 175;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
-#chase-container {
+.chase-container {
    position: absolute;
-   left: 960px;
-   top: 344px;
-
-   width: 350px;
-   height: 250px;
+   width: 25%;
+   aspect-ratio: 2 / 1;
    opacity: 0;
-   transform: translate(-50%, -50%) scale(0.1);
-   transition:
-      top 4s ease-out,
-      left 4s ease-out,
-      transform 4s ease-out,
-      opacity 1s ease-in;
-   pointer-events: auto;
    z-index: 500;
+   transition:
+      top 3s ease-in,
+      left 3s ease-in,
+      transform 3s ease-in,
+      opacity 1.5s ease-in;
+   pointer-events: auto;
+   transform: translate(-50%, -50%) scale(0.1);
 }
 
-#chase-container.approaching {
-   opacity: 1;
-   top: 621px;
-   transform: translate(-50%, -50%) scale(1.5);
-}
-
-#chase-container.retreating {
+.chase-container.retreating {
    opacity: 0;
-   top: 344px;
+   top: 45%;
+   left: 50%;
    transform: translate(-50%, -50%) scale(0.1);
    pointer-events: none;
 }
 
-#police-car-img {
+.pos-center {
+   left: 50%;
+   top: 45%;
+}
+
+.pos-center.approaching {
+   top: 75%;
+   left: 50%;
+   transform: translate(-50%, -50%) scale(1.5);
+   opacity: 1;
+}
+
+.pos-left {
+   left: 48%;
+   top: 45%;
+}
+
+.pos-left.approaching {
+   top: 75%;
+   left: 25%;
+   transform: translate(-50%, -50%) scale(1.5);
+   opacity: 1;
+}
+
+.pos-right {
+   left: 52%;
+   top: 45%;
+}
+
+.pos-right.approaching {
+   top: 75%;
+   left: 75%;
+   transform: translate(-50%, -50%) scale(1.5);
+   opacity: 1;
+}
+
+.police-car-img {
    width: 100%;
    height: 100%;
    background-size: contain;
@@ -1068,6 +1113,7 @@ nav button:hover {
 
 .hitbox {
    position: absolute;
+   cursor: crosshair;
 }
 
 .driver {
@@ -1075,8 +1121,6 @@ nav button:hover {
    height: 23%;
    top: 23%;
    left: 50%;
-   background: rgba(0, 0, 0, 0);
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
 }
 
 .passenger {
@@ -1084,13 +1128,6 @@ nav button:hover {
    height: 23%;
    top: 23%;
    left: 22%;
-   background: rgba(0, 0, 0, 0);
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
-}
-
-.car-crash-away {
-   transform: translate(1000px, 200px) rotate(15deg);
-   opacity: 0;
 }
 
 #chase-view {
@@ -1103,5 +1140,5 @@ nav button:hover {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
-   cursor: url('assets/cursor_0.gif') 16 16, crosshair;
+   overflow: hidden;
 }

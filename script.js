@@ -296,9 +296,57 @@ function nextCutsceneStep() {
 // Houdt de status van de speler bij
 let playerHasShovel = false;
 let shedIsUnlocked = false;
+let currentDamagePercent = 0;
 
 // Houdt de rotatie van de 8 schijven bij
 let diskRotations = [0, 0, 0, 0, 0, 0, 0, 0];
+
+// Maakt de overlays/cursors werkend
+function updateGlobalDamage(percent) {
+    const validSteps = [0, 20, 40, 60, 80, 100];
+    if (!validSteps.includes(percent)) return;
+
+    currentDamagePercent = percent;
+    const overlay = document.getElementById('global-damage-overlay');
+    const retryBtn = document.getElementById('retry-button');
+    const body = document.body;
+
+    if (percent === 0) {
+        overlay.classList.remove('active');
+        overlay.style.backgroundImage = 'none';
+        body.style.setProperty('cursor', "url('assets/cursor_0.gif') 16 16, auto", 'important');
+        if (retryBtn) retryBtn.classList.add('hidden');
+    } else {
+        overlay.classList.add('active');
+        overlay.style.backgroundImage = `url('assets/overlay_${percent}.gif')`;
+        body.style.setProperty('cursor', `url('assets/cursor_${percent}.gif') 16 16, auto`, 'important');
+
+        if (percent < 100 && retryBtn) {
+            retryBtn.classList.add('hidden');
+        }
+    }
+
+    if (percent === 100) {
+        Object.keys(carsActive).forEach(id => {
+            if (carsActive[id].interval) clearInterval(carsActive[id].interval);
+            carsActive[id].active = false;
+        });
+
+        if (retryBtn) {
+            retryBtn.classList.remove('hidden');
+            console.log("Retry button zou nu zichtbaar moeten zijn.");
+        }
+    }
+}
+
+function resetGameToMenu() {
+    const retryBtn = document.getElementById('retry-button');
+    if (retryBtn) retryBtn.classList.add('hidden');
+
+    updateGlobalDamage(0);
+
+    showScreen('main-menu');
+}
 
 // De puzzelacties
 function openElectricalPuzzleOverLay() {
@@ -601,14 +649,11 @@ function startDrag(e) {
     offset.x = e.clientX - rect.left;
     offset.y = e.clientY - rect.top;
     activeBlock.style.zIndex = "100";
-    activeBlock.style.cursor = "url('assets/cursor_0.gif') 16 16, crosshair";
 }
 
 function endDrag() {
     if (activeBlock) {
         activeBlock.style.zIndex = "10";
-        activeBlock.style.cursor = "url('assets/cursor_0.gif') 16 16, crosshair";
-        ;
         activeBlock = null;
     }
 }
@@ -1237,43 +1282,17 @@ function interactWithManual() {
 }
 
 //Chase-scene
-let currentVehicle = null;
+let currentSequenceIndex = 0;
+const chaseSequence = [
+    { type: 'single' },
+    { type: 'single' },
+    { type: 'double' },
+    { type: 'double' }
+];
 
-let policeStatus = {
-    driverHp: 1,
-    passengerHp: 1,
-    active: false,
-    type: 'police_car'
-};
-
-const vehicleTypes = {
-    police_car: {
-        hp: 1,
-        images: {
-            bothAlive: 'assets/car_both.gif',
-            driverOnly: 'assets/car_driver_only.gif',
-            passengerOnly: 'assets/car_passenger_only.gif',
-            bothDead: 'assets/car_both_dead.gif'
-        }
-    },
-    police_van: {
-        hp: 2,
-        images: {
-            bothAlive: 'assets/van_both.gif',
-            driverOnly: 'assets/van_driver_only.gif',
-            passengerOnly: 'assets/van_passenger_only.gif',
-            bothDead: 'assets/van_both_dead.gif'
-        }
-    },
-    armored_truck: {
-        hp: 3,
-        images: {
-            bothAlive: 'assets/armored_both.gif',
-            driverOnly: 'assets/armored_driver_only.gif',
-            passengerOnly: 'assets/armored_passenger_only.gif',
-            bothDead: 'assets/armored_both_dead.gif'
-        }
-    }
+let carsActive = {
+    1: { driverAlive: true, passengerAlive: true, active: false, interval: null },
+    2: { driverAlive: true, passengerAlive: true, active: false, interval: null }
 };
 
 const policeImages = {
@@ -1283,92 +1302,147 @@ const policeImages = {
     bothDead: 'assets/car_both_dead.gif'
 };
 
-const chaseSequence = ['police_car', 'police_car', 'police_van', 'armored_truck'];
-let currentSequenceIndex = 0;
-
-function startChaseGame(vehicleKey = 'police_car') {
-    const container = document.getElementById('chase-container');
+function startChaseGame(wave) {
     const screen = document.getElementById('chase-screen');
-
-    currentVehicle = vehicleTypes[vehicleKey];
-
-    policeStatus.type = vehicleKey;
-    policeStatus.driverHp = currentVehicle.hp;
-    policeStatus.passengerHp = currentVehicle.hp;
-    policeStatus.active = true;
-
     screen.classList.remove('hidden');
-    container.classList.remove('approaching', 'retreating');
 
-    updatePoliceCarImage();
+    resetCarStatus(1);
+    resetCarStatus(2);
 
-    setTimeout(() => {
-        container.classList.add('approaching');
-    }, 100);
+    const container1 = document.getElementById('chase-container-1');
+    const container2 = document.getElementById('chase-container-2');
+
+    if (wave.type === 'single') {
+        container1.className = 'chase-container pos-center';
+        container2.classList.add('hidden');
+        initiateVehicle(1);
+    } else if (wave.type === 'double') {
+        container1.className = 'chase-container pos-left';
+        container2.className = 'chase-container pos-right';
+        container2.classList.remove('hidden');
+        initiateVehicle(1);
+        initiateVehicle(2);
+    }
 }
 
-function shootAgent(role) {
-    if (!policeStatus.active) return;
+function initiateVehicle(id) {
+    const container = document.getElementById(`chase-container-${id}`);
+    carsActive[id].active = true;
+
+    updateCarImg(id);
+
+    setTimeout(() => {
+        container.classList.remove('retreating');
+        container.classList.add('approaching');
+
+        setTimeout(() => startAgentShooting(id), 1000);
+    }, 50);
+}
+
+function startAgentShooting(id) {
+    if (carsActive[id].interval) clearInterval(carsActive[id].interval);
+
+    carsActive[id].interval = setInterval(() => {
+        const car = carsActive[id];
+
+        if (car.active && car.passengerAlive) {
+            console.log(`Auto ${id} schiet!`);
+
+            if (Math.random() < 0.25) {
+                let newDamage = currentDamagePercent + 20;
+                if (newDamage > 100) newDamage = 100;
+                updateGlobalDamage(newDamage);
+
+                const overlay = document.getElementById('global-damage-overlay');
+                overlay.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+                setTimeout(() => overlay.style.backgroundColor = "transparent", 100);
+            }
+        } else {
+            clearInterval(carsActive[id].interval);
+        }
+    }, 2000);
+}
+
+function shootAgent(carId, role) {
+    const car = carsActive[carId];
+    if (!car.active) return;
 
     const screen = document.getElementById('chase-screen');
     screen.classList.add('flash-active');
     setTimeout(() => screen.classList.remove('flash-active'), 100);
 
-    if (role === 'driver' && policeStatus.driverHp > 0) {
-        policeStatus.driverHp--;
-    } else if (role === 'passenger' && policeStatus.passengerHp > 0) {
-        policeStatus.passengerHp--;
+    if (role === 'driver') {
+        car.driverAlive = false;
+    } else {
+        car.passengerAlive = false;
     }
 
-    updatePoliceCarImage();
+    updateCarImg(carId);
 
-    if (policeStatus.driverHp <= 0) {
-        policeStatus.active = false;
-        crashPoliceCar();
-    }
-}
+    if (!car.driverAlive) {
+        car.active = false;
+        if (car.interval) clearInterval(car.interval);
 
-function updatePoliceCarImage() {
-    const carImgDiv = document.getElementById('police-car-img');
-    const imgs = currentVehicle.images;
-    const driverAlive = policeStatus.driverHp > 0;
-    const passengerAlive = policeStatus.passengerHp > 0;
+        const container = document.getElementById(`chase-container-${carId}`);
 
-    if (driverAlive && passengerAlive) {
-        carImgDiv.style.backgroundImage = `url('${imgs.bothAlive}')`;
-    }
-    else if (driverAlive && !passengerAlive) {
-        carImgDiv.style.backgroundImage = `url('${imgs.driverOnly}')`;
-    }
-    else if (!driverAlive && passengerAlive) {
-        carImgDiv.style.backgroundImage = `url('${imgs.passengerOnly}')`;
-    }
-    else {
-        carImgDiv.style.backgroundImage = `url('${imgs.bothDead}')`;
-    }
-}
-
-function crashPoliceCar() {
-    const container = document.getElementById('chase-container');
-
-    setTimeout(() => {
         container.classList.remove('approaching');
+
+        void container.offsetWidth;
+
         container.classList.add('retreating');
 
+        checkWaveProgress();
+    }
+}
+
+function updateCarImg(id) {
+    const imgDiv = document.getElementById(`police-car-img-${id}`);
+    const car = carsActive[id];
+
+    let imgUrl = policeImages.bothAlive;
+
+    if (car.driverAlive && !car.passengerAlive) {
+        imgUrl = policeImages.driverOnly;
+    }
+    else if (!car.driverAlive && car.passengerAlive) {
+        imgUrl = policeImages.passengerOnly;
+    }
+    else if (!car.driverAlive && !car.passengerAlive) {
+        imgUrl = policeImages.bothDead;
+    }
+
+    imgDiv.style.backgroundImage = `url('${imgUrl}')`;
+}
+
+function checkWaveProgress() {
+    const allCarsDown = !carsActive[1].active && !carsActive[2].active;
+
+    if (allCarsDown) {
         setTimeout(() => {
             currentSequenceIndex++;
 
             if (currentSequenceIndex < chaseSequence.length) {
-                const nextVehicle = chaseSequence[currentSequenceIndex];
-                startChaseGame(nextVehicle);
+                startChaseGame(chaseSequence[currentSequenceIndex]);
             } else {
-                policeStatus.active = false;
                 gameState.currentChapter = 10;
                 saveGame();
                 playCutscene('na_chase');
             }
-        }, 4000);
-    }, 500);
+        }, 3000);
+    }
+}
+
+function resetCarStatus(id) {
+    carsActive[id].driverAlive = true;
+    carsActive[id].passengerAlive = true;
+    carsActive[id].active = false;
+    if (carsActive[id].interval) {
+        clearInterval(carsActive[id].interval);
+        carsActive[id].interval = null;
+    }
+
+    const container = document.getElementById(`chase-container-${id}`);
+    if (container) container.classList.remove('approaching', 'retreating');
 }
 
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
