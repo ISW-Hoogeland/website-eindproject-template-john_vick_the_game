@@ -126,10 +126,75 @@ const cutsceneData = {
         nextStep: "chapter_9"
     },
 
+    na_chase: {
+        steps: [
+            { gif: "assets/weg_achtervolging_lek.gif", speaker: " ", text: "Het laatste schot raakte de auto!" },
+            { gif: "assets/weg_achtervolging_lek.gif", speaker: "John Vick", text: "HIJ GAAT PLOFFEN!" },
+            { gif: "assets/greppel_dicht.png", speaker: " ", text: "John springt van de vrachtwagen af en belandt in een greppel." },
+            { gif: "assets/greppel_dicht.png", speaker: "John Vick", text: "AAH, FUCK!" },
+        ],
+        nextStep: "chapter_10"
+    },
+
+    na_greppel: {
+        steps: [
+            { gif: "assets/greppel_open.png", speaker: " ", text: "De gereedschapskist breekt open en er zit een tang in! John gebruikt dit om het prikkeldraad van zijn been af te knippen." },
+            { gif: "assets/greppel_draad.png", speaker: "John Vick", text: "Eindelijk dat prikkeldraad van mijn been af." },
+            { gif: "assets/frederik_kwam.gif", speaker: "John Vick", text: "Ahh, nee! Niet de NGD!" },
+            { gif: "assets/frederik_kwam.gif", speaker: "Frederick van der Heuvel", text: "Dus, meneertje Vick, u dacht zomaar bij agent Jantje Hoeksma in te kunnen breken en zijn geweer mee te nemen?" },
+            { gif: "assets/frederik_zag.gif", speaker: "Frederick van der Heuvel", text: "Wat ik je nu ga zeggen is heel belangrijke informatie: Ons hoofdkwartier is zeer geheim, we zouden niet willen dat iemand weet waar het is, toch?" },
+            { gif: "assets/frederik_overwon.gif", speaker: " ", text: "Frederick slaat John met een metalen pijp..." },
+            { gif: "assets/bo.png", speaker: " ", text: " " },
+            { gif: "assets/interrogatiekamer_dicht.gif", speaker: " ", text: " " },
+            { gif: "assets/interrogatiekamer_open.gif", speaker: " ", text: " " },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "Victor van der Koning, hoofd van de NGD. John Vick, toch? Goeie naam voor een actieheld." },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "Jammer dat je je kansen hebt verspeeld door relaties met gangsterbaas Mason Bourne aan te gaan. Dat is een bekende naam bij de NGD:" },
+            { gif: "assets/interrogatiekamer_victor_lezen.gif", speaker: "Victor van der Koning", text: "Drugssmokkel, moord, mensenhandel, aanslag tegen het rijk," },
+            { gif: "assets/bo.png", speaker: "Victor van der Koning", text: "meerdere bankkraken, gijzeling, belastingfraude, witwassen..." },
+            { gif: "assets/interrogatiekamer_victor_water.gif", speaker: "Victor van der Koning", text: "Wel bij de les blijven hè!" },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "Ik zal toegeven, ik had het liever met een natte doek op je hoofd gedaan, maar dat bewaren we wel voor zometeen." },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "Je bent ver gekomen John, jammer van de tracker op het geweer van Jantje Hoeksma." },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "De rest van Masons kartel is al gevangengenomen of vermoord, en Mason Bourne zelf zit ergens op een godvergeten boerderij in Brabant." },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "Victor van der Koning", text: "Aan jou nu de vraag, waar is deze boerderij?" },
+            { gif: "assets/interrogatiekamer_victor.gif", speaker: "John Vick", text: "Ik weet het niet, meneer Van der Koning. Ik ben afgelopen dinsdag pas in dienst gegaan, ik kan u niks vertellen." },
+            { gif: "assets/interrogatiekamer_assistent.gif", speaker: "Victor van der Koning", text: "Assistent! Breng mijn overtuigingsmateriaal!" },
+
+
+        ],
+        nextStep: "chapter_11"
+    },
+
+    na_torture: {
+        steps: [
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 6..." },
+        ],
+        nextStep: "chapter_12"
+    },
+
+    na_victor: {
+        steps: [
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Lekker geslapen, John Vick?" },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Aangezien je geen zwakte hebt voor onze traditionele methodes blijk je een uitstekende NGD-agent. Wat gaf Mason Bourne je om bij hem te werken?" },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "Vrijheid van corrupten zoals jullie." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Ik verzeker je, wij zijn niet zo corrupt als jullie denken. Wij beschermen alleen het land en de koninklijke familie." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "De enige koning die jullie beschermen is Victor van der Koning. De rest van het geld gaat in jullie eigen zak." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Je gelooft die leugens toch niet?! Weet je wat, meneer Vick, ik heb een baan voor je. 10.000 euro per maand netto. Jouw vaardigheden als ex-huurmoordenaar kunnen wij zeker gebruiken." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Stel je voor: Het hele volk staat te kijken hoe je heldhaftig en nonchalant terroristen en oplichters oppakt. En daarna ga je naar je huis in Wassenaar om lekker te genieten van je Bourbon." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "De grootste terrorist en oplichter staat recht voor mij." },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!" },
+            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!" },
+            { gif: "assets/pen_1", speaker: " ", text: "" },
+            { gif: "assets/pen_2", speaker: " ", text: "" },
+            { gif: "assets/pen_3", speaker: " ", text: "" },
+            { gif: "assets/gangen", speaker: " ", text: "Je moet de 4 NGD-agenten doodschieten!" },
+        ],
+        nextStep: "chapter_13"
+    },
+
     /*
     [naam]: {
         steps: [
-                { gif: "assets/", speaker: "", text: "" },
+            { gif: "assets/", speaker: "", text: "" },
         ],
         nextStep: "chapter_[#]"
     },
@@ -170,7 +235,19 @@ function startGameplay() {
 
 // Slaat de huidige gameState op in de browser
 function saveGame() {
+    gameState.currentDamage = window.currentDamagePercent;
     localStorage.setItem('johnVickSave', JSON.stringify(gameState));
+}
+
+// Vertaalt de "Chapters" van de technische kant naar de "Dagen" van het script
+function getDayDisplay(chapter) {
+    if (chapter <= 2) return 1;
+    if (chapter === 3) return 2;
+    if (chapter <= 5) return 3;
+    if (chapter <= 7) return 4;
+    if (chapter <= 11) return 5;
+    if (chapter <= 12) return 6;
+    return 7;
 }
 
 // Laadt het spel vanuit de browser
@@ -179,24 +256,38 @@ function loadGame() {
 
     if (savedData) {
         gameState = JSON.parse(savedData);
-        alert("Spel geladen! Je bent bij Dag " + gameState.currentChapter);
-        showScreen('garden-screen');
-    } else {
-        alert("Geen opgeslagen spel gevonden.");
+        if (gameState.currentDamage !== undefined) {
+            updateGlobalDamage(gameState.currentDamage);
+        }
+        goToChapter(gameState.currentChapter);
     }
 }
 
-// Update de 'laad spel' knop tekst als er een save is
+// Update de tekst in het hoofdmenu en het laadmenu
 function checkSaveGame() {
     const savedData = localStorage.getItem('johnVickSave');
-    const loadBtn = document.querySelector("button[onclick*='load-menu']");
+    const mainMenuLoadBtn = document.querySelector("button[onclick*='showScreen(\\'load-menu\\')']");
+    const saveStatusText = document.getElementById('save-status-text');
+    const executeLoadBtn = document.getElementById('execute-load-btn');
 
-    if (savedData && loadBtn) {
+    if (savedData) {
         const data = JSON.parse(savedData);
-        loadBtn.innerText = "LAAD SPEL (Hoofdstuk " + data.currentChapter + ")";
+        const dagNummer = getDayDisplay(data.currentChapter);
+
+        if (mainMenuLoadBtn) {
+            mainMenuLoadBtn.innerText = "LAAD SPEL (Dag " + dagNummer + ")";
+        }
+
+        if (saveStatusText) {
+            saveStatusText.innerText = "Spel gevonden: Dag " + dagNummer;
+        }
+
+        if (executeLoadBtn) {
+            executeLoadBtn.classList.remove('hidden');
+            executeLoadBtn.innerText = "START DAG " + dagNummer;
+        }
     }
 }
-
 
 
 // Speelt de cutscene af
@@ -243,53 +334,82 @@ function updateCutsceneUI() {
     }, 40);
 }
 
+function goToChapter(chapterNumber) {
+    updateGlobalDamage(0);
+
+    switch (chapterNumber) {
+        case 1:
+            showScreen('garden-screen');
+            showGardenMessage('Mason Bourne: El Patrón, El Chapo, Al Capone, weet je wat ze gemeen hadden? Ze gebruikten hun hersens!');
+            break;
+        case 2:
+            showScreen('shooting-range');
+            break;
+        case 3:
+            showScreen('choice-screen');
+            break;
+        case 4:
+            showScreen('hotel-screen');
+            break;
+        case 5:
+            showScreen('rob-home');
+            break;
+        case 6:
+            showScreen('highway-screen');
+            startHighwayGame();
+            break;
+        case 7:
+            showScreen('jantje-home');
+            break;
+        case 8:
+            showScreen('NGD-hotel-screen');
+            break;
+        case 9:
+            showScreen('chase-screen');
+            currentSequenceIndex = 0;
+            startChaseGame(chaseSequence[0]);
+            break;
+        case 10:
+            showScreen('ditch-screen');
+            let damageBefore = window.currentDamagePercent;
+            if (damageBefore === 0 && gameState.currentDamage) {
+                damageBefore = gameState.currentDamage;
+            }
+            let finalDamage = Number(damageBefore) + 20;
+            if (finalDamage > 100) finalDamage = 100;
+            updateGlobalDamage(finalDamage);
+            break;
+        case 11:
+            showScreen('torture-screen');
+            let currentVal = window.currentDamagePercent;
+            if (currentVal > 40) {
+                updateGlobalDamage(40);
+            }
+            break;
+        case 12:
+            showScreen('after-torture-screen');
+            break;
+        case 13:
+            showScreen('building-screen');
+            break;
+        default:
+            showScreen('main-menu');
+            break;
+    }
+}
+
 function nextCutsceneStep() {
     clearInterval(typewriterInterval);
     currentCutsceneIndex++;
+
     if (currentCutsceneIndex < activeCutscene.steps.length) {
         updateCutsceneUI();
     } else {
         const container = document.getElementById('cutscene-container');
         container.classList.add('hidden');
-
         container.style.backgroundImage = "none";
-
-        switch (activeCutscene.nextStep) {
-            case "chapter_1":
-                showScreen('garden-screen');
-                showGardenMessage('Mason Bourne: El Patrón, El Chapo, Al Capone, weet je wat ze gemeen hadden? Ze gebruikten hun hersens!')
-                break;
-            case "chapter_2":
-                showScreen('shooting-range');
-                break;
-            case "chapter_3":
-                showScreen('choice-screen');
-                break;
-            case "chapter_4":
-                showScreen('hotel-screen');
-                break;
-            case "chapter_5":
-                showScreen('rob-home');
-                break;
-            case "chapter_6":
-                showScreen('highway-screen');
-                startHighwayGame();
-                break;
-            case "chapter_7":
-                showScreen('jantje-home');
-                break;
-            case "chapter_8":
-                showScreen('NGD-hotel-screen');
-                break;
-            case "chapter_9":
-                showScreen('chase-screen');
-                currentSequenceIndex = 0;
-                startChaseGame(chaseSequence[0]);
-                break;
-            default:
-                showScreen('main-menu');
-                break;
-        }
+        const chapterNum = parseInt(activeCutscene.nextStep.replace("chapter_", ""));
+        goToChapter(chapterNum);
     }
 }
 
@@ -302,14 +422,28 @@ let currentDamagePercent = 0;
 let diskRotations = [0, 0, 0, 0, 0, 0, 0, 0];
 
 // Maakt de overlays/cursors werkend
-function updateGlobalDamage(percent) {
-    const validSteps = [0, 20, 40, 60, 80, 100];
-    if (!validSteps.includes(percent)) return;
+let previousDamagePercent = 0;
 
+function updateGlobalDamage(percent) {
+    percent = Math.max(0, Math.min(100, Math.round(percent)));
+
+    window.currentDamagePercent = percent;
     currentDamagePercent = percent;
+
     const overlay = document.getElementById('global-damage-overlay');
     const retryBtn = document.getElementById('retry-button');
     const body = document.body;
+
+    if (!overlay) return;
+    if (percent > (window.previousDamagePercent || 0) && percent > 0) {
+        body.classList.remove('damage-shake');
+        void body.offsetWidth;
+        body.classList.add('damage-shake');
+        setTimeout(() => body.classList.remove('damage-shake'), 400);
+    }
+    window.previousDamagePercent = percent;
+
+    const visualLevel = Math.floor(percent / 20) * 20;
 
     if (percent === 0) {
         overlay.classList.remove('active');
@@ -318,23 +452,27 @@ function updateGlobalDamage(percent) {
         if (retryBtn) retryBtn.classList.add('hidden');
     } else {
         overlay.classList.add('active');
-        overlay.style.backgroundImage = `url('assets/overlay_${percent}.gif')`;
-        body.style.setProperty('cursor', `url('assets/cursor_${percent}.gif') 16 16, auto`, 'important');
+
+        overlay.style.backgroundImage = `url('assets/overlay_${visualLevel}.gif')`;
+        body.style.setProperty('cursor', `url('assets/cursor_${visualLevel}.gif') 16 16, auto`, 'important');
 
         if (percent < 100 && retryBtn) {
             retryBtn.classList.add('hidden');
         }
     }
 
-    if (percent === 100) {
-        Object.keys(carsActive).forEach(id => {
-            if (carsActive[id].interval) clearInterval(carsActive[id].interval);
-            carsActive[id].active = false;
-        });
+    if (percent >= 100) {
+
+        if (typeof carsActive !== 'undefined') {
+            Object.keys(carsActive).forEach(id => {
+                if (carsActive[id].interval) clearInterval(carsActive[id].interval);
+                carsActive[id].active = false;
+            });
+        }
 
         if (retryBtn) {
             retryBtn.classList.remove('hidden');
-            console.log("Retry button zou nu zichtbaar moeten zijn.");
+            retryBtn.style.pointerEvents = 'auto';
         }
     }
 }
@@ -342,9 +480,7 @@ function updateGlobalDamage(percent) {
 function resetGameToMenu() {
     const retryBtn = document.getElementById('retry-button');
     if (retryBtn) retryBtn.classList.add('hidden');
-
     updateGlobalDamage(0);
-
     showScreen('main-menu');
 }
 
@@ -561,7 +697,7 @@ function interactWithDoor() {
 // Start de Club puzzel
 function startClubPuzzle() {
     showScreen('strip-club');
-    document.getElementById('unblock-puzzle-overlay').classList.remove('hidden');
+    document.getElementById('unblock-grid').classList.remove('hidden');
 }
 
 // Initialisatie van de blokken
@@ -1123,13 +1259,16 @@ function handleCrash() {
         setTimeout(() => timerDisplay.style.color = "white", 500);
     }
 
-    showHighwayMessage('Gecrasht! 3 seconden straftijd...')
+    showHighwayMessage('Gecrasht! 3 seconden straftijd...');
 
     setTimeout(() => {
         canMoveVertical = true;
         canMoveHorizontal = true;
         isInvincible = false;
-        if (feedback) feedback.classList.add('hidden');
+        const feedbackBtn = document.getElementById('highway-feedback');
+        if (feedbackBtn) {
+            feedbackBtn.classList.add('hidden');
+        }
     }, 2000);
 }
 
@@ -1335,7 +1474,7 @@ function initiateVehicle(id) {
         container.classList.remove('retreating');
         container.classList.add('approaching');
 
-        setTimeout(() => startAgentShooting(id), 1000);
+        setTimeout(() => startAgentShooting(id), 750);
     }, 50);
 }
 
@@ -1346,15 +1485,12 @@ function startAgentShooting(id) {
         const car = carsActive[id];
 
         if (car.active && car.passengerAlive) {
-            console.log(`Auto ${id} schiet!`);
-
             if (Math.random() < 0.25) {
                 let newDamage = currentDamagePercent + 20;
                 if (newDamage > 100) newDamage = 100;
                 updateGlobalDamage(newDamage);
 
                 const overlay = document.getElementById('global-damage-overlay');
-                overlay.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
                 setTimeout(() => overlay.style.backgroundColor = "transparent", 100);
             }
         } else {
@@ -1366,11 +1502,6 @@ function startAgentShooting(id) {
 function shootAgent(carId, role) {
     const car = carsActive[carId];
     if (!car.active) return;
-
-    const screen = document.getElementById('chase-screen');
-    screen.classList.add('flash-active');
-    setTimeout(() => screen.classList.remove('flash-active'), 100);
-
     if (role === 'driver') {
         car.driverAlive = false;
     } else {
@@ -1420,7 +1551,6 @@ function checkWaveProgress() {
     if (allCarsDown) {
         setTimeout(() => {
             currentSequenceIndex++;
-
             if (currentSequenceIndex < chaseSequence.length) {
                 startChaseGame(chaseSequence[currentSequenceIndex]);
             } else {
@@ -1443,6 +1573,306 @@ function resetCarStatus(id) {
 
     const container = document.getElementById(`chase-container-${id}`);
     if (container) container.classList.remove('approaching', 'retreating');
+}
+
+// Greppel
+function showDitchMessage(message) {
+    const feedback = document.getElementById('ditch-feedback');
+    const text = document.getElementById('ditch-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.ditchTimeout) clearTimeout(window.ditchTimeout);
+
+    window.ditchTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+function interactWithToolbox() {
+    const hasCrowbar = gameState.inventory.includes("Crowbar");
+
+    if (hasCrowbar) {
+        gameState.currentChapter = 11;
+        saveGame();
+        playCutscene('na_greppel')
+
+    } else {
+        showDitchMessage("Hmm, deze zit op slot.")
+    }
+}
+
+function interactWithCrowbar() {
+    const ditchView = document.getElementById('ditch-screen-view');
+    ditchView.style.backgroundImage = "url('assets/greppel_dicht_no_crowbar.png')";;
+    gameState.inventory.includes('Crowbar');
+    gameState.inventory.push('Crowbar');
+}
+
+// Torture!!
+function showTortureMessage(message) {
+    const feedback = document.getElementById('torture-feedback');
+    const text = document.getElementById('torture-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.tortureTimeout) clearTimeout(window.tortureTimeout);
+
+    window.tortureTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 6000);
+}
+
+function interactWithElectrocution() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/electro_1.gif')";
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/electro_2.gif')";
+        document.body.classList.add('rumble-effect');
+        let damageBefore = window.currentDamagePercent;
+
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 1000)
+
+    setTimeout(() => {
+        showTortureMessage('Victor: ZEG HET!');
+    }, 4000)
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 6000)
+
+    setTimeout(() => {
+        document.body.classList.remove('rumble-effect');
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 11000)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 13000)
+}
+
+function interactWithWaterboard() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/water_1.gif')";
+    document.body.classList.add('damage-shake');
+    setTimeout(() => document.body.classList.remove('damage-shake'), 400);
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/water_2.gif')";
+        document.body.classList.add('rumble-effect');
+    }, 750)
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 6750)
+
+    setTimeout(() => {
+        document.body.classList.remove('rumble-effect');
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 8750)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 10750)
+}
+
+function interactWithWrench() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/wrench_1.gif')";
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/wrench_2.gif')";
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 1000)
+
+    setTimeout(() => {
+        document.body.classList.add('damage-shake');
+        setTimeout(() => document.body.classList.remove('damage-shake'), 400);
+    }, 1050)
+
+    setTimeout(() => {
+        showTortureMessage('Victor: ZEG HET!');
+    }, 2450)
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 4450)
+
+    setTimeout(() => {
+        document.body.classList.add('damage-shake');
+        setTimeout(() => document.body.classList.remove('damage-shake'), 400);
+    }, 4500)
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 7900)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 9900)
+}
+
+function interactWithTax() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/tax.gif')";
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 40;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 1000)
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 3000)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 5000)
+}
+
+function interactWithKnife() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/knife_1.gif')";
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/knife_2.gif')";
+    }, 500)
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 1500)
+
+    setTimeout(() => {
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 3500)
+
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 5500)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 7500)
+}
+
+function interactWithUSB() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/usb_1.gif')";
+    showTortureMessage('Victor: O Hemeltje, ik heb hier wel een hele dappere man voor mij zitten. Weet je, ik ga je een gunst doen, puur omdat ik het niemand gun om zijn LO PO terug te zien.')
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/usb_2.gif')";
+    }, 6500)
+
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 7000)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 9000)
+}
+
+function interactWithChromebook() {
+    const tortureView = document.getElementById('torture-screen-view');
+    tortureView.style.backgroundImage = "url('assets/chromebook.gif')";
+    showTortureMessage('Silvius: Welkom, John Vick bij het blokuur wiskunde. Ik doe het vandaag via Teams omdat ik me niet zo goed voel na die Bounty van gisteren. We beginnen vandaag met parabolen. Om dat te demonstreren')
+
+    setTimeout(() => {
+        tortureView.style.backgroundImage = "url('assets/bo.png')";
+    }, 6050)
+
+    setTimeout(() => {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+    }, 8050)
+}
+
+function interactWithPen() {
+    gameState.currentChapter = 13;
+    saveGame();
+    playCutscene('na_victor')
 }
 
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
@@ -1551,9 +1981,50 @@ function devSkip() {
         return;
     }
 
+    const chase = document.getElementById('chase-screen');
+    if (chase && !chase.classList.contains('hidden')) {
+        [1, 2].forEach(id => {
+            const car = carsActive[id];
+            car.active = false;
+            if (car.interval) {
+                clearInterval(car.interval);
+                car.interval = null;
+            }
+        });
+        gameState.currentChapter = 10;
+        saveGame();
+        playCutscene('na_chase');
+        return;
+    }
+
+    const ditch = document.getElementById('ditch-screen');
+    if (ditch && !ditch.classList.contains('hidden')) {
+        gameState.currentChapter = 11;
+        gameState.inventory.push("Crowbar");
+        saveGame();
+        playCutscene('na_greppel');
+        return;
+    }
+
+    const torture = document.getElementById('torture-screen');
+    if (torture && !torture.classList.contains('hidden')) {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_torture');
+        return;
+    }
+
+    const building = document.getElementById('building-screen');
+    if (building && !building.classList.contains('hidden')) {
+        gameState.currentChapter = 13;
+        saveGame();
+        playCutscene('na_gebouw');
+        return;
+    }
+
     alert("Niets om hier te skippen!");
 }
 
 // Check save game bij laden van script
 checkSaveGame();
-

@@ -28,7 +28,7 @@ body {
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
-   z-index: 999999;
+   z-index: 9999999;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -1061,7 +1061,7 @@ nav button:hover {
 
 .chase-container.retreating {
    opacity: 0;
-   top: 45%;
+   top: 30%;
    left: 50%;
    transform: translate(-50%, -50%) scale(0.1);
    pointer-events: none;
@@ -1069,36 +1069,36 @@ nav button:hover {
 
 .pos-center {
    left: 50%;
-   top: 45%;
+   top: 30%;
 }
 
 .pos-center.approaching {
-   top: 75%;
+   top: 45%;
    left: 50%;
    transform: translate(-50%, -50%) scale(1.5);
    opacity: 1;
 }
 
 .pos-left {
-   left: 48%;
-   top: 45%;
+   left: 45%;
+   top: 30%;
 }
 
 .pos-left.approaching {
-   top: 75%;
-   left: 25%;
+   top: 45%;
+   left: 35%;
    transform: translate(-50%, -50%) scale(1.5);
    opacity: 1;
 }
 
 .pos-right {
-   left: 52%;
-   top: 45%;
+   left: 55%;
+   top: 30%;
 }
 
 .pos-right.approaching {
-   top: 75%;
-   left: 75%;
+   top: 45%;
+   left: 65%;
    transform: translate(-50%, -50%) scale(1.5);
    opacity: 1;
 }
@@ -1141,4 +1141,237 @@ nav button:hover {
    background-position: center;
    background-repeat: no-repeat;
    overflow: hidden;
+}
+
+@keyframes screen-shake {
+
+   10%,
+   90% {
+      transform: translate3d(-2px, 0, 0);
+   }
+
+   20%,
+   80% {
+      transform: translate3d(4px, 0, 0);
+   }
+
+   30%,
+   50%,
+   70% {
+      transform: translate3d(-8px, 0, 0);
+   }
+
+   40%,
+   60% {
+      transform: translate3d(8px, 0, 0);
+   }
+}
+
+.damage-shake {
+   animation: screen-shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+   backface-visibility: hidden;
+   perspective: 1000px;
+}
+
+#ditch-screen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-image: url('assets/greppel_dicht.png');
+   background-size: cover;
+   background-position: bottom;
+   background-repeat: no-repeat;
+   z-index: 1000;
+}
+
+#crowbar-click {
+   position: absolute;
+   bottom: 14%;
+   right: 21.5%;
+   width: 8.5%;
+   height: 5%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#toolbox-click {
+   position: absolute;
+   bottom: 2%;
+   left: 20%;
+   width: 19.2%;
+   height: 39%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 25;
+}
+
+#condom-click {
+   position: absolute;
+   bottom: 0%;
+   left: 37%;
+   width: 3%;
+   height: 4%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 50
+}
+
+#ditch-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#torture-screen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-image: url('assets/interrogatiekamer_marteling.gif');
+   background-size: cover;
+   background-position: bottom;
+   background-repeat: no-repeat;
+}
+
+#electrocution-click {
+   position: absolute;
+   bottom: 17.8%;
+   left: 28%;
+   width: 7.3%;
+   height: 13.6%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#waterboard-click {
+   position: absolute;
+   bottom: 8.2%;
+   left: 30.5%;
+   width: 6%;
+   height: 9.3%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#wrench-click {
+   position: absolute;
+   bottom: 20%;
+   left: 36.8%;
+   width: 20.3%;
+   height: 7%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 50
+}
+
+#tax-click {
+   position: absolute;
+   bottom: 2.5%;
+   left: 40%;
+   width: 6.5%;
+   height: 17%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#knife-click {
+   position: absolute;
+   bottom: 6.7%;
+   left: 47.6%;
+   width: 1.5%;
+   height: 11.7%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#usb-click {
+   position: absolute;
+   bottom: 13%;
+   left: 50.8%;
+   width: 1.5%;
+   height: 4%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#chromebook-click {
+   position: absolute;
+   bottom: 7%;
+   left: 55%;
+   width: 10%;
+   height: 19%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+   z-index: 25
+}
+
+#torture-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+.rumble-effect {
+   animation: rumble 0.2s infinite alternate;
+}
+
+@keyframes rumble {
+   0% {
+      transform: translate(0, 0);
+   }
+
+   25% {
+      transform: translate(1px, 1px);
+   }
+
+   50% {
+      transform: translate(-1px, 1px);
+   }
+
+   75% {
+      transform: translate(1px, -1px);
+   }
+
+   100% {
+      transform: translate(-1px, -1px);
+   }
+}
+
+#after-torture-screen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-image: url('assets/interrogatiekamer_victor.gif');
+   background-size: cover;
+   background-position: bottom;
+   background-repeat: no-repeat;
+}
+
+#pen-click {
+   position: absolute;
+   bottom: 26%;
+   right: 29%;
+   width: 3.7%;
+   height: 13.6%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }

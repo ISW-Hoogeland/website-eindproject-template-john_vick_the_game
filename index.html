@@ -7,8 +7,6 @@
 </head>
 
 <body>
-  <div id="global-damage-overlay"></div>
-
   <div id="global-damage-overlay">
     <button id="retry-button" class="hidden" onclick="resetGameToMenu()">
       TERUG NAAR HET HOOFDMENU
@@ -28,7 +26,11 @@
 
     <div id="load-menu" class="menu-screen hidden">
       <h2>LAAD SPEL</h2>
-      <p>Geen opgeslagen spellen gevonden...</p>
+      <p id="save-status-text">Geen opgeslagen spellen gevonden...</p>
+      <button id="execute-load-btn" class="hidden" onclick="loadGame()">
+        LAAD DAG X
+      </button>
+      <br><br>
       <button onclick="showScreen('main-menu')">TERUG</button>
     </div>
 
@@ -213,6 +215,46 @@
         <div id="police-car-img-2" class="police-car-img"></div>
         <div class="hitbox driver" onclick="shootAgent(2, 'driver')"></div>
         <div class="hitbox passenger" onclick="shootAgent(2, 'passenger')"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ditch-screen" class="menu-screen hidden">
+    <div id="ditch-screen-view">
+      <div id="crowbar-click" onclick="interactWithCrowbar()"></div>
+      <div id="toolbox-click" onclick="interactWithToolbox()"></div>
+      <div id="condom-click" onclick="showDitchMessage('Tenminste heeft iemand het hier naar zijn zin gehad.')"></div>
+      <div id="ditch-feedback" class="hidden">
+        <p id="ditch-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="torture-screen" class="menu-screen hidden">
+    <div id="torture-screen-view">
+      <div id="electrocution-click" onclick="interactWithElectrocution()"></div>
+      <div id="waterboard-click" onclick="interactWithWaterboard()"></div>
+      <div id="wrench-click" onclick="interactWithWrench()"></div>
+      <div id="tax-click" onclick="interactWithTax()"></div>
+      <div id="knife-click" onclick="interactWithKnife()"></div>
+      <div id="usb-click" onclick="interactWithUSB()"></div>
+      <div id="chromebook-click" onclick="interactWithChromebook()"></div>
+      <div id="torture-feedback" class="hidden">
+        <p id="torture-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="after-torture-screen" class="menu-screen hidden">
+    <div id="after-torture-screen-view">
+      <div id="pen-click" onclick="interactWithPen()"></div>
+    </div>
+  </div>
+
+  <div id="building-screen" class="menu-screen hidden">
+    <div id="building-screen-view">
+      <div id="building-feedback" class="hidden">
+        <p id="building-feedback-text"></p>
       </div>
     </div>
   </div>
