@@ -165,8 +165,8 @@
 
   <div id="jantje-binnen" class="menu-screen hidden">
     <div id="jantje-binnen-view">
-      <div id="tv-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
-      <div id="coke-click" onclick="showJantjeBMessage('Ik moet nog een line bedenken')"></div>
+      <div id="tv-click" onclick="showJantjeBMessage('Het lijkt wel een feestje daar!')"></div>
+      <div id="coke-click" onclick="showJantjeBMessage('Er is hier poedersuiker gemorst...')"></div>
       <div id="carpet-click" onclick="showJantjeBMessage('Een tapijt met ... VLEKKEN!?')"></div>
       <div id="laptop-click" onclick="interactWithLaptop()"></div>
       <div id="jantje-binnen-feedback" class="hidden">
@@ -253,6 +253,10 @@
 
   <div id="building-screen" class="menu-screen hidden">
     <div id="building-screen-view">
+      <div id="agent-arnold" class="agent static" onclick="shootAgent('arnold')"></div>
+      <div id="agent-gertjan" class="agent static" onclick="shootAgent('gertjan')"></div>
+      <div id="agent-diederik" class="agent static" onclick="shootAgent('diederik')"></div>
+      <div id="agent-kevin" class="agent cover" onclick="shootAgent('kevin')"></div>
       <div id="building-feedback" class="hidden">
         <p id="building-feedback-text"></p>
       </div>

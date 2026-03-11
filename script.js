@@ -173,20 +173,20 @@ const cutsceneData = {
 
     na_victor: {
         steps: [
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Lekker geslapen, John Vick?" },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Aangezien je geen zwakte hebt voor onze traditionele methodes blijk je een uitstekende NGD-agent. Wat gaf Mason Bourne je om bij hem te werken?" },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "Vrijheid van corrupten zoals jullie." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Ik verzeker je, wij zijn niet zo corrupt als jullie denken. Wij beschermen alleen het land en de koninklijke familie." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "De enige koning die jullie beschermen is Victor van der Koning. De rest van het geld gaat in jullie eigen zak." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Je gelooft die leugens toch niet?! Weet je wat, meneer Vick, ik heb een baan voor je. 10.000 euro per maand netto. Jouw vaardigheden als ex-huurmoordenaar kunnen wij zeker gebruiken." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "Stel je voor: Het hele volk staat te kijken hoe je heldhaftig en nonchalant terroristen en oplichters oppakt. En daarna ga je naar je huis in Wassenaar om lekker te genieten van je Bourbon." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "De grootste terrorist en oplichter staat recht voor mij." },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!" },
-            { gif: "assets/interrogatiekamer_geen_pen", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!" },
-            { gif: "assets/pen_1", speaker: " ", text: "" },
-            { gif: "assets/pen_2", speaker: " ", text: "" },
-            { gif: "assets/pen_3", speaker: " ", text: "" },
-            { gif: "assets/gangen", speaker: " ", text: "Je moet de 4 NGD-agenten doodschieten!" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Lekker geslapen, John Vick?" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Aangezien je geen zwakte hebt voor onze traditionele methodes blijk je een uitstekende NGD-agent. Wat gaf Mason Bourne je om bij hem te werken?" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Vrijheid van corrupten zoals jullie." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Ik verzeker je, wij zijn niet zo corrupt als jullie denken. Wij beschermen alleen het land en de koninklijke familie." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De enige koning die jullie beschermen is Victor van der Koning. De rest van het geld gaat in jullie eigen zak." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Je gelooft die leugens toch niet?! Weet je wat, meneer Vick, ik heb een baan voor je. 10.000 euro per maand netto. Jouw vaardigheden als ex-huurmoordenaar kunnen wij zeker gebruiken." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Stel je voor: Het hele volk staat te kijken hoe je heldhaftig en nonchalant terroristen en oplichters oppakt. En daarna ga je naar je huis in Wassenaar om lekker te genieten van je Bourbon." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De grootste terrorist en oplichter staat recht voor mij." },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!" },
+            { gif: "assets/pen_1.gif", speaker: " ", text: "" },
+            { gif: "assets/pen_2.gif", speaker: " ", text: "" },
+            { gif: "assets/pen_3.gif", speaker: " ", text: "" },
+            { gif: "assets/gangen.gif", speaker: " ", text: "Je moet de 4 NGD-agenten doodschieten!" },
         ],
         nextStep: "chapter_13"
     },
@@ -391,6 +391,7 @@ function goToChapter(chapterNumber) {
             break;
         case 13:
             showScreen('building-screen');
+            startAgentLogic();
             break;
         default:
             showScreen('main-menu');
@@ -1622,7 +1623,7 @@ function showTortureMessage(message) {
 
     window.tortureTimeout = setTimeout(() => {
         feedback.classList.add('hidden');
-    }, 6000);
+    }, 10000);
 }
 
 function interactWithElectrocution() {
@@ -1662,26 +1663,26 @@ function interactWithElectrocution() {
     setTimeout(() => {
         document.body.classList.remove('rumble-effect');
         tortureView.style.backgroundImage = "url('assets/bo.png')";
-    }, 11000)
+    }, 8500)
 
     setTimeout(() => {
         updateGlobalDamage(40);
         gameState.currentChapter = 12;
         saveGame();
         playCutscene('na_torture');
-    }, 13000)
+    }, 10500)
 }
 
 function interactWithWaterboard() {
     const tortureView = document.getElementById('torture-screen-view');
     tortureView.style.backgroundImage = "url('assets/water_1.gif')";
-    document.body.classList.add('damage-shake');
-    setTimeout(() => document.body.classList.remove('damage-shake'), 400);
+    document.body.classList.add('heavy-rumble-effect');
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/water_2.gif')";
+        document.body.classList.remove('heavy-rumble-effect');
         document.body.classList.add('rumble-effect');
-    }, 750)
+    }, 1500)
 
     setTimeout(() => {
         let damageBefore = window.currentDamagePercent;
@@ -1692,19 +1693,19 @@ function interactWithWaterboard() {
         let finalDamage = Number(damageBefore) + 20;
         if (finalDamage > 100) finalDamage = 100;
         updateGlobalDamage(finalDamage);
-    }, 6750)
+    }, 7500)
 
     setTimeout(() => {
         document.body.classList.remove('rumble-effect');
         tortureView.style.backgroundImage = "url('assets/bo.png')";
-    }, 8750)
+    }, 14500)
 
     setTimeout(() => {
         updateGlobalDamage(40);
         gameState.currentChapter = 12;
         saveGame();
         playCutscene('na_torture');
-    }, 10750)
+    }, 16500)
 }
 
 function interactWithWrench() {
@@ -1713,24 +1714,22 @@ function interactWithWrench() {
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/wrench_2.gif')";
-        let damageBefore = window.currentDamagePercent;
-        if (damageBefore === 0 && gameState.currentDamage) {
-            damageBefore = gameState.currentDamage;
-        }
-
-        let finalDamage = Number(damageBefore) + 20;
-        if (finalDamage > 100) finalDamage = 100;
-        updateGlobalDamage(finalDamage);
     }, 1000)
 
     setTimeout(() => {
-        document.body.classList.add('damage-shake');
-        setTimeout(() => document.body.classList.remove('damage-shake'), 400);
-    }, 1050)
+        let damageBefore = window.currentDamagePercent;
+        if (damageBefore === 0 && gameState.currentDamage) {
+            damageBefore = gameState.currentDamage;
+        }
+
+        let finalDamage = Number(damageBefore) + 20;
+        if (finalDamage > 100) finalDamage = 100;
+        updateGlobalDamage(finalDamage);
+    }, 2000)
 
     setTimeout(() => {
         showTortureMessage('Victor: ZEG HET!');
-    }, 2450)
+    }, 2500)
 
     setTimeout(() => {
         let damageBefore = window.currentDamagePercent;
@@ -1741,23 +1740,18 @@ function interactWithWrench() {
         let finalDamage = Number(damageBefore) + 20;
         if (finalDamage > 100) finalDamage = 100;
         updateGlobalDamage(finalDamage);
-    }, 4450)
-
-    setTimeout(() => {
-        document.body.classList.add('damage-shake');
-        setTimeout(() => document.body.classList.remove('damage-shake'), 400);
     }, 4500)
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/bo.png')";
-    }, 7900)
+    }, 8000)
 
     setTimeout(() => {
         updateGlobalDamage(40);
         gameState.currentChapter = 12;
         saveGame();
         playCutscene('na_torture');
-    }, 9900)
+    }, 10000)
 }
 
 function interactWithTax() {
@@ -1837,42 +1831,120 @@ function interactWithUSB() {
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/usb_2.gif')";
-    }, 6500)
+    }, 10500)
 
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/bo.png')";
-    }, 7000)
+    }, 11000)
 
     setTimeout(() => {
         updateGlobalDamage(40);
         gameState.currentChapter = 12;
         saveGame();
         playCutscene('na_torture');
-    }, 9000)
+    }, 13000)
 }
 
 function interactWithChromebook() {
     const tortureView = document.getElementById('torture-screen-view');
     tortureView.style.backgroundImage = "url('assets/chromebook.gif')";
-    showTortureMessage('Silvius: Welkom, John Vick bij het blokuur wiskunde. Ik doe het vandaag via Teams omdat ik me niet zo goed voel na die Bounty van gisteren. We beginnen vandaag met parabolen. Om dat te demonstreren')
+    showTortureMessage('Silvius: Welkom, John Vick bij het blokuur wiskunde via Microsoft Teams. We beginnen met parabolen. En om dat te demonstreren...')
 
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/bo.png')";
-    }, 6050)
+    }, 10050)
 
     setTimeout(() => {
         updateGlobalDamage(40);
         gameState.currentChapter = 12;
         saveGame();
         playCutscene('na_torture');
-    }, 8050)
+    }, 12050)
 }
 
 function interactWithPen() {
     gameState.currentChapter = 13;
     saveGame();
     playCutscene('na_victor')
+}
+
+// Schietoefening in de gangen
+let agents = {
+    arnold: { alive: true, behavior: 'static', elementId: 'agent-arnold' },
+    gertjan: { alive: true, behavior: 'static', elementId: 'agent-gertjan' },
+    diederik: { alive: true, behavior: 'static', elementId: 'agent-diederik' },
+    kevin: { alive: true, behavior: 'cover', elementId: 'agent-kevin', isCovered: false }
+};
+
+function startAgentLogic() {
+    const kevin = agents.kevin;
+    const kevinEl = document.getElementById(kevin.elementId);
+    let timer = 0;
+
+    function syncKevin() {
+        if (!kevin.alive) return;
+
+        timer++;
+
+        if (timer <= 2) {
+            kevin.isCovered = false;
+
+            if (timer === 1 && kevinEl) {
+                const timestamp = new Date().getTime();
+                kevinEl.style.backgroundImage = `url('assets/kevin.gif?t=${timestamp}')`;
+            }
+        } else {
+            kevin.isCovered = true;
+            timer = 0;
+        }
+    }
+
+    syncKevin();
+    const kevinInterval = setInterval(() => {
+        if (!kevin.alive) {
+            clearInterval(kevinInterval);
+            return;
+        }
+        syncKevin();
+    }, 1000);
+}
+
+function shootAgent(name) {
+    const agent = agents[name];
+
+    if (!agent.alive) return;
+
+    if (agent.behavior === 'cover' && agent.isCovered) {
+        return;
+    }
+
+    agent.alive = false;
+    const el = document.getElementById(agent.elementId);
+
+    if (el) {
+        el.style.pointerEvents = 'none';
+
+        if (name === 'kevin') {
+            el.style.backgroundImage = "url('assets/kevin_dead.png')";
+            el.classList.add('dead');
+            el.classList.remove('in-cover');
+        } else {
+            el.classList.add('dead');
+        }
+    }
+
+    checkAllAgentsDead();
+}
+
+function checkAllAgentsDead() {
+    const allDead = Object.values(agents).every(a => !a.alive);
+    if (allDead) {
+        setTimeout(() => {
+            saveGame();
+            showScreen('s&f-screen')
+        }, 2000);
+    }
 }
 
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
@@ -2017,9 +2089,8 @@ function devSkip() {
 
     const building = document.getElementById('building-screen');
     if (building && !building.classList.contains('hidden')) {
-        gameState.currentChapter = 13;
         saveGame();
-        playCutscene('na_gebouw');
+        showScreen('s&f-screen')
         return;
     }
 
