@@ -1386,7 +1386,7 @@ nav button:hover {
    left: 0;
    width: 100vw;
    height: 100vh;
-   background-image: url('assets/interrogatiekamer_victor.gif');
+   background-image: url('assets/interrogatiekamer_open.gif');
    background-size: cover;
    background-position: bottom;
    background-repeat: no-repeat;
@@ -1423,26 +1423,26 @@ nav button:hover {
 }
 
 #agent-arnold {
-   bottom: 10%;
-   left: 20%;
+   bottom: 60%;
+   left: 33%;
    width: 300px;
    height: 500px;
    background-image: url('assets/arnold.gif');
 }
 
 #agent-diederik {
-   bottom: 25%;
-   right: 10%;
+   bottom: 50%;
+   right: 37%;
    width: 200px;
    height: 450px;
    background-image: url('assets/diederik.gif');
 }
 
 #agent-gertjan {
-   bottom: 40%;
+   bottom: 7%;
    left: 45%;
-   width: 250px;
-   height: 541.67px;
+   width: 300px;
+   height: 650px;
    background-image: url('assets/gert-jan.gif');
 }
 

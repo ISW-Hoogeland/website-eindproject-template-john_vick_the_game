@@ -2087,6 +2087,15 @@ function devSkip() {
         return;
     }
 
+    const aftertorture = document.getElementById('after-torture-screen');
+    if (aftertorture && !aftertorture.classList.contains('hidden')) {
+        updateGlobalDamage(40);
+        gameState.currentChapter = 12;
+        saveGame();
+        playCutscene('na_victor');
+        return;
+    }
+
     const building = document.getElementById('building-screen');
     if (building && !building.classList.contains('hidden')) {
         saveGame();
