@@ -11,47 +11,47 @@ const offsetMargin = 6;
 const cutsceneData = {
     intro: {
         steps: [
-            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Jij..." },
-            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "JIJ..." },
-            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "bent precies degene waar ik naar opzoek ben." },
-            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst bewijzen. Als hitman moet je slim zijn." },
-            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder." }
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Jij...", audio: "assets/jij.wav" },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "JIJ...", audio: "assets/jij.wav" },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Jij  bent precies waar ik naar opzoek ben.", audio: "assets/jij-ben.wav" },
+            { gif: "assets/mason_jij.gif", speaker: "Mason Bourne", text: "Maar, je moet jezelf wel eerst kunnen bewijzen. Als hitman moet je slim zijn en je omgeving kunnen gebruiken ten gunste van jezelf.", audio: "assets/maar-jezelf.wav" },
+            { gif: "assets/tuin_dicht.png", speaker: "Mason Bourne", text: "In de tuin ligt een geladen pistool begraven. Gebruik je hersenen, dan praten we verder.", audio: "assets/in-verder.wav" }
         ],
         nextStep: "chapter_1"
     },
 
     na_geweer_vinden: {
         steps: [
-            { gif: "assets/mason_buiten.gif", speaker: "Mason Bourne", text: "*klapt*" },
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen." },
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten." },
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm." },
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "10 meter, 20 meter en 30 meter. Laat maar zien wat je kunt." }
+            { gif: "assets/mason_buiten.gif", speaker: "Mason Bourne", text: "*klapt*", audio: "assets/klappen.wav" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Nou, één ding is zeker, in een gevecht zou je in ieder geval van mijn dode oma kunnen winnen.", audio: "assets/nou-winnen.wav" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Waar je daadwerkelijk het verschil maakt in dit vak is je schieten.", audio: "assets/waar-schieten.wav" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Kijk hier eens: dummies. Het neusje van de zalm.", audio: "assets/kijk-zalm.wav" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "10 meter, 20 meter en 30 meter. Laat maar zien wat je kunt.", audio: "assets/10-kunt.wav" }
         ],
         nextStep: "chapter_2"
     },
 
     na_schieten: {
         steps: [
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Ik ben serieus onder de indruk, voor hoever dat kan met stilstaande doelen natuurlijk." },
-            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?" },
-            { gif: "assets/mason_range.gif", speaker: "John Vick", text: "YEAH!!" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Ik ben serieus onder de indruk, voor hoever dat kan met stilstaande doelen natuurlijk.", audio: "assets/ik-natuurlijk.wav" },
+            { gif: "assets/mason_range.gif", speaker: "Mason Bourne", text: "Zeg, zou je morgen op een echt doelwit willen jagen?", audio: "assets/zeg-jagen.wav" },
+            { gif: "assets/mason_range.gif", speaker: "John Vick", text: "YEAH!!", audio: "assets/yeah.wav" },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 2..." },
-            { gif: "assets/huis_mason.gif", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie." },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?" },
-            { gif: "assets/mason.gif", speaker: "John Vick", text: "Zeker." },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Jozef gestolen." },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Jij moet hem terug halen." },
-            { gif: "assets/mason.gif", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?" },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is," },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "meestal spijkerbroeken draagt, veel bananen eet en een bril draagt." },
-            { gif: "assets/mason.gif", speaker: "John Vick", text: "Heb je nog meer info? Er zijn namelijk veel mensen die er zo uitzien." },
-            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hij woont in Nederland en hij werkt bij ..." },
-            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "WAT GEBEURT HIER?!?!" },
-            { gif: "assets/tunnel_ingang.gif", speaker: "Wachter", text: "WE WORDEN AANGEVALLEN! SNEL, NAAR DE GANGEN!" },
-            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!" },
-            { gif: "assets/tunnel_ingang.gif", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!" },
-            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!" },
+            { gif: "assets/huis_mason.gif", speaker: "John Vick", text: "Ik ben beniewd naar mijn missie.", audio: "assets/ik-missie.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hallo John. Ben je klaar voor je eerste missie?", audio: "assets/hallo-missie.wav" },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Zeker.", audio: "assets/zeker.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Iemand heeft mijn harde schijf met Jozef gestolen.", audio: "assets/iemand-getolen.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Jij moet hem terug halen.", audio: "assets/jij-halen.wav" },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Weet je ook wie hem heeft gestolen?", audio: "assets/weet-gestolen.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "We weten nog niet de naam van degene die je moet zoeken, maar we weten wel dat hij super klein is,", audio: "assets/we-is.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "meestal spijkerbroeken draagt, veel bananen eet en een bril draagt.", audio: "assets/meestal-draagt.wav" },
+            { gif: "assets/mason.gif", speaker: "John Vick", text: "Heb je nog meer info? Er zijn namelijk veel mensen die er zo uitzien.", audio: "assets/is-uitzien.wav" },
+            { gif: "assets/mason.gif", speaker: "Mason Bourne", text: "Hij woont in Nederland en hij werkt bij ...", audio: "assets/hij-bij.wav" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "WAT GEBEURT HIER?!?!", audio: "assets/wat-er.wav" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Wachter", text: "WE WORDEN AANGEVALLEN! SNEL, NAAR DE GANGEN!", audio: "assets/we-aangevallen.wav" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!", audio: "assets/volg-john.wav" },
+            { gif: "assets/tunnel_ingang.gif", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!", audio: "assets/ik-je.wav" },
+            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!", audio: "assets/ga-opsplitsen.wav" },
             { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!" },
         ],
         nextStep: "chapter_3"
@@ -343,6 +343,12 @@ function updateCutsceneUI() {
         container.style.backgroundRepeat = "no-repeat";
     }
 
+    if (step.audio) {
+        playCutsceneAudio(step.audio);
+    } else {
+        playCutsceneAudio(null);
+    }
+
     let i = 0;
     textElement.innerText = "";
     nextBtn.style.display = "none";
@@ -367,6 +373,7 @@ function goToChapter(chapterNumber) {
         case 1:
             showScreen('garden-screen');
             showGardenMessage('Mason Bourne: El Patrón, El Chapo, Al Capone, weet je wat ze gemeen hadden? Ze gebruikten hun hersens!');
+            playCutsceneAudio('assets/el-hersens.wav')
             break;
         case 2:
             showScreen('shooting-range');
@@ -444,8 +451,29 @@ function nextCutsceneStep() {
         container.classList.add('hidden');
         container.style.backgroundImage = "none";
         const chapterNum = parseInt(activeCutscene.nextStep.replace("chapter_", ""));
-        goToChapter(chapterNum);
+        playCutsceneAudio(null)
+            ; goToChapter(chapterNum);
     }
+}
+
+let currentCutsceneAudio = null;
+
+function playCutsceneAudio(file) {
+    if (currentCutsceneAudio) {
+        currentCutsceneAudio.pause();
+        currentCutsceneAudio.currentTime = 0;
+    }
+
+    if (!file) {
+        currentCutsceneAudio = null;
+        return;
+    }
+
+    currentCutsceneAudio = new Audio(file);
+
+    currentCutsceneAudio.play().catch(error => {
+        console.error("Audio afspelen mislukt:", error);
+    });
 }
 
 // Houdt de status van de speler bij
@@ -711,6 +739,7 @@ function showTunnelText() {
     const text = document.getElementById('choice-feedback-text');
 
     text.innerText = "Daar ga ik verdwaald raken...";
+    playCutsceneAudio('assets/daar-raken.wav')
     feedback.classList.remove('hidden');
     setTimeout(() => {
         feedback.classList.add('hidden');
