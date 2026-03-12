@@ -633,7 +633,6 @@ function interactWithShed() {
         showGardenMessage("Mason Bourne: 'Slim zijn, zeg ik toch!'. Het slot zit erop.");
     } else {
         if (!playerHasShovel) {
-            showGardenMessage("Je opent het tuinhuisje. Binnenin staat een schep!");
             gardenView.style.backgroundImage = "url('assets/tuin_dicht_schep.png')";
             gardenView.style.backgroundSize = "cover";
             gardenView.style.backgroundPosition = "center";
@@ -734,14 +733,16 @@ function shootDummy(element) {
 
 
 // Tunnel "keuze"
-function showTunnelText() {
+function showTunnelMessage(message) {
     const feedback = document.getElementById('choice-feedback');
     const text = document.getElementById('choice-feedback-text');
 
-    text.innerText = "Daar ga ik verdwaald raken...";
-    playCutsceneAudio('assets/daar-raken.wav')
+    text.innerText = message
     feedback.classList.remove('hidden');
-    setTimeout(() => {
+
+    if (window.tunnelTimeout) clearTimeout(window.tunnelTimeout);
+
+    window.tunnelTimeout = setTimeout(() => {
         feedback.classList.add('hidden');
     }, 3000);
 }
@@ -757,7 +758,7 @@ function interactWithDoor() {
         playCutscene('na_puzzel_club');
 
     } else {
-        showTunnelText("Het slot zit er op...");
+        showTunnelMessage("Het slot zit er op...");
         startClubPuzzle();
     }
 }
