@@ -191,14 +191,40 @@ const cutsceneData = {
         nextStep: "chapter_13"
     },
 
-    /*
-    [naam]: {
+    kantoor: {
         steps: [
-            { gif: "assets/", speaker: "", text: "" },
+            { gif: "assets/kantoor_1.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_2.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_3.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_4.png", speaker: "John Vick", text: "Natuurlijk, de klassieke tunnel achter de poster." },
+            { gif: "assets/kantoor_5.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_6.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_7.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_8.png", speaker: "John Vick", text: "Geen klassiek trucje, maar wel een klassieker!" },
+            { gif: "assets/kantoor_9.png", speaker: " ", text: " " },
+            { gif: "assets/kantoor_10.gif", speaker: "John Vick", text: "Ze noemen me niet voor niets HITman!" },
+            { gif: "assets/bo.png", speaker: "John Vick", text: "Dit moet de uitweg zijn!" },
+            { gif: "assets/buiten.gif", speaker: "John Vick", text: "Het is tijd om naar huis te gaan." },
+            { gif: "assets/bo.png", speaker: " ", text: " " },
+            { gif: "assets/bo.png", speaker: " ", text: "DAG 7..." },
+            { gif: "assets/mason_belt.gif", speaker: "Mason Bourne", text: "Hoor ik daar een nieuwe werknemer van de maand?!" },
+            { gif: "assets/mason_belt.gif", speaker: "John Vick", text: "Weet je welke dag het is? Zondag." },
+            { gif: "assets/mason_hangen.gif", speaker: "John Vick", text: "*hangt op*" },
         ],
-        nextStep: "chapter_[#]"
+        nextStep: "chapter_14"
     },
-    */
+
+    na_shop: {
+        steps: [
+            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Is deze nog te koop?" },
+            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Jazeker! Eindelijk genoeg geld bij elkaar John?" },
+            { gif: "assets/shop.gif", speaker: "John Vick", text: "Nu wel." },
+            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Neem maar mee dan." },
+            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Hehehe, Pepper, eindelijk heb ik je! Ik zal ervoor zorgen dat jou nooit iets aangedaan wordt." },
+            { gif: "assets/einde.gif", speaker: " ", text: "EINDE!" },
+        ],
+        nextStep: "chapter_15"
+    }
 }
 
 // Laad het menu
@@ -246,7 +272,7 @@ function getDayDisplay(chapter) {
     if (chapter <= 5) return 3;
     if (chapter <= 7) return 4;
     if (chapter <= 11) return 5;
-    if (chapter <= 12) return 6;
+    if (chapter <= 13) return 6;
     return 7;
 }
 
@@ -393,6 +419,14 @@ function goToChapter(chapterNumber) {
             showScreen('building-screen');
             startAgentLogic();
             break;
+
+        case 14:
+            showScreen('shop-screen');
+            updateGlobalDamage(0);
+            break;
+        case 15:
+            showScreen('main-menu');
+            break;
         default:
             showScreen('main-menu');
             break;
@@ -418,6 +452,10 @@ function nextCutsceneStep() {
 let playerHasShovel = false;
 let shedIsUnlocked = false;
 let currentDamagePercent = 0;
+let toiletLights = {
+    leftBroken: false,
+    rightBroken: false
+};
 
 // Houdt de rotatie van de 8 schijven bij
 let diskRotations = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -1398,7 +1436,7 @@ function interactWithWindow() {
 function interactWithLady() {
     const LadyView = document.getElementById('lady-click');
     LadyView.style.zIndex = 50;
-    showMagazineMessage('Hmm, deze bladzijden lijken wel aan elkaar vast geplakt.')
+    showMagazineMessage('Hmm, deze bladzijden lijken wel aan elkaar vastgeplakt.')
 }
 
 function interactWithHoogeblad() {
@@ -1878,6 +1916,7 @@ let agents = {
 };
 
 function startAgentLogic() {
+    startEnemyFire();
     const kevin = agents.kevin;
     const kevinEl = document.getElementById(kevin.elementId);
     let timer = 0;
@@ -1939,12 +1978,333 @@ function shootAgent(name) {
 
 function checkAllAgentsDead() {
     const allDead = Object.values(agents).every(a => !a.alive);
+
     if (allDead) {
+        stopEnemyFire();
+        const allAgentElements = document.querySelectorAll('.agent');
+        allAgentElements.forEach(el => {
+            el.classList.add('fade-out');
+        });
+
         setTimeout(() => {
-            saveGame();
-            showScreen('s&f-screen')
-        }, 2000);
+            document.getElementById('office-click').classList.add('doors-active');
+            document.getElementById('toilet-click').classList.add('doors-active');
+            document.getElementById('conference-click').classList.add('doors-active');
+        }, 2500);
     }
+}
+
+let enemyFireInterval = null;
+
+function startEnemyFire() {
+    if (enemyFireInterval) return;
+
+    enemyFireInterval = setInterval(() => {
+        let hits = 0;
+
+        Object.values(agents).forEach(a => {
+            if (a.alive && Math.random() < 0.10) hits++;
+        });
+
+        Object.values(officeAgents).forEach(a => {
+            if (a.alive && Math.random() < 0.10) hits++;
+        });
+
+        if (hits > 0) {
+            let currentDamage = window.currentDamagePercent || 0;
+            let newDamage = currentDamage + (hits * 20);
+
+            updateGlobalDamage(newDamage);
+
+            if (newDamage >= 100) {
+                clearInterval(enemyFireInterval);
+                enemyFireInterval = null;
+            }
+        }
+    }, 1000);
+}
+
+function stopEnemyFire() {
+    clearInterval(enemyFireInterval);
+    enemyFireInterval = null;
+}
+
+// deuren in het gebouw
+function showBuildingMessage(message) {
+    const feedback = document.getElementById('building-feedback');
+    const text = document.getElementById('building-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.buildingTimeout) clearTimeout(window.buildingTimeout);
+
+    window.buildingTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
+}
+
+function interactWithOfficeDoor() {
+    const hasKeychain = gameState.inventory.includes("Sleutelbos");
+    const buildingView = document.getElementById('building-screen-view');
+    if (hasKeychain) {
+        buildingView.style.backgroundImage = "url('assets/kantoor_1.png')";
+        document.querySelectorAll('.door-zone').forEach(d => d.classList.remove('doors-active'));
+        setTimeout(() => {
+            gameState.currentChapter = 14;
+            saveGame();
+            playCutscene('kantoor');
+        }, 2000);
+    } else {
+        showBuildingMessage("De deur zit op slot...")
+    }
+}
+
+function interactWithToiletDoor() {
+    const hasCode = gameState.inventory.includes("Code");
+    const buildingView = document.getElementById('building-screen-view');
+    if (hasCode) {
+        showBuildingMessage("???: Oké, oké, ik vertel het! De code voor de vergaderruimte is 20153.");
+    } else {
+        buildingView.style.backgroundImage = "url('assets/toiletten.png')";
+        document.querySelectorAll('.door-zone').forEach(d => d.classList.remove('doors-active'));
+        document.getElementById('toilet-hallway-click').classList.add('doors-active');
+        document.getElementById('light-left-click').classList.add('doors-active');
+        document.getElementById('light-right-click').classList.add('doors-active');
+        updateToiletBackground();
+
+    }
+}
+
+function shootToiletLight(side) {
+    if (side === 'left') toiletLights.leftBroken = true;
+    if (side === 'right') toiletLights.rightBroken = true;
+
+    updateToiletBackground();
+}
+
+function updateToiletBackground() {
+    const buildingView = document.getElementById('building-screen-view');
+
+    if (toiletLights.leftBroken && toiletLights.rightBroken) {
+        buildingView.style.backgroundImage = "url('assets/toiletten_beide.png')";
+        showBuildingMessage("???: Oké, oké, ik vertel het! De code voor de vergaderruimte is 20153.");
+        gameState.inventory.push('Code');
+    }
+    else if (toiletLights.leftBroken || toiletLights.rightBroken) {
+        if (toiletLights.leftBroken) {
+            buildingView.style.backgroundImage = "url('assets/toiletten_links.png')";
+        } else {
+            buildingView.style.backgroundImage = "url('assets/toiletten_rechts.png')";
+        }
+
+        showBuildingMessage("???: AAAh!");
+    }
+    else {
+        buildingView.style.backgroundImage = "url('assets/toiletten.png')";
+    }
+}
+
+function interactWithToiletHallway() {
+    const buildingView = document.getElementById('building-screen-view');
+    buildingView.style.backgroundImage = "url('assets/gangen.gif')";
+    document.querySelectorAll('.door-zone').forEach(d => d.classList.remove('doors-active'));
+    document.getElementById('office-click').classList.add('doors-active');
+    document.getElementById('toilet-click').classList.add('doors-active');
+    document.getElementById('conference-click').classList.add('doors-active');
+
+}
+
+function interactWithConferenceDoor() {
+    const hasCode = gameState.inventory.includes("Code");
+    if (hasCode) {
+        document.getElementById('keypad-container').classList.remove('hidden');
+    } else {
+        showBuildingMessage("Er moet een code ingevoerd worden...")
+    }
+}
+
+let currentInput = "";
+const correctCode = "20153";
+
+function pressKey(key) {
+    const display = document.getElementById('keypad-display');
+
+    if (key === 'back') {
+        currentInput = currentInput.slice(0, -1);
+    } else if (key === 'ok') {
+        if (currentInput === correctCode) {
+            display.style.color = "#66ff66";
+            display.innerText = "TOEGANG";
+            setTimeout(() => {
+                document.getElementById('keypad-container').classList.add('hidden');
+                unlockOfficeDoor();
+            }, 1000);
+        } else {
+            display.style.color = "#ff6666";
+            display.innerText = "FOUT";
+            currentInput = "";
+            setTimeout(() => {
+                display.style.color = "#4df04d";
+                display.innerText = "____";
+            }, 1000);
+        }
+        return;
+    } else {
+        if (currentInput.length < 5) {
+            currentInput += key;
+        }
+    }
+
+    display.innerText = currentInput.length > 0 ? currentInput : "CODE INVOEREN:";
+}
+
+
+// Agenten in de vergaderruimte
+const officeAgents = {
+    arnold2: { id: 'agent-arnold2', alive: true },
+    matthijs: { id: 'agent-matthijs', alive: true },
+    denise: { id: 'agent-denise', alive: true },
+    gertjan2: { id: 'agent-gertjan2', alive: true },
+    dimitri: { id: 'agent-dimitri', alive: true }
+};
+
+function unlockOfficeDoor() {
+    document.querySelectorAll('.door-zone').forEach(el => {
+        el.classList.remove('doors-active');
+    });
+
+    const buildingView = document.getElementById('building-screen-view');
+    buildingView.style.backgroundImage = "url('assets/vergaderruimte_geen_mes_sleutels.png')";
+
+    Object.keys(officeAgents).forEach(key => {
+        const el = document.getElementById(officeAgents[key].id);
+        if (el) {
+            el.className = 'office-agent active';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.filter = 'none';
+            startEnemyFire();
+        }
+    });
+}
+
+function shootOfficeAgent(name) {
+    const agent = officeAgents[name];
+    if (!agent || !agent.alive) return;
+
+    agent.alive = false;
+    const el = document.getElementById(agent.id);
+    if (el) {
+        el.classList.add('office-dead');
+    }
+
+    checkOfficeBattleFinished();
+}
+
+function checkOfficeBattleFinished() {
+    const buildingView = document.getElementById('building-screen-view');
+    const allDead = Object.values(officeAgents).every(a => !a.alive);
+
+    if (allDead) {
+        stopEnemyFire();
+        setTimeout(() => {
+            Object.keys(officeAgents).forEach(key => {
+                const el = document.getElementById(officeAgents[key].id);
+                if (el) {
+                    el.classList.add('office-fade');
+                }
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.office-agent').forEach(el => el.style.display = 'none');
+                document.getElementById('mes-click').classList.add('doors-active');
+                document.getElementById('keychain-click').classList.add('doors-active');
+                document.getElementById('drive-click').classList.add('doors-active');
+                document.getElementById('office-exit').classList.add('doors-active');
+                buildingView.style.backgroundImage = "url('assets/vergaderruimte.png')";
+            }, 2000);
+        }, 1000);
+    }
+}
+
+function interactWithMes() {
+    if (gameState.inventory.includes('Mes')) return;
+    showBuildingMessage('Een... mes?')
+    gameState.inventory.push('Mes');
+    document.getElementById('mes-click').classList.remove('doors-active');
+    updateOfficeBackground();
+}
+
+function interactWithDrive() {
+    if (gameState.inventory.includes('Schijf')) return;
+    showBuildingMessage('Missie volbracht. Snel weg hier.')
+    gameState.inventory.push('Schijf');
+    document.getElementById('drive-click').classList.remove('doors-active');
+    updateOfficeBackground();
+}
+
+function interactWithKeychain() {
+    if (gameState.inventory.includes('Sleutelbos')) return;
+    showBuildingMessage('Dit is vast de sleutel van het kantoor!')
+    gameState.inventory.push('Sleutelbos');
+    document.getElementById('keychain-click').classList.remove('doors-active');
+    updateOfficeBackground();
+}
+
+function updateOfficeBackground() {
+    const buildingView = document.getElementById('building-screen-view');
+
+    const hasMes = gameState.inventory.includes('Mes');
+    const hasSchijf = gameState.inventory.includes('Schijf');
+    const hasSleutels = gameState.inventory.includes('Sleutelbos');
+
+    let bg = "vergaderruimte";
+
+    if (hasMes && hasSchijf && hasSleutels) {
+        bg += "_leeg";
+    } else if (hasMes && hasSchijf) {
+        bg += "_geen_mes_schijf";
+    } else if (hasMes && hasSleutels) {
+        bg += "_geen_mes_sleutels";
+    } else if (hasSchijf && hasSleutels) {
+        bg += "_geen_schijf_sleutels";
+    } else if (hasMes) {
+        bg += "_geen_mes";
+    } else if (hasSchijf) {
+        bg += "_geen_schijf";
+    } else if (hasSleutels) {
+        bg += "_geen_sleutels";
+    }
+
+    buildingView.style.backgroundImage = `url('assets/${bg}.png')`;
+}
+
+
+function exitOffice() {
+    const buildingView = document.getElementById('building-screen-view');
+    if (gameState.inventory.includes('Schijf') && gameState.inventory.includes('Sleutelbos') && gameState.inventory.includes('Mes')) {
+        buildingView.style.backgroundImage = "url('assets/gangen.gif')";
+        document.querySelectorAll('.door-zone').forEach(d => d.classList.remove('doors-active'));
+        document.getElementById('office-click').classList.add('doors-active');
+    } else {
+        showBuildingMessage("Ik mis nog wat denk ik...");
+    }
+}
+
+// Dierenwinkel
+function showShopMessage(message) {
+    const feedback = document.getElementById('shop-feedback');
+    const text = document.getElementById('shop-feedback-text');
+
+    text.innerText = message
+    feedback.classList.remove('hidden');
+
+    if (window.shopTimeout) clearTimeout(window.shopTimeout);
+
+    window.shopTimeout = setTimeout(() => {
+        feedback.classList.add('hidden');
+    }, 3000);
 }
 
 // Skip-knop zodat ik niet elke keer de hele game hoef te spelen
@@ -2098,8 +2458,22 @@ function devSkip() {
 
     const building = document.getElementById('building-screen');
     if (building && !building.classList.contains('hidden')) {
+        gameState.currentChapter = 14;
+        stopEnemyFire();
+        gameState.inventory.push("Code");
+        gameState.inventory.push("Sleutelbos");
+        gameState.inventory.push("Schijf");
+        gameState.inventory.push("Mes");
         saveGame();
-        showScreen('s&f-screen')
+        playCutscene('kantoor');
+        return;
+    }
+
+    const shop = document.getElementById('shop-screen');
+    if (shop && !shop.classList.contains('hidden')) {
+        gameState.currentChapter = 15;
+        saveGame();
+        playCutscene('na_shop');
         return;
     }
 

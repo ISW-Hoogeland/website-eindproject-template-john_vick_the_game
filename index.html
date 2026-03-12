@@ -56,7 +56,8 @@
   <div id="garden-screen" class="menu-screen hidden">
     <div id="garden-view">
       <button class="game-object" id="shed-click-spot" onclick="interactWithShed()"></button>
-      <button class="game-object" id="junction-box-click-spot" onclick="openElectricalPuzzleOverLay()"></button>
+      <button class="game-object" id="junction-box-click-spot"
+        onclick="gameState.currentChapter = 15; openElectricalPuzzleOverLay()"></button>
       <button class="game-object" id="dig-site" onclick="interactWithDigSite()"></button>
       <div id="garden-feedback" class="hidden">
         <p id="garden-feedback-text"></p>
@@ -257,8 +258,50 @@
       <div id="agent-gertjan" class="agent static" onclick="shootAgent('gertjan')"></div>
       <div id="agent-diederik" class="agent static" onclick="shootAgent('diederik')"></div>
       <div id="agent-kevin" class="agent cover" onclick="shootAgent('kevin')"></div>
+      <div id="office-click" class="door-zone" onclick="interactWithOfficeDoor()"></div>
+      <div id="toilet-click" class="door-zone" onclick="interactWithToiletDoor()"></div>
+      <div id="conference-click" class="door-zone" onclick="interactWithConferenceDoor()"></div>
+      <div id="light-left-click" class="door-zone" onclick="shootToiletLight('left')"></div>
+      <div id="light-right-click" class="door-zone" onclick="shootToiletLight('right')"></div>
+      <div id="toilet-hallway-click" class="door-zone" onclick="interactWithToiletHallway()"></div>
+      <div id="keypad-container" class="hidden">
+        <div id="keypad-display">CODE INVOEREN:</div>
+        <div id="keypad-grid">
+          <button onclick="pressKey('1')">1</button>
+          <button onclick="pressKey('2')">2</button>
+          <button onclick="pressKey('3')">3</button>
+          <button onclick="pressKey('4')">4</button>
+          <button onclick="pressKey('5')">5</button>
+          <button onclick="pressKey('6')">6</button>
+          <button onclick="pressKey('7')">7</button>
+          <button onclick="pressKey('8')">8</button>
+          <button onclick="pressKey('9')">9</button>
+          <button onclick="pressKey('back')">⌫</button>
+          <button onclick="pressKey('0')">0</button>
+          <button onclick="pressKey('ok')">OK</button>
+        </div>
+      </div>
+      <div id="agent-arnold2" class="office-agent" onclick="shootOfficeAgent('arnold2')"></div>
+      <div id="agent-matthijs" class="office-agent" onclick="shootOfficeAgent('matthijs')"></div>
+      <div id="agent-denise" class="office-agent" onclick="shootOfficeAgent('denise')"></div>
+      <div id="agent-gertjan2" class="office-agent" onclick="shootOfficeAgent('gertjan2')"></div>
+      <div id="agent-dimitri" class="office-agent" onclick="shootOfficeAgent('dimitri')"></div>
+      <div id="mes-click" class="door-zone" onclick="interactWithMes()"></div>
+      <div id="keychain-click" class="door-zone" onclick="interactWithKeychain()"></div>
+      <div id="drive-click" class="door-zone" onclick="interactWithDrive()"></div>
+      <div id="office-exit" class="door-zone" onclick="exitOffice()"></div>
       <div id="building-feedback" class="hidden">
         <p id="building-feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="shop-screen" class="menu-screen hidden">
+    <div id="shop-screen-view">
+      <div id="cat-click" onclick="playCutscene('na_shop')"></div>
+      <div id="bird-click" onclick="showShopMessage('Een schattig volgeltje, maar ik houd niet zo van vogels.')"></div>
+      <div id="shop-feedback" class="hidden">
+        <p id="shop-feedback-text"></p>
       </div>
     </div>
   </div>

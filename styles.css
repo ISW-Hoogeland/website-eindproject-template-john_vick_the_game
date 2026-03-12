@@ -1384,11 +1384,11 @@ nav button:hover {
    position: absolute;
    top: 0;
    left: 0;
-   width: 100vw;
-   height: 100vh;
+   width: 100%;
+   height: 100%;
    background-image: url('assets/interrogatiekamer_open.gif');
    background-size: cover;
-   background-position: bottom;
+   background-position: center;
    background-repeat: no-repeat;
 }
 
@@ -1406,11 +1406,11 @@ nav button:hover {
    position: absolute;
    top: 0;
    left: 0;
-   width: 100vw;
-   height: 100vh;
+   width: 100%;
+   height: 100%;
    background-image: url('assets/gangen.gif');
    background-size: cover;
-   background-position: bottom;
+   background-position: top;
    background-repeat: no-repeat;
 }
 
@@ -1418,12 +1418,13 @@ nav button:hover {
    position: absolute;
    background-size: contain;
    background-repeat: no-repeat;
-   transition: transform 0.3s ease-in-out, opacity 0.3s;
-   z-index: 5;
+   z-index: 1000 !important;
+   pointer-events: auto;
+   transition: transform 0.8s ease-out, opacity 2s ease-in-out;
 }
 
 #agent-arnold {
-   bottom: 60%;
+   bottom: 50%;
    left: 33%;
    width: 300px;
    height: 500px;
@@ -1439,7 +1440,7 @@ nav button:hover {
 }
 
 #agent-gertjan {
-   bottom: 7%;
+   bottom: 2%;
    left: 45%;
    width: 300px;
    height: 650px;
@@ -1447,23 +1448,18 @@ nav button:hover {
 }
 
 #agent-kevin {
-   bottom: 35%;
+   bottom: 27.5%;
    right: 27.5%;
    width: 225px;
    height: 525px;
    background-image: url('assets/kevin.gif');
 }
 
-.agent.in-cover {
-   transform: translateY(120px);
-   filter: brightness(0.5);
-}
-
 .agent.dead {
-   transform: rotate(90deg) scale(0.8);
+   transform: rotate(90deg) scale(0.8) !important;
    opacity: 0.5;
-   pointer-events: none;
    filter: grayscale(1) sepia(1) hue-rotate(-40deg);
+   pointer-events: none;
 }
 
 .cover-object {
@@ -1474,4 +1470,347 @@ nav button:hover {
    background: #555;
    border: 2px solid #333;
    z-index: 10;
+}
+
+#office-click {
+   position: absolute;
+   bottom: 5.5%;
+   left: 19.5%;
+   width: 4.5%;
+   height: 72.5%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#toilet-click {
+   position: absolute;
+   bottom: 0%;
+   right: 11%;
+   width: 9.4%;
+   height: 84%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#conference-click {
+   position: absolute;
+   top: 5.5%;
+   left: 35%;
+   width: 9.5%;
+   height: 39%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+.agent.fade-out {
+   opacity: 0 !important;
+   transform: rotate(90deg) scale(0.8) !important;
+}
+
+#office-click,
+#toilet-click,
+#conference-click,
+#toilet-hallway-click,
+#light-right-click,
+#light-left-click {
+   display: none;
+   position: absolute;
+}
+
+.doors-active {
+   display: block !important;
+}
+
+#building-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#toilet-hallway-click {
+   position: absolute;
+   bottom: 0%;
+   left: 0%;
+   width: 8.2%;
+   height: 84%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#light-left-click {
+   position: absolute;
+   top: 7%;
+   left: 20.5%;
+   width: 20.2%;
+   height: 5%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#light-right-click {
+   position: absolute;
+   top: 7%;
+   right: 10.8%;
+   width: 20.2%;
+   height: 5%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#keypad-container {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #7a7a7a;
+   padding: 30px;
+   border: 3px solid #4a4a4a;
+   box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+   z-index: 100;
+   width: 280px;
+   text-align: center;
+}
+
+#keypad-display {
+   background-color: #004d00;
+   color: #4df04d;
+   font-family: 'Courier New', monospace;
+   font-size: 20px;
+   height: 60px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 25px;
+   border: 2px solid #222;
+   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+   text-transform: uppercase;
+}
+
+#keypad-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 15px;
+}
+
+#keypad-grid button {
+   background-color: #666;
+   color: white;
+   border: 2px solid #444;
+   height: 50px;
+   font-size: 1.2rem;
+   cursor: pointer;
+   transition: all 0.1s;
+}
+
+#keypad-grid button:active {
+   background-color: #444;
+   transform: scale(0.95);
+}
+
+#keypad-grid button:nth-last-child(3) {
+   color: #ff6666;
+}
+
+#keypad-grid button:last-child {
+   color: #66ff66;
+}
+
+.error-shake {
+   animation: shake 0.3s;
+   color: red !important;
+   border-color: red !important;
+}
+
+@keyframes shake {
+   0% {
+      transform: translateX(0);
+   }
+
+   25% {
+      transform: translateX(-5px);
+   }
+
+   50% {
+      transform: translateX(5px);
+   }
+
+   75% {
+      transform: translateX(-5px);
+   }
+
+   100% {
+      transform: translateX(0);
+   }
+}
+
+.agent.hidden {
+   display: none !important;
+   visibility: hidden !important;
+   opacity: 0 !important;
+}
+
+#agent-arnold2 {
+   top: 2%;
+   right: 25%;
+   width: 300px;
+   height: 500px;
+   background-image: url('assets/arnold.gif');
+}
+
+#agent-matthijs {
+   top: 20%;
+   left: 20%;
+   width: 250px;
+   height: 400px;
+   background-image: url('assets/matthijs.gif');
+}
+
+#agent-denise {
+   top: 25%;
+   right: 22%;
+   width: 200px;
+   height: 400px;
+   background-image: url('assets/denise.gif');
+}
+
+#agent-gertjan2 {
+   top: 45%;
+   left: 5%;
+   width: 300px;
+   height: 650px;
+   background-image: url('assets/gert-jan.gif');
+}
+
+#agent-dimitri {
+   top: 72%;
+   left: 42%;
+   width: 400px;
+   height: 200px;
+   background-image: url('assets/dimitri.gif');
+}
+
+#mes-click,
+#keychain-click,
+#drive-click,
+#office-exit {
+   display: none;
+}
+
+
+#mes-click {
+   position: absolute;
+   bottom: 5.5%;
+   right: 49%;
+   width: 2%;
+   height: 12%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#keychain-click {
+   position: absolute;
+   bottom: 5.5%;
+   left: 10%;
+   width: 5%;
+   height: 8%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#drive-click {
+   position: absolute;
+   top: 1.5%;
+   left: 22%;
+   width: 13%;
+   height: 41%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#office-exit {
+   position: absolute;
+   top: 8%;
+   right: 0%;
+   width: 4%;
+   height: 85%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+.office-agent {
+   position: absolute;
+   background-size: contain;
+   background-repeat: no-repeat;
+   z-index: 1000 !important;
+   display: none;
+   transition: transform 0.8s ease-out, opacity 2s ease-in-out;
+}
+
+.office-agent.active {
+   display: block !important;
+}
+
+.office-dead {
+   transform: rotate(90deg) scale(0.8) !important;
+   opacity: 0.5 !important;
+   filter: grayscale(1) sepia(1) hue-rotate(-40deg) !important;
+   pointer-events: none;
+}
+
+.office-fade {
+   opacity: 0 !important;
+   transform: rotate(90deg) scale(0.8) !important;
+   transition: opacity 2s ease-in-out !important;
+}
+
+#shop-screen-view {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-image: url('assets/shop.gif');
+   background-size: cover;
+   background-position: top;
+   background-repeat: no-repeat;
+}
+
+#shop-feedback {
+   position: absolute;
+   bottom: 5%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(0, 0, 0, 0.8);
+   color: white;
+   padding: 15px;
+   border-radius: 10px;
+   border: 1px solid #891717;
+   z-index: 9999;
+}
+
+#cat-click {
+   position: absolute;
+   bottom: 47%;
+   right: 29%;
+   width: 7.8%;
+   height: 10%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
+}
+
+#bird-click {
+   position: absolute;
+   top: 5%;
+   right: 28.5%;
+   width: 6%;
+   height: 12.2%;
+   background: rgba(0, 0, 0, 0);
+   border: none;
 }
