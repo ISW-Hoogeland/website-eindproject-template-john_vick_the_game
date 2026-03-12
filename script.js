@@ -97,16 +97,16 @@ const cutsceneData = {
 
     na_jantje: {
         steps: [
-            { gif: "assets/huis_jantje_binnen.png", speaker: "John Vick", text: "Shit! Ik hoor iemand! Ik moet hier weg." },
+            { gif: "assets/huis_jantje_binnen.png", speaker: "John Vick", text: "Shit! Ik hoor iemand! Ik moet hier weg.", audio: "assets/shit-weg.wav" },
             { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "John pakt het wapen van de tafel." },
             { gif: "assets/huis_jantje_binnen_no_gun.png", speaker: " ", text: "Hij vlucht naar zijn auto en gaat naar een ander hotel." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 5..." },
-            { gif: "assets/bo.png", speaker: "John Vick", text: "*gaapt*" },
+            { gif: "assets/bo.png", speaker: "John Vick", text: "*gaapt*", audio: "assets/jawn.wav" },
             { gif: "assets/bo.png", speaker: " ", text: "*klik*" },
             { gif: "assets/bo.png", speaker: " ", text: "*klik*" },
             { gif: "assets/bo.png", speaker: " ", text: "*klik klik klik klik klik klik*" },
             { gif: "assets/bo.png", speaker: "John Vick", text: "Oh shit...", audio: "assets/ohshit.wav" },
-            { gif: "assets/ngd_hotel_kijken.gif", speaker: "John Vick", text: "De NGD!" },
+            { gif: "assets/ngd_hotel_kijken.gif", speaker: "John Vick", text: "De NGD!", audio: "assets/de-ngd.wav" },
             { gif: "assets/ngd_hotel_deur.gif", speaker: "John Vick", text: "Een elektronisch slot, niemand kan naar binnen of naar buiten...", audio: "assets/een-buiten.wav" },
         ],
         nextStep: "chapter_8"
@@ -115,7 +115,7 @@ const cutsceneData = {
     na_touw: {
         steps: [
             { gif: "assets/touw_bewegend.gif", speaker: "John Vick", text: "Je moet wel gek zijn om dit te doen.", audio: "assets/je-doen.wav" },
-            { gif: "assets/touw_stilstaand.gif", speaker: "John Vick", text: "De olietruck gaat rijden!" },
+            { gif: "assets/touw_stilstaand.gif", speaker: "John Vick", text: "De olietruck gaat rijden!", audio: "assets/olietruck.wav" },
             { gif: "assets/weg_achtervolging.gif", speaker: " ", text: "De NGD achtervolgt je! Schakel ze uit door op ze te schieten!" },
 
         ],
@@ -133,7 +133,7 @@ const cutsceneData = {
 
     na_greppel: {
         steps: [
-            { gif: "assets/greppel_draad.png", speaker: "John Vick", text: "Eindelijk dat prikkeldraad van mijn been af." },
+            { gif: "assets/greppel_draad.png", speaker: "John Vick", text: "Eindelijk dat prikkeldraad van mijn been af.", audio: "assets/eindelijk-been.wav" },
             { gif: "assets/frederik_kwam.gif", speaker: "Frederick van der Heuvel", text: "Dus, meneertje Vick, u dacht zomaar bij agent Jantje Hoeksma in te kunnen breken en zijn geweer mee te nemen? Wij hadden beter van u verwacht!", audio: "assets/dus-verwacht.wav" },
             { gif: "assets/frederik_kwam.gif", speaker: "Frederick van der Heuvel", text: "Wat ik je nu ga zeggen is heel belangrijke informatie: Ons hoofdkwartier is zeer geheim, we zouden niet willen dat iemand weet waar het is, toch?", audio: "assets/wat-toch.wav" },
             { gif: "assets/frederik_zag.gif", speaker: " ", text: " " },
@@ -167,19 +167,25 @@ const cutsceneData = {
 
     na_victor: {
         steps: [
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Lekker geslapen, John Vick?" },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Aangezien je geen zwakte hebt voor onze traditionele methodes blijk je een uitstekende NGD-agent. Wat gaf Mason Bourne je om bij hem te werken?" },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Vrijheid van corrupten zoals jullie." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Ik verzeker je, wij zijn niet zo corrupt als jullie denken. Wij beschermen alleen het land en de koninklijke familie." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De enige koning die jullie beschermen is Victor van der Koning. De rest van het geld gaat in jullie eigen zak." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Je gelooft die leugens toch niet?! Weet je wat, meneer Vick, ik heb een baan voor je. 10.000 euro per maand netto. Jouw vaardigheden als ex-huurmoordenaar kunnen wij zeker gebruiken." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Stel je voor: Het hele volk staat te kijken hoe je heldhaftig en nonchalant terroristen en oplichters oppakt. En daarna ga je naar je huis in Wassenaar om lekker te genieten van je Bourbon." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De grootste terrorist en oplichter staat recht voor mij." },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!" },
-            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!" },
-            { gif: "assets/pen_1.gif", speaker: " ", text: "" },
-            { gif: "assets/pen_2.gif", speaker: " ", text: "" },
-            { gif: "assets/pen_3.gif", speaker: " ", text: "" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Lekker geslapen, John Vick?", audio: "assets/lekker-vick.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Aangezien je geen zwakte hebt voor onze traditionele methodes blijk je een uitstekende NGD-agent.", audio: "assets/aangezien-agent.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Wat gaf Mason Bourne je om bij hem te werken?", audio: "assets/wat-werken.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Vrijheid van corrupten zoals jullie.", audio: "assets/vrijheid-jullie.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Ik verzeker je, wij zijn niet zo corrupt als jullie denken.", audio: "assets/ik-denken.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Wij beschermen alleen het land en de koninklijke familie.", audio: "assets/wij-familie.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De enige koning die jullie beschermen is Victor van der Koning. De rest van het geld gaat in jullie eigen zak.", audio: "assets/de-zak.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Je gelooft die leugens toch niet?!", audio: "assets/je-niet.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Weet je wat, meneer Vick, ik heb een baan voor je.", audio: "assets/weet-je.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "10.000 euro per maand netto.", audio: "assets/tien-netto.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Jouw vaardigheden als ex-huurmoordenaar kunnen wij zeker gebruiken.", audio: "assets/jouw-gebruiken.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "Stel je voor: Het hele volk staat te kijken hoe je heldhaftig en nonchalant terroristen en oplichters oppakt.", audio: "assets/stel-oppakt.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "En daarna ga je naar je huis in Wassenaar om lekker te genieten van je Bourbon.", audio: "assets/en-bourbon.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "De grootste terrorist en oplichter staat recht voor mij.", audio: "assets/de-mij.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!", audio: "assets/tien-voor.wav" },
+            { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!", audio: "assets/blijf-jij.wav" },
+            { gif: "assets/pen_1.gif", speaker: " ", text: " " },
+            { gif: "assets/pen_2.gif", speaker: " ", text: " ", audio: "assets/victor-pijn.wav" },
+            { gif: "assets/pen_3.gif", speaker: " ", text: " " },
             { gif: "assets/gangen.gif", speaker: " ", text: "Je moet de 4 NGD-agenten doodschieten!" },
         ],
         nextStep: "chapter_13"
@@ -188,31 +194,32 @@ const cutsceneData = {
     kantoor: {
         steps: [
             { gif: "assets/kantoor_1.png", speaker: " ", text: " " },
-            { gif: "assets/kantoor_2.png", speaker: "John Vick", text: "Natuurlijk, de klassieke tunnel achter de poster." },
+            { gif: "assets/kantoor_2.png", speaker: "John Vick", text: "Natuurlijk, de klassieke tunnel achter de poster.", audio: "assets/natuurlijk-poster.wav" },
             { gif: "assets/kantoor_3.png", speaker: " ", text: " " },
-            { gif: "assets/kantoor_4.png", speaker: "John Vick", text: "Geen klassiek trucje, maar wel een klassieker!" },
+            { gif: "assets/kantoor_4.png", speaker: "John Vick", text: "Geen klassiek trucje, maar wel een klassieker!", audio: "assets/geen-klassieker.wav" },
             { gif: "assets/kantoor_5.png", speaker: " ", text: " " },
             { gif: "assets/kantoor_6.png", speaker: " ", text: " " },
             { gif: "assets/kantoor_7.png", speaker: " ", text: " " },
             { gif: "assets/kantoor_8.png", speaker: "", text: " " },
             { gif: "assets/kantoor_9.png", speaker: " ", text: " " },
-            { gif: "assets/kantoor_10.gif", speaker: "John Vick", text: "Ze noemen me niet voor niets HITman!" },
-            { gif: "assets/buiten.gif", speaker: "John Vick", text: "Het is tijd om naar huis te gaan." },
+            { gif: "assets/kantoor_10.gif", speaker: "John Vick", text: "Ze noemen me niet voor niets HITman!", audio: "assets/hitman.wav" },
+            { gif: "assets/buiten.gif", speaker: "John Vick", text: "Het is tijd om naar huis te gaan.", audio: "assets/huis-gaan.wav" },
             { gif: "assets/bo.png", speaker: " ", text: " " },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 7..." },
-            { gif: "assets/mason_belt.gif", speaker: "Mason Bourne", text: "Hoor ik daar een nieuwe werknemer van de maand?!" },
-            { gif: "assets/mason_hangen.gif", speaker: "John Vick", text: "Weet je welke dag het is? Zondag." },
+            { gif: "assets/mason_belt.gif", speaker: "Mason Bourne", text: "Hoor ik daar een nieuwe werknemer van de maand?!", audio: "assets/hoor-maand.wav" },
+            { gif: "assets/mason_belt.gif", speaker: "John Vick", text: "Weet je welke dag het is?", audio: "assets/weet-je-is.wav" },
+            { gif: "assets/mason_hangen.gif", speaker: "John Vick", text: "Zondag.", audio: "assets/zondag.wav" },
         ],
         nextStep: "chapter_14"
     },
 
     na_shop: {
         steps: [
-            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Is deze nog te koop?" },
-            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Jazeker! Eindelijk genoeg geld bij elkaar John?" },
-            { gif: "assets/shop.gif", speaker: "John Vick", text: "Nu wel." },
-            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Neem maar mee dan." },
-            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Hehehe, Pepper, eindelijk heb ik je! Ik zal ervoor zorgen dat jou nooit iets aangedaan wordt." },
+            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Is deze nog te koop?", audio: "assets/te-koop.wav" },
+            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Jazeker! Eindelijk genoeg geld bij elkaar John?", audio: "assets/jazeker-neem.wav" },
+            { gif: "assets/shop.gif", speaker: "John Vick", text: "Nu wel.", audio: "assets/nu-wel.wav" },
+            { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Neem maar mee dan.", audio: "assets/neemmaarmee.wav" },
+            { gif: "assets/pepper.gif", speaker: "John Vick", text: "Hehehe, Pepper! Eindelijk heb ik je! Ik zal ervoor zorgen dat jou nooit iets aangedaan wordt.", audio: "assets/pepper.wav" },
             { gif: "assets/einde.gif", speaker: " ", text: "EINDE!" },
         ],
         nextStep: "chapter_15"
@@ -623,6 +630,7 @@ function interactWithShed() {
     const gardenView = document.getElementById('garden-view');
     if (!shedIsUnlocked) {
         showGardenMessage("Mason Bourne: 'Slim zijn, zeg ik toch!'. Het slot zit erop.");
+        playCutsceneAudio("assets/slim-erop.wav");
     } else {
         if (!playerHasShovel) {
             gardenView.style.backgroundImage = "url('assets/tuin_dicht_schep.png')";
@@ -649,6 +657,7 @@ function interactWithShed() {
 function interactWithDigSite() {
     if (!playerHasShovel) {
         showGardenMessage("Mason Bourne: Graven met je handen duurt te lang...");
+        playCutsceneAudio("assets/graven.wav");
     } else {
         const gardenView = document.getElementById('garden-view');
         if (gardenView) {
@@ -751,6 +760,7 @@ function interactWithDoor() {
 
     } else {
         showTunnelMessage("Het slot zit er op...");
+        playCutsceneAudio("assets/tunnel.wav");
         startClubPuzzle();
     }
 }
@@ -1029,6 +1039,7 @@ function interactWithHotelDoor() {
 
     } else {
         showHotelMessage("Zonder kaart weet ik niet waar ik heen moet.");
+        playCutsceneAudio("assets/kaart.wav");
     }
 }
 
@@ -1380,7 +1391,8 @@ function interactWithJantjeDoor() {
         showScreen('jantje-binnen');
 
     } else {
-        showJantjeMessage("Er moet een manier zijn binnen te komen")
+        showJantjeMessage("Er moet een manier zijn binnen te komen");
+        playCutsceneAudio("assets/binnen-komen.wav");
     }
 }
 
@@ -1898,7 +1910,7 @@ function interactWithUSB() {
     const tortureView = document.getElementById('torture-screen-view');
     tortureView.style.backgroundImage = "url('assets/usb_1.gif')";
     showTortureMessage('Victor: O Hemeltje, ik heb hier wel een hele dappere man voor mij zitten. Weet je, ik ga je een gunst doen, puur omdat ik het niemand gun om hun LO PO terug te zien.')
-    playCutsceneAudio('assets/o-zien');
+    playCutsceneAudio('assets/o-zien.wav');
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/usb_2.gif')";
     }, 10500)
@@ -1919,8 +1931,8 @@ function interactWithUSB() {
 function interactWithChromebook() {
     const tortureView = document.getElementById('torture-screen-view');
     tortureView.style.backgroundImage = "url('assets/chromebook.gif')";
-    showTortureMessage('Silvius: Welkom, John Vick bij het blokuur wiskunde via Microsoft Teams. We beginnen met parabolen. En om dat te demonstreren...')
-
+    showTortureMessage('Silvius: Welkom, John Vick bij het blokuur wiskunde via Microsoft Teams. We beginnen met parabolen. En om dat te demonstreren...');
+    playCutsceneAudio('assets/silvius.wav');
     setTimeout(() => {
         tortureView.style.backgroundImage = "url('assets/bo.png')";
     }, 10050)
@@ -2088,7 +2100,8 @@ function interactWithOfficeDoor() {
             playCutscene('kantoor');
         }, 2000);
     } else {
-        showBuildingMessage("De deur zit op slot...")
+        showBuildingMessage("De deur zit op slot...");
+        playCutsceneAudio("assets/kantoor-deur.wav");
     }
 }
 
@@ -2124,7 +2137,7 @@ function updateToiletBackground() {
         playCutsceneAudio('assets/oke-code.wav')
         gameState.inventory.push('Code');
         setTimeout(() => {
-            showBuildingMessage("John Vick: Als het de verkeerde code is, gaat de volgende kogel door de deur.");
+            showBuildingMessage("John Vick: Als dat de verkeerde code is, gaat de volgende kogel door de deur."); 
             playCutsceneAudio('assets/als-deur.wav')
         }, 9000)
     }
@@ -2161,7 +2174,8 @@ function interactWithConferenceDoor() {
     if (hasCode) {
         document.getElementById('keypad-container').classList.remove('hidden');
     } else {
-        showBuildingMessage("Er moet een code ingevoerd worden...")
+        showBuildingMessage("Er moet een code ingevoerd worden...");
+        playCutsceneAudio("assets/vergaderruimte.wav");
     }
 }
 
@@ -2267,6 +2281,8 @@ function checkOfficeBattleFinished() {
                 document.getElementById('drive-click').classList.add('doors-active');
                 document.getElementById('office-exit').classList.add('doors-active');
                 buildingView.style.backgroundImage = "url('assets/vergaderruimte.png')";
+                showBuildingMessage("De criminaliteit lijkt wel georganiseerder dan de Nederlandse Geheime Dienst.");
+                playCutsceneAudio("assets/de-dienst.wav");
             }, 2000);
         }, 1000);
     }
@@ -2274,7 +2290,8 @@ function checkOfficeBattleFinished() {
 
 function interactWithMes() {
     if (gameState.inventory.includes('Mes')) return;
-    showBuildingMessage('Een... mes?')
+    showBuildingMessage('Een mes! Dat kan vast van pas komen.')
+    playCutsceneAudio('assets/mes.wav');
     gameState.inventory.push('Mes');
     document.getElementById('mes-click').classList.remove('doors-active');
     updateOfficeBackground();
@@ -2282,7 +2299,8 @@ function interactWithMes() {
 
 function interactWithDrive() {
     if (gameState.inventory.includes('Schijf')) return;
-    showBuildingMessage('Missie volbracht. Snel weg hier.')
+    showBuildingMessage('Missie volbracht. Weg hier.');
+    playCutsceneAudio('assets/missie-hier.wav');
     gameState.inventory.push('Schijf');
     document.getElementById('drive-click').classList.remove('doors-active');
     updateOfficeBackground();
@@ -2291,6 +2309,7 @@ function interactWithDrive() {
 function interactWithKeychain() {
     if (gameState.inventory.includes('Sleutelbos')) return;
     showBuildingMessage('Dit is vast de sleutel van het kantoor!')
+    playCutsceneAudio('assets/sleutel.wav');
     gameState.inventory.push('Sleutelbos');
     document.getElementById('keychain-click').classList.remove('doors-active');
     updateOfficeBackground();
@@ -2333,6 +2352,7 @@ function exitOffice() {
         document.getElementById('office-click').classList.add('doors-active');
     } else {
         showBuildingMessage("Ik mis nog wat denk ik...");
+        playCutsceneAudio("assets/mis-denk.wav");
     }
 }
 
