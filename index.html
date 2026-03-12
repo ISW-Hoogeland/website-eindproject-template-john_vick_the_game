@@ -167,9 +167,13 @@
 
   <div id="jantje-binnen" class="menu-screen hidden">
     <div id="jantje-binnen-view">
-      <div id="tv-click" onclick="showJantjeBMessage('Het lijkt wel een feestje daar!')"></div>
-      <div id="coke-click" onclick="showJantjeBMessage('Er is hier poedersuiker gemorst...')"></div>
-      <div id="carpet-click" onclick="showJantjeBMessage('Een tapijt met ... VLEKKEN!?')"></div>
+      <div id="tv-click"
+        onclick="showJantjeBMessage('Het lijkt wel een feestje daar!'); playCutsceneAudio('assets/het-daar.wav')"></div>
+      <div id="coke-click"
+        onclick="showJantjeBMessage('Er is hier poedersuiker gemorst...'); playCutsceneAudio('assets/er-gemorst.wav')">
+      </div>
+      <div id="carpet-click"
+        onclick="showJantjeBMessage('Een tapijt met ... VLEKKEN!?'); playCutsceneAudio('assets/een-vlekken.wav')"></div>
       <div id="laptop-click" onclick="interactWithLaptop()"></div>
       <div id="jantje-binnen-feedback" class="hidden">
         <p id="jantje-binnen-feedback-text"></p>
@@ -210,13 +214,13 @@
     <div id="chase-view">
       <div id="chase-container-1" class="chase-container">
         <div id="police-car-img-1" class="police-car-img"></div>
-        <div class="hitbox driver" onclick="shootAgent(1, 'driver')"></div>
-        <div class="hitbox passenger" onclick="shootAgent(1, 'passenger')"></div>
+        <div class="hitbox driver" onclick="shootChaseAgent(1, 'driver')"></div>
+        <div class="hitbox passenger" onclick="shootChaseAgent(1, 'passenger')"></div>
       </div>
       <div id="chase-container-2" class="chase-container hidden">
         <div id="police-car-img-2" class="police-car-img"></div>
-        <div class="hitbox driver" onclick="shootAgent(2, 'driver')"></div>
-        <div class="hitbox passenger" onclick="shootAgent(2, 'passenger')"></div>
+        <div class="hitbox driver" onclick="shootChaseAgent(2, 'driver')"></div>
+        <div class="hitbox passenger" onclick="shootChaseAgent(2, 'passenger')"></div>
       </div>
     </div>
   </div>

@@ -1113,6 +1113,7 @@ nav button:hover {
 
 .hitbox {
    position: absolute;
+   z-index: 1000 !important;
 }
 
 .driver {
@@ -1126,7 +1127,7 @@ nav button:hover {
    width: 15%;
    height: 23%;
    top: 23%;
-   left: 22%;
+   left: 24%;
 }
 
 #chase-view {
