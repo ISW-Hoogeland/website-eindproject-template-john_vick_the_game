@@ -52,7 +52,7 @@ const cutsceneData = {
             { gif: "assets/tunnel_ingang.gif", speaker: "Mason Bourne", text: "VOLG MIJ, JOHN!", audio: "assets/volg-john.wav" },
             { gif: "assets/tunnel_ingang.gif", speaker: "John Vick", text: "IK ZIT VLAK ACHTER JE!", audio: "assets/ik-je.wav" },
             { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga snel naar binnen! We moeten opsplitsen!", audio: "assets/ga-opsplitsen.wav" },
-            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!" },
+            { gif: "assets/tunnel_binnen.png", speaker: "Mason Bourne", text: "Ga naar dit adres en zoek Rob, hij heeft misschien meer informatie over wie het geeft gedaan! Succes!", audio: "assets/ga-succes.wav" },
         ],
         nextStep: "chapter_3"
     },
