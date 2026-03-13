@@ -59,7 +59,7 @@ const cutsceneData = {
 
     na_puzzel_club: {
         steps: [
-            { gif: "assets/stripclub.gif", speaker: "John Vick", text: "Laat ik maar naar een hotel gaan en morgen Rob opzoeken." },
+            { gif: "assets/stripclub_sfw.gif", speaker: "John Vick", text: "Laat ik maar naar een hotel gaan en morgen Rob opzoeken." },
             { gif: "assets/bo.png", speaker: " ", text: "DAG 3..." },
         ],
         nextStep: "chapter_4"
@@ -184,7 +184,7 @@ const cutsceneData = {
             { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "Victor van der Koning", text: "10.000 euro! Stel je voor!", audio: "assets/tien-voor.wav" },
             { gif: "assets/interrogatiekamer_geen_pen.gif", speaker: "John Vick", text: "Nee! En ik blijf erbij! De moordende stelende frauduleuze drugbaas Mason Bourne zal altijd een eerlijker persoon zijn dan jij!", audio: "assets/blijf-jij.wav" },
             { gif: "assets/pen_1.gif", speaker: " ", text: " " },
-            { gif: "assets/pen_2.gif", speaker: " ", text: " ", audio: "assets/victor-pijn.wav" },
+            { gif: "assets/pen_2_sfw.gif", speaker: " ", text: " ", audio: "assets/victor-pijn.wav" },
             { gif: "assets/pen_3.gif", speaker: " ", text: " " },
             { gif: "assets/gangen.gif", speaker: " ", text: "Je moet de 4 NGD-agenten doodschieten!" },
         ],
@@ -220,7 +220,7 @@ const cutsceneData = {
             { gif: "assets/shop.gif", speaker: "John Vick", text: "Nu wel.", audio: "assets/nu-wel.wav" },
             { gif: "assets/shop.gif", speaker: "Winkeleigenaar", text: "Neem maar mee dan.", audio: "assets/neemmaarmee.wav" },
             { gif: "assets/pepper.gif", speaker: "John Vick", text: "Hehehe, Pepper! Eindelijk heb ik je! Ik zal ervoor zorgen dat jou nooit iets aangedaan wordt.", audio: "assets/pepper.wav" },
-            { gif: "assets/einde.gif", speaker: " ", text: "EINDE!" },
+            { gif: "assets/einde.gif", speaker: " ", text: " " },
         ],
         nextStep: "chapter_15"
     }
@@ -1868,7 +1868,7 @@ function interactWithKnife() {
     tortureView.style.backgroundImage = "url('assets/knife_1.gif')";
 
     setTimeout(() => {
-        tortureView.style.backgroundImage = "url('assets/knife_2.gif')";
+        tortureView.style.backgroundImage = "url('assets/knife_2_sfw.gif')";
     }, 500)
 
     setTimeout(() => {
